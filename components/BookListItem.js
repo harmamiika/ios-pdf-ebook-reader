@@ -1,5 +1,7 @@
 import React from 'react';
 import { SafeAreaView, Text } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { setActiveBook } from '../state/books';
 
 // Type Book
 
@@ -13,10 +15,15 @@ import { SafeAreaView, Text } from 'react-native';
 // pagecount
 // image
 
-export default function BookListItem({ item }) {
-  return (
-    <SafeAreaView>
-      <Text>Menu</Text>
-    </SafeAreaView>
-  );
+export default function BookListItem({ book }) {
+  const dispatch = useDispatch();
+
+  console.log(book, 'book item');
+
+  const onItemPress = () => {
+    console.log('press');
+    dispatch(setActiveBook(book));
+  };
+
+  return <Text onPress={onItemPress}>{book.name}</Text>;
 }

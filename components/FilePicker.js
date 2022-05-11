@@ -30,7 +30,7 @@ export default function FilePicker({}) {
       console.log(res, 'res2');
 
       if (!bookList.find(b => b.name === res.name)) {
-        dispatch(addBookToList(res));
+        dispatch(addBookToList(res[0]));
       } else {
         console.log('duplicate file');
       }
