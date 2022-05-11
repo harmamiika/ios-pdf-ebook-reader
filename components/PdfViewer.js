@@ -1,28 +1,17 @@
 import React, { useState } from 'react';
-
 import {
+  Button,
+  Dimensions,
   SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
-  Text,
   useColorScheme,
   View,
-  Dimensions,
-  Button,
 } from 'react-native';
-
-import { useSelector } from 'react-redux';
-
 import Pdf from 'react-native-pdf';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { useSelector } from 'react-redux';
 
 export default function PdfViewer() {
   const { activeBook } = useSelector(state => state.books);
@@ -32,7 +21,8 @@ export default function PdfViewer() {
   const isDarkMode = useColorScheme() === 'dark';
 
   // fileCopyUri, uri
-  const source = require('../file.pdf');
+  // const source = require('../file.pdf');
+  const source = { uri: activeBook.fileCopyUri };
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,

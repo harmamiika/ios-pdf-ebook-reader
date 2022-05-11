@@ -1,15 +1,12 @@
-import React, { useState } from 'react';
-import { View, Button } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-
+import React from 'react';
+import { Button, View } from 'react-native';
 import DocumentPicker from 'react-native-document-picker';
+import { useDispatch, useSelector } from 'react-redux';
 import { addBookToList } from '../state/books';
 
 export default function FilePicker({}) {
   const dispatch = useDispatch();
   const { bookList } = useSelector(state => state.books);
-
-  const [singleFile, setSingleFile] = useState();
 
   console.log(bookList, 'book list');
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, Text } from 'react-native';
+import { Text } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { setActiveBook } from '../state/books';
 
