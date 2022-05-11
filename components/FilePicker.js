@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Button} from 'react-native';
 
 import DocumentPicker from 'react-native-document-picker';
 
 export default function FilePicker({}) {
+  const [singleFile, setSingleFile] = useState();
+
   const getFile = async () => {
     try {
       const res = await DocumentPicker.pick({
@@ -14,6 +16,7 @@ export default function FilePicker({}) {
         // DocumentPicker.types.plainText
         // DocumentPicker.types.audio
         // DocumentPicker.types.pdf
+        copyTo: 'documentDirectory',
       });
       //Printing the log realted to the file
       console.log('res : ' + JSON.stringify(res));
@@ -22,7 +25,9 @@ export default function FilePicker({}) {
       console.log('File Name : ' + res.name);
       console.log('File Size : ' + res.size);
       //Setting the state to show single file attributes
-      this.setState({singleFile: res});
+      console.log(res, 'res2');
+
+      setSingleFile(res);
     } catch (err) {
       //Handling any exception (If any)
       if (DocumentPicker.isCancel(err)) {
