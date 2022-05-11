@@ -1,21 +1,23 @@
-import React, {useState} from 'react';
-import {View, Button} from 'react-native';
+import React, { useState } from 'react';
+import { View, Button } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 
 import DocumentPicker from 'react-native-document-picker';
+import { addBookToList } from '../state/books';
 
 export default function FilePicker({}) {
+  const dispatch = useDispatch();
+  const { bookList } = useSelector(state => state.books);
+
   const [singleFile, setSingleFile] = useState();
+
+  console.log(bookList, 'book list');
 
   const getFile = async () => {
     try {
       const res = await DocumentPicker.pick({
-        type: [DocumentPicker.types.allFiles],
-        //There can me more options as well
+        type: [DocumentPicker.types.pdf],
         // DocumentPicker.types.allFiles
-        // DocumentPicker.types.images
-        // DocumentPicker.types.plainText
-        // DocumentPicker.types.audio
-        // DocumentPicker.types.pdf
         copyTo: 'documentDirectory',
       });
       //Printing the log realted to the file
@@ -27,7 +29,11 @@ export default function FilePicker({}) {
       //Setting the state to show single file attributes
       console.log(res, 'res2');
 
-      setSingleFile(res);
+      if (!bookList.find(b => b.name === res.name)) {
+        dispatch(addBookToList(res));
+      } else {
+        console.log('duplicate file');
+      }
     } catch (err) {
       //Handling any exception (If any)
       if (DocumentPicker.isCancel(err)) {
