@@ -15,6 +15,7 @@ import {
   Text,
   useColorScheme,
   View,
+  Button,
 } from 'react-native';
 
 import {
@@ -51,7 +52,7 @@ const Section = ({children, title}) => {
   );
 };
 
-const App = () => {
+const App = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -72,6 +73,14 @@ const App = () => {
           <Section title="Step One">
             Edit <Text style={styles.highlight}>App.js hello world</Text> to
             change this screen and then come back to see your edits.
+            <Button
+              title="Go to Jane's profile"
+              onPress={() => navigation.navigate('PdfViewer')}
+            />
+            <Button
+              title="Go to Menu profile"
+              onPress={() => navigation.navigate('Menu')}
+            />
           </Section>
           <Section title="See Your Changes">
             <ReloadInstructions />
