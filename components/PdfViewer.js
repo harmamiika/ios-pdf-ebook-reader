@@ -12,6 +12,8 @@ import {
   Button,
 } from 'react-native';
 
+import { useSelector } from 'react-redux';
+
 import Pdf from 'react-native-pdf';
 
 import {
@@ -23,15 +25,19 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 export default function PdfViewer() {
+  const { activeBook } = useSelector(state => state.books);
+
+  console.log(activeBook, 'activeBook from pdf');
+
   const isDarkMode = useColorScheme() === 'dark';
 
+  // fileCopyUri, uri
   const source = require('../file.pdf');
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  console.log('asdasd');
   console.log(source, 'source');
 
   const [controlledPage, setControlledPage] = useState(1);
