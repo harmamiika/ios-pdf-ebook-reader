@@ -3,17 +3,22 @@ import { Text } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { setActiveBook } from '../state/booksSlice';
 
-// Type Book
+// const createBook = file => ({
+//   id: uuidv4(),
+//   name: file.fileName,
+//   // huom
+//   file,
 
-// id
-// name
+//   currentPage: 1,
 
-// filename
-// filepath
+//   // get form file
+//   totalPages: 0,
 
-// page
-// pagecount
-// image
+//   startDate: new Date(),
+//   finishDate: undefined,
+
+//   bookmarks: [],
+// });
 
 export default function BookListItem({ book }) {
   const dispatch = useDispatch();

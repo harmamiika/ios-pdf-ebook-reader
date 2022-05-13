@@ -14,6 +14,7 @@ import { Provider, useDispatch } from 'react-redux';
 import { store } from './src/state/store';
 import { getBooks, getActiveBook } from './src/state/booksSlice';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const Stack = createNativeStackNavigator();
 
 const Application = () => {
@@ -36,6 +37,8 @@ const Application = () => {
 };
 
 const Root = () => {
+  // AsyncStorage.clear();
+
   return (
     <Provider store={store}>
       <Application />

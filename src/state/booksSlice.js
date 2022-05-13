@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import uuid from 'react-native-uuid';
 import {
   getActiveBookFromStorage,
   getBookListFromStorage,
@@ -17,6 +18,22 @@ export const getActiveBook = createAsyncThunk(
   },
 );
 
+// Book data model
+const createBook = file => ({
+  id: uuid.v4(),
+  name: file.name,
+  file,
+
+  // get pdf page count somehow
+  totalPages: 0,
+  currentPage: 1,
+
+  startDate: new Date().toString(),
+  finishDate: undefined,
+
+  bookmarks: [],
+});
+
 const booksSlice = createSlice({
   name: 'books',
   initialState: {
@@ -25,7 +42,7 @@ const booksSlice = createSlice({
   },
   reducers: {
     addBookToList(state, action) {
-      const bookList = [...state.bookList, action.payload];
+      const bookList = [...state.bookList, createBook(action.payload)];
       saveBookListToStorage(bookList);
       state.bookList = bookList;
     },

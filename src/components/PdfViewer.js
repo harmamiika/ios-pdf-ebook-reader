@@ -23,7 +23,7 @@ export default function PdfViewer() {
 
   // fileCopyUri, uri
   // const source = require('../file.pdf');
-  const source = { uri: activeBook.fileCopyUri };
+  const source = { uri: activeBook?.file?.fileCopyUri };
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
