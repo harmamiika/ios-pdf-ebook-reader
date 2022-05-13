@@ -41,10 +41,11 @@ const booksSlice = createSlice({
       state.bookList = action.payload;
     });
     builder.addCase(getActiveBook.fulfilled, (state, action) => {
+      console.log(action, 'action');
       state.activeBook = action.payload;
     });
   },
 });
 
-export const { addBookToList, setActiveBook, getAllBooks } = booksSlice.actions;
+export const { addBookToList, setActiveBook } = booksSlice.actions;
 export default booksSlice.reducer;

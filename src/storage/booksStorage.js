@@ -14,7 +14,7 @@ export const saveBookListToStorage = async books => {
 export const getBookListFromStorage = async () => {
   try {
     const bookList = await AsyncStorage.getItem('bookList');
-    console.log(bookList, 'get FORM storage');
+    // console.log(bookList, 'get FORM storage');
     return bookList !== null ? JSON.parse(bookList) : [];
   } catch (e) {
     //
@@ -33,7 +33,8 @@ export const saveActiveBookToStorage = async activeBook => {
 export const getActiveBookFromStorage = async () => {
   try {
     const activeBook = await AsyncStorage.getItem('activeBook');
-    return activeBook !== null ? JSON.parse(bookList) : {};
+    console.log(activeBook, 'activeBook from storeage');
+    return activeBook !== null ? JSON.parse(activeBook) : {};
   } catch (e) {
     //
   }

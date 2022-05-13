@@ -17,10 +17,7 @@ import { store } from '../state';
 
 export default function PdfViewer() {
   const { activeBook } = useSelector(state => state.books);
-
-  console.log(activeBook, 'activeBook from pdf');
-
-  console.log(store.getState(), 'store fet state pdf viewwe');
+  const [controlledPage, setControlledPage] = useState(1);
 
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -33,8 +30,8 @@ export default function PdfViewer() {
   };
 
   console.log(source, 'source');
-
-  const [controlledPage, setControlledPage] = useState(1);
+  console.log(activeBook, 'activeBook from pdf');
+  console.log(store.getState(), 'store fet state pdf viewwe');
 
   const onSetPagePress = () => {
     console.log(this.pdf, 'pdf');
