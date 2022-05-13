@@ -25,7 +25,7 @@ const createBook = file => ({
   file,
 
   // get pdf page count somehow
-  totalPages: 0,
+  totalPages: undefined,
   currentPage: 1,
 
   startDate: new Date().toString(),
@@ -54,7 +54,6 @@ const booksSlice = createSlice({
     updateActiveBookPage(state, action) {
       const updatedBook = { ...state.activeBook, currentPage: action.payload };
 
-      console.log(updatedBook, 'update book from reducer');
       state.activeBook = updatedBook;
       saveActiveBookToStorage(updatedBook);
 
@@ -63,11 +62,6 @@ const booksSlice = createSlice({
       );
       state.bookList = newList;
       saveBookListToStorage(newList);
-      console.log(
-        state.activeBook,
-        state.bookList,
-        'state from update reducer',
-      );
     },
   },
   extraReducers: builder => {
