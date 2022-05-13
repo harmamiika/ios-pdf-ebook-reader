@@ -6,14 +6,9 @@ import {
   saveBookList,
 } from '../storage/booksStorage';
 
-export const getBooks = createAsyncThunk(
-  'books/getBookList',
-  async (state, action) => {
-    const list = await getBookList();
-    console.log(list, 'list');
-    return list;
-  },
-);
+export const getBooks = createAsyncThunk('books/getBookList', async () => {
+  return await getBookList();
+});
 
 const booksSlice = createSlice({
   name: 'books',
@@ -42,9 +37,7 @@ const booksSlice = createSlice({
   },
   extraReducers: builder => {
     builder.addCase(getBooks.fulfilled, (state, action) => {
-      console.log(action, 'action');
-      console.log(state, 'state');
-      state.bookList === action.payload;
+      state.bookList = action.payload;
     });
   },
 });
