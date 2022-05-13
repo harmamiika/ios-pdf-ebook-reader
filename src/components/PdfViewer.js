@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Button,
   Dimensions,
@@ -11,19 +11,28 @@ import {
 } from 'react-native';
 import Pdf from 'react-native-pdf';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { store } from '../state';
+import { setActiveBook, updateActiveBook } from '../state/booksSlice';
 
 export default function PdfViewer() {
   const { activeBook } = useSelector(state => state.books);
-  const [controlledPage, setControlledPage] = useState(1);
+  const [controlledPage, setControlledPage] = useState(activeBook.currentPage);
+  const dispatch = useDispatch();
 
   const isDarkMode = useColorScheme() === 'dark';
 
   // fileCopyUri, uri
   // const source = require('../file.pdf');
-  const source = { uri: activeBook?.file?.fileCopyUri };
+  // const source = { uri: activeBook?.file?.fileCopyUri };
+
+  const [source, setSource] = useState({ uri: undefined });
+
+  useEffect(() => {
+    setSource({ uri: activeBook?.file?.fileCopyUri });
+    setControlledPage(activeBook?.currentPage);
+  }, [activeBook]);
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -33,9 +42,16 @@ export default function PdfViewer() {
   console.log(activeBook, 'activeBook from pdf');
   console.log(store.getState(), 'store fet state pdf viewwe');
 
-  const onSetPagePress = () => {
-    console.log(this.pdf, 'pdf');
-    this.pdf.setPage(3);
+  // const onSetPagePress = () => {
+  //   console.log(this.pdf, 'pdf');
+  //   this.pdf.setPage(3);
+  // };
+
+  const onPageChanged = (page, numberOfPages) => {
+    console.log(`Current page: ${page}`);
+    console.log(`number of pages ${numberOfPages}`);
+    dispatch(updateActiveBook(page));
+    setControlledPage(page);
   };
 
   return (
@@ -65,10 +81,7 @@ export default function PdfViewer() {
             ref={pdf => {
               this.pdf = pdf;
             }}
-            onPageChanged={(page, numberOfPages) => {
-              console.log(`Current page: ${page}`);
-              setControlledPage(page);
-            }}
+            onPageChanged={onPageChanged}
           />
         </View>
       </ScrollView>

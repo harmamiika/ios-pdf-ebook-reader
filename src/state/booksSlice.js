@@ -51,6 +51,19 @@ const booksSlice = createSlice({
       saveActiveBookToStorage(book);
       state.activeBook = book;
     },
+    updateActiveBook(state, action) {
+      const updatedBook = { ...state.activeBook, currentPage: action.payload };
+
+      console.log(updatedBook, 'update book from reducer');
+      state.activeBook = updatedBook;
+      state.bookList = [...state.bookList, updatedBook];
+
+      console.log(
+        state.activeBook,
+        state.bookList,
+        'state from update reducer',
+      );
+    },
   },
   extraReducers: builder => {
     builder.addCase(getBooks.fulfilled, (state, action) => {
@@ -64,5 +77,6 @@ const booksSlice = createSlice({
   },
 });
 
-export const { addBookToList, setActiveBook } = booksSlice.actions;
+export const { addBookToList, setActiveBook, updateActiveBook } =
+  booksSlice.actions;
 export default booksSlice.reducer;
