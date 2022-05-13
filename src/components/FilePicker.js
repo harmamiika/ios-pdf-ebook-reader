@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, View } from 'react-native';
 import DocumentPicker from 'react-native-document-picker';
 import { useDispatch, useSelector } from 'react-redux';
-import { addBookToList } from '../state/books';
+import { addBookToList } from '../state/booksSlice';
 
 export default function FilePicker({}) {
   const dispatch = useDispatch();

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { setActiveBook } from '../state/books';
+import { setActiveBook } from '../state/booksSlice';
 
 // Type Book
 

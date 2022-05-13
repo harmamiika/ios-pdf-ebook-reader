@@ -13,7 +13,7 @@ export default function Menu() {
       <Text>Menu</Text>
 
       {bookList.map(b => (
-        <BookListItem book={b} />
+        <BookListItem book={b} key={b.fileCopyUri} />
       ))}
 
       <FilePicker />
