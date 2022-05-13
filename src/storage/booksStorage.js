@@ -4,7 +4,9 @@ const storeKey = '@storage_Key';
 
 export const saveBookList = async books => {
   try {
-    await AsyncStorage.setItem('bookList', JSON.stringify(books));
+    const res = await AsyncStorage.setItem('bookList', JSON.stringify(books));
+    console.log(books, 'books');
+    console.log(res, 'res from async sotre');
   } catch (e) {
     // saving error
     // set error

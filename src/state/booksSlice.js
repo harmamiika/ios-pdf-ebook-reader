@@ -4,16 +4,16 @@ import {
   getBookList,
   saveActiveBook,
   saveBookList,
-} from '../storage/books';
+} from '../storage/booksStorage';
 
-// const getBooks = createAsyncThunk(
-//   'books/getBookList',
-//   async (state, action) => {
-//     const list = await getBookList();
-//     console.log(list, 'list');
-//     return list;
-//   },
-// );
+export const getBooks = createAsyncThunk(
+  'books/getBookList',
+  async (state, action) => {
+    const list = await getBookList();
+    console.log(list, 'list');
+    return list;
+  },
+);
 
 const booksSlice = createSlice({
   name: 'books',
@@ -30,14 +30,24 @@ const booksSlice = createSlice({
     },
     setActiveBook(state, action) {
       const book = action.payload;
-      saveActiveBook(book);
+      // saveActiveBook(book);
       state.activeBook = book;
     },
     // async getActiveBook(state, action) {
     //   state.activeBook = await getActiveBook();
     // },
+    // async getAllBooks(state, action) {
+    //   state.bookList = await getBookList();
+    // },
+  },
+  extraReducers: builder => {
+    builder.addCase(getBooks.fulfilled, (state, action) => {
+      console.log(action, 'action');
+      console.log(state, 'state');
+      state.bookList === action.payload;
+    });
   },
 });
 
-export const { addBookToList, setActiveBook } = booksSlice.actions;
+export const { addBookToList, setActiveBook, getAllBooks } = booksSlice.actions;
 export default booksSlice.reducer;

@@ -12,7 +12,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Provider, useDispatch } from 'react-redux';
 import { store } from './src/state/store';
-import { getActiveBook, getBookList } from './src/storage/books';
+import { getBooks } from './src/state/booksSlice';
+// import { getActiveBook, getBookList } from './src/storage/books';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,7 +21,7 @@ const Application = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // dispatch(getBookList());
+    dispatch(getBooks());
     // dispatch(getActiveBook());
   }, []);
 
@@ -36,6 +37,8 @@ const Application = () => {
 };
 
 const Root = () => {
+  console.log(store.getState(), 'store');
+
   return (
     <Provider store={store}>
       <Application />
