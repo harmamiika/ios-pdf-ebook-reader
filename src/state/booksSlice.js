@@ -1,43 +1,47 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {
-  getActiveBook,
-  getBookList,
-  saveActiveBook,
-  saveBookList,
+  getActiveBookFromStorage,
+  getBookListFromStorage,
+  saveActiveBookToStorage,
+  saveBookListToStorage,
 } from '../storage/booksStorage';
 
 export const getBooks = createAsyncThunk('books/getBookList', async () => {
-  return await getBookList();
+  return await getBookListFromStorage();
 });
+
+export const getActiveBook = createAsyncThunk(
+  'books/getActiveBook',
+  async () => {
+    return await getActiveBookFromStorage();
+  },
+);
 
 const booksSlice = createSlice({
   name: 'books',
   initialState: {
-    // get booksit db / json
     bookList: [],
     activeBook: {},
   },
   reducers: {
     addBookToList(state, action) {
       const bookList = [...state.bookList, action.payload];
-      saveBookList(bookList);
+      saveBookListToStorage(bookList);
       state.bookList = bookList;
     },
     setActiveBook(state, action) {
       const book = action.payload;
-      // saveActiveBook(book);
+      saveActiveBookToStorage(book);
       state.activeBook = book;
     },
-    // async getActiveBook(state, action) {
-    //   state.activeBook = await getActiveBook();
-    // },
-    // async getAllBooks(state, action) {
-    //   state.bookList = await getBookList();
-    // },
   },
   extraReducers: builder => {
     builder.addCase(getBooks.fulfilled, (state, action) => {
+      console.log(state, 'store state on load');
       state.bookList = action.payload;
+    });
+    builder.addCase(getActiveBook.fulfilled, (state, action) => {
+      state.activeBook = action.payload;
     });
   },
 });

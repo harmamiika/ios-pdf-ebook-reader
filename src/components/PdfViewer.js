@@ -13,10 +13,14 @@ import Pdf from 'react-native-pdf';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { useSelector } from 'react-redux';
 
+import { store } from '../state';
+
 export default function PdfViewer() {
   const { activeBook } = useSelector(state => state.books);
 
   console.log(activeBook, 'activeBook from pdf');
+
+  console.log(store.getState(), 'store fet state pdf viewwe');
 
   const isDarkMode = useColorScheme() === 'dark';
 

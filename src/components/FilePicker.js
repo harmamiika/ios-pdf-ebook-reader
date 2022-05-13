@@ -8,8 +8,6 @@ export default function FilePicker({}) {
   const dispatch = useDispatch();
   const { bookList } = useSelector(state => state.books);
 
-  console.log(bookList, 'book list');
-
   const getFile = async () => {
     try {
       const res = await DocumentPicker.pick({

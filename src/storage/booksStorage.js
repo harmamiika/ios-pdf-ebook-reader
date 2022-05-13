@@ -1,28 +1,27 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const storeKey = '@storage_Key';
-
-export const saveBookList = async books => {
+export const saveBookListToStorage = async books => {
   try {
     await AsyncStorage.setItem('bookList', JSON.stringify(books));
     const bookListFromStore = await AsyncStorage.getItem('bookList');
-    console.log(bookListFromStore, 'from store');
+    console.log(bookListFromStore, 'from storage');
   } catch (e) {
     // saving error
     // set error
   }
 };
 
-export const getBookList = async () => {
+export const getBookListFromStorage = async () => {
   try {
     const bookList = await AsyncStorage.getItem('bookList');
+    console.log(bookList, 'get FORM storage');
     return bookList !== null ? JSON.parse(bookList) : [];
   } catch (e) {
     //
   }
 };
 
-export const saveActiveBook = async activeBook => {
+export const saveActiveBookToStorage = async activeBook => {
   try {
     await AsyncStorage.setItem('activeBook', JSON.stringify(activeBook));
   } catch (e) {
@@ -31,7 +30,7 @@ export const saveActiveBook = async activeBook => {
   }
 };
 
-export const getActiveBook = async () => {
+export const getActiveBookFromStorage = async () => {
   try {
     const activeBook = await AsyncStorage.getItem('activeBook');
     return activeBook !== null ? JSON.parse(bookList) : {};
