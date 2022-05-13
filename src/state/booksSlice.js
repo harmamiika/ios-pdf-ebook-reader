@@ -51,13 +51,18 @@ const booksSlice = createSlice({
       saveActiveBookToStorage(book);
       state.activeBook = book;
     },
-    updateActiveBook(state, action) {
+    updateActiveBookPage(state, action) {
       const updatedBook = { ...state.activeBook, currentPage: action.payload };
 
       console.log(updatedBook, 'update book from reducer');
       state.activeBook = updatedBook;
-      state.bookList = [...state.bookList, updatedBook];
+      saveActiveBookToStorage(updatedBook);
 
+      const newList = state.bookList.map(b =>
+        b.id === updatedBook.id ? updatedBook : b,
+      );
+      state.bookList = newList;
+      saveBookListToStorage(newList);
       console.log(
         state.activeBook,
         state.bookList,
@@ -77,6 +82,6 @@ const booksSlice = createSlice({
   },
 });
 
-export const { addBookToList, setActiveBook, updateActiveBook } =
+export const { addBookToList, setActiveBook, updateActiveBookPage } =
   booksSlice.actions;
 export default booksSlice.reducer;

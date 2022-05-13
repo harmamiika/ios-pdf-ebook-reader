@@ -14,12 +14,11 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { store } from '../state';
-import { setActiveBook, updateActiveBook } from '../state/booksSlice';
+import { setActiveBook, updateActiveBookPage } from '../state/booksSlice';
 
 export default function PdfViewer() {
-  const { activeBook } = useSelector(state => state.books);
-  const [controlledPage, setControlledPage] = useState(activeBook.currentPage);
   const dispatch = useDispatch();
+  const { activeBook } = useSelector(state => state.books);
 
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -31,7 +30,6 @@ export default function PdfViewer() {
 
   useEffect(() => {
     setSource({ uri: activeBook?.file?.fileCopyUri });
-    setControlledPage(activeBook?.currentPage);
   }, [activeBook]);
 
   const backgroundStyle = {
@@ -50,8 +48,7 @@ export default function PdfViewer() {
   const onPageChanged = (page, numberOfPages) => {
     console.log(`Current page: ${page}`);
     console.log(`number of pages ${numberOfPages}`);
-    dispatch(updateActiveBook(page));
-    setControlledPage(page);
+    dispatch(updateActiveBookPage(page));
   };
 
   return (
@@ -66,10 +63,10 @@ export default function PdfViewer() {
           }}>
           <Button
             title="page--"
-            onPress={() => this.pdf.setPage(controlledPage - 1)}
+            onPress={() => this.pdf.setPage(activeBook.currentPage - 1)}
           />
           <Button
-            onPress={() => this.pdf.setPage(controlledPage + 1)}
+            onPress={() => this.pdf.setPage(activeBook.currentPage + 1)}
             title="page++"
           />
           <Pdf
@@ -82,6 +79,7 @@ export default function PdfViewer() {
               this.pdf = pdf;
             }}
             onPageChanged={onPageChanged}
+            onLoadComplete={() => this.pdf.setPage(activeBook.currentPage)}
           />
         </View>
       </ScrollView>
