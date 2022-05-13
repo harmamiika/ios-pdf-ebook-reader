@@ -12,9 +12,7 @@ import {
 import Pdf from 'react-native-pdf';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { store } from '../state';
-import { setActiveBook, updateActiveBookPage } from '../state/booksSlice';
+import { updateActiveBookPage } from '../state/booksSlice';
 
 export default function PdfViewer() {
   const dispatch = useDispatch();
@@ -35,10 +33,6 @@ export default function PdfViewer() {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-
-  console.log(source, 'source');
-  console.log(activeBook, 'activeBook from pdf');
-  console.log(store.getState(), 'store fet state pdf viewwe');
 
   // const onSetPagePress = () => {
   //   console.log(this.pdf, 'pdf');

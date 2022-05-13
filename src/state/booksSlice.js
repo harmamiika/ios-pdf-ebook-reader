@@ -7,17 +7,6 @@ import {
   saveBookListToStorage,
 } from '../storage/booksStorage';
 
-export const getBooks = createAsyncThunk('books/getBookList', async () => {
-  return await getBookListFromStorage();
-});
-
-export const getActiveBook = createAsyncThunk(
-  'books/getActiveBook',
-  async () => {
-    return await getActiveBookFromStorage();
-  },
-);
-
 // Book data model
 const createBook = file => ({
   id: uuid.v4(),
@@ -33,6 +22,17 @@ const createBook = file => ({
 
   bookmarks: [],
 });
+
+export const getBooks = createAsyncThunk('books/getBookList', async () => {
+  return await getBookListFromStorage();
+});
+
+export const getActiveBook = createAsyncThunk(
+  'books/getActiveBook',
+  async () => {
+    return await getActiveBookFromStorage();
+  },
+);
 
 const booksSlice = createSlice({
   name: 'books',
