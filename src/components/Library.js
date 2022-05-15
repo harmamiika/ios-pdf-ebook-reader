@@ -10,8 +10,6 @@ export default function Menu() {
 
   return (
     <SafeAreaView>
-      <Text>Menu</Text>
-
       {bookList?.length > 0 &&
         bookList.map(b => <BookListItem book={b} key={b.id} />)}
 

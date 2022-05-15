@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { setActiveBook } from '../state/booksSlice';
 
@@ -30,5 +30,28 @@ export default function BookListItem({ book }) {
     dispatch(setActiveBook(book));
   };
 
-  return <Text onPress={onItemPress}>{book.name}</Text>;
+  return (
+    <View style={styles.sectionContainer}>
+      <Text onPress={onItemPress}>{book.name}</Text>
+    </View>
+  );
 }
+
+const styles = StyleSheet.create({
+  sectionContainer: {
+    marginTop: 32,
+    paddingHorizontal: 24,
+  },
+  sectionTitle: {
+    fontSize: 24,
+    fontWeight: '600',
+  },
+  sectionDescription: {
+    marginTop: 8,
+    fontSize: 18,
+    fontWeight: '400',
+  },
+  highlight: {
+    fontWeight: '700',
+  },
+});

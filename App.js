@@ -79,7 +79,7 @@ const App = ({ navigation }) => {
             />
             <Button
               title="Go to Menu profile"
-              onPress={() => navigation.navigate('Menu')}
+              onPress={() => navigation.navigate('Library')}
             />
           </Section>
           <Section title="See Your Changes">

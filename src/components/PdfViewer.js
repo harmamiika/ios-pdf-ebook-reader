@@ -17,14 +17,13 @@ import { updateActiveBookPage } from '../state/booksSlice';
 export default function PdfViewer() {
   const dispatch = useDispatch();
   const { activeBook } = useSelector(state => state.books);
+  const [source, setSource] = useState({ uri: undefined });
 
   const isDarkMode = useColorScheme() === 'dark';
 
   // fileCopyUri, uri
   // const source = require('../file.pdf');
   // const source = { uri: activeBook?.file?.fileCopyUri };
-
-  const [source, setSource] = useState({ uri: undefined });
 
   useEffect(() => {
     setSource({ uri: activeBook?.file?.fileCopyUri });
