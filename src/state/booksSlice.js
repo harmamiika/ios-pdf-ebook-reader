@@ -19,6 +19,7 @@ const createBook = file => ({
 
   startDate: new Date().toString(),
   finishDate: undefined,
+  lastPDFMountTime: undefined,
 
   bookmarks: [],
 });

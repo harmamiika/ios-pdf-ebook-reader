@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { setActiveBook } from '../state/booksSlice';
+import { Divider, List, ListItem } from '@ui-kitten/components';
 
 // const createBook = file => ({
 //   id: uuidv4(),
@@ -20,20 +21,27 @@ import { setActiveBook } from '../state/booksSlice';
 //   bookmarks: [],
 // });
 
-export default function BookListItem({ book }) {
+export default function BookListItem({ item }) {
   const dispatch = useDispatch();
 
-  console.log(book, 'book item');
+  console.log(item, 'item item');
 
   const onItemPress = () => {
     console.log('press');
-    dispatch(setActiveBook(book));
+    dispatch(setActiveBook(item));
   };
 
   return (
-    <View style={styles.sectionContainer}>
-      <Text onPress={onItemPress}>{book.name}</Text>
-    </View>
+    // <View>
+    //   <View style={styles.sectionContainer}>
+    //     <Text onPress={onItemPress}>{item.name}</Text>
+    //   </View>
+    <ListItem
+      title={`${item.name}`}
+      description={`Page ${item.currentPage} / ${item.totalPages || '?'}`}
+      onPress={onItemPress}
+    />
+    // </View>
   );
 }
 

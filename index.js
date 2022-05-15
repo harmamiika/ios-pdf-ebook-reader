@@ -42,9 +42,11 @@ const Root = () => {
   // AsyncStorage.clear();
 
   return (
-    <Provider store={store}>
-      <Application />
-    </Provider>
+    <ApplicationProvider {...eva} theme={eva.light}>
+      <Provider store={store}>
+        <Application />
+      </Provider>
+    </ApplicationProvider>
   );
 };
 
