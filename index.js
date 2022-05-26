@@ -17,6 +17,7 @@ import { getBooks, getActiveBook } from './src/state/booksSlice';
 import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { PlusIcon } from './src/components/header/PlusIcon';
 const { Navigator, Screen } = createNativeStackNavigator();
 
 const Application = () => {
@@ -30,7 +31,13 @@ const Application = () => {
   return (
     <NavigationContainer>
       <Navigator>
-        <Screen name="App" component={App} />
+        <Screen
+          name="App"
+          component={App}
+          options={{
+            headerRight: PlusIcon,
+          }}
+        />
         <Screen name="PdfViewer" component={PdfViewer} />
         <Screen name="Library" component={Library} />
       </Navigator>
