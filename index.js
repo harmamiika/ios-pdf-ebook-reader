@@ -39,7 +39,13 @@ const Application = () => {
           }}
         />
         <Screen name="PdfViewer" component={PdfViewer} />
-        <Screen name="Library" component={Library} />
+        <Screen
+          name="Library"
+          component={Library}
+          options={{
+            headerRight: PlusIcon,
+          }}
+        />
       </Navigator>
     </NavigationContainer>
   );

@@ -1,9 +1,7 @@
-import React from 'react';
-import { SafeAreaView, Text, ScrollView } from 'react-native';
-import FilePicker from './FilePicker';
-import { useDispatch, useSelector } from 'react-redux';
-import BookListItem from './BookListItem';
 import { Divider, List, ListItem } from '@ui-kitten/components';
+import React from 'react';
+import { SafeAreaView } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { setActiveBook } from '../state/booksSlice';
 
 export default function Menu() {
@@ -32,8 +30,6 @@ export default function Menu() {
         ItemSeparatorComponent={Divider}
         renderItem={renderBookListItem}
       />
-
-      <FilePicker />
     </SafeAreaView>
   );
 }
