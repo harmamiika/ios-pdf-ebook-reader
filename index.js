@@ -18,6 +18,8 @@ import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { PlusIcon } from './src/components/header/PlusIcon';
+import { BookIcon } from './src/components/header/BookIcon';
+import { LibraryRightHeader } from './src/components/header/LibraryRightHeader';
 const { Navigator, Screen } = createNativeStackNavigator();
 
 const Application = () => {
@@ -43,7 +45,8 @@ const Application = () => {
           name="Library"
           component={Library}
           options={{
-            headerRight: PlusIcon,
+            headerLeft: BookIcon,
+            headerRight: LibraryRightHeader,
           }}
         />
       </Navigator>

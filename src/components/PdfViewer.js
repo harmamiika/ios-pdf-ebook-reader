@@ -54,14 +54,6 @@ export default function PdfViewer() {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          <Button
-            title="page--"
-            onPress={() => this.pdf.setPage(activeBook.currentPage - 1)}
-          />
-          <Button
-            onPress={() => this.pdf.setPage(activeBook.currentPage + 1)}
-            title="page++"
-          />
           <Pdf
             singlePage={true}
             enableAnnotationRendering={true}
@@ -73,6 +65,14 @@ export default function PdfViewer() {
             }}
             onPageChanged={onPageChanged}
             onLoadComplete={() => this.pdf.setPage(activeBook.currentPage)}
+          />
+          <Button
+            title="page--"
+            onPress={() => this.pdf.setPage(activeBook.currentPage - 1)}
+          />
+          <Button
+            onPress={() => this.pdf.setPage(activeBook.currentPage + 1)}
+            title="page++"
           />
         </View>
       </ScrollView>
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   pdf: {
-    flex: 1,
+    flex: 0.8,
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
   },
