@@ -26,6 +26,10 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+const MyIcon = () => <Icon name="rocket" size={30} color="#900" />;
+
 const Section = ({ children, title }) => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
@@ -37,6 +41,7 @@ const Section = ({ children, title }) => {
             color: isDarkMode ? Colors.white : Colors.black,
           },
         ]}>
+        <MyIcon />
         {title}
       </Text>
       <Text
