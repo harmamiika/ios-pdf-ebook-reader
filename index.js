@@ -11,7 +11,7 @@ import Library from './src/components/Library';
 import { name as appName } from './app.json';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Provider, useDispatch } from 'react-redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 import { store } from './src/state/store';
 import { getBooks, getActiveBook } from './src/state/booksSlice';
 import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
@@ -27,6 +27,9 @@ const { Navigator, Screen } = createNativeStackNavigator();
 
 const Application = () => {
   const dispatch = useDispatch();
+  const activeBookTitle = useSelector(state => state.books.activeBook.name);
+
+  console.log(activeBookTitle, 'active book title');
 
   useEffect(() => {
     dispatch(getBooks());
@@ -46,24 +49,26 @@ const Application = () => {
         <Screen
           name="PdfViewer"
           component={PdfViewer}
-          options={{
-            headerRight: LibraryIcon,
-          }}
+          options={({ navigation }) => ({
+            headerLeft: () => <LibraryIcon navigation={navigation} />,
+            headerRight: () => <LibraryRightHeader navigation={navigation} />,
+            title: activeBookTitle || 'Book',
+          })}
+          // headerRight: LibraryIcon,
         />
         <Screen
           name="Library"
           component={Library}
           options={({ navigation }) => ({
-            headerLeft: () => <BookIcon navigation={navigation} />,
-            headerRight: LibraryRightHeader,
+            headerRight: () => <PlusIcon />,
           })}
         />
         <Screen
           name="Menu"
           component={Menu}
-          options={{
-            headerLeft: LibraryIcon,
-          }}
+          // options={{
+          //   headerLeft: LibraryIcon,
+          // }}
         />
       </Navigator>
     </NavigationContainer>
