@@ -20,24 +20,9 @@ export default function PdfViewer() {
   const { activeBook } = useSelector(state => state.books);
   const [source, setSource] = useState({ uri: undefined });
 
-  const isDarkMode = useColorScheme() === 'dark';
-
-  // fileCopyUri, uri
-  // const source = require('../file.pdf');
-  // const source = { uri: activeBook?.file?.fileCopyUri };
-
   useEffect(() => {
     setSource({ uri: activeBook?.file?.fileCopyUri });
   }, [activeBook]);
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  // const onSetPagePress = () => {
-  //   console.log(this.pdf, 'pdf');
-  //   this.pdf.setPage(3);
-  // };
 
   const onPageChanged = (page, numberOfPages) => {
     console.log(`Current page: ${page}`);
@@ -48,12 +33,9 @@ export default function PdfViewer() {
   const goPageForward = () => {
     this.pdf.setPage(activeBook.currentPage + 1);
   };
-
   const goPageBackwards = () => {
     this.pdf.setPage(activeBook.currentPage - 1);
   };
-
-  console.log(Dimensions.get('window').height, 'height');
 
   return (
     <View style={styles.container}>
