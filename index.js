@@ -15,12 +15,14 @@ import { Provider, useDispatch } from 'react-redux';
 import { store } from './src/state/store';
 import { getBooks, getActiveBook } from './src/state/booksSlice';
 import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
+import { FontAwesome5Icon } from './src/components/reusable/FontAwesome5Icon';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { PlusIcon } from './src/components/header/PlusIcon';
 import { BookIcon } from './src/components/header/BookIcon';
 import { LibraryRightHeader } from './src/components/header/LibraryRightHeader';
 import { LibraryIcon } from './src/components/header/LibraryIcon';
+import { Menu } from './src/components/Menu';
 const { Navigator, Screen } = createNativeStackNavigator();
 
 const Application = () => {
@@ -51,9 +53,16 @@ const Application = () => {
         <Screen
           name="Library"
           component={Library}
-          options={{
-            headerLeft: BookIcon,
+          options={({ navigation }) => ({
+            headerLeft: () => <BookIcon navigation={navigation} />,
             headerRight: LibraryRightHeader,
+          })}
+        />
+        <Screen
+          name="Menu"
+          component={Menu}
+          options={{
+            headerLeft: LibraryIcon,
           }}
         />
       </Navigator>
@@ -63,7 +72,6 @@ const Application = () => {
 
 const Root = () => {
   // AsyncStorage.clear();
-
   return (
     <ApplicationProvider {...eva} theme={eva.light}>
       <Provider store={store}>
