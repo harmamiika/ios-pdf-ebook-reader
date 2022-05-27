@@ -45,60 +45,36 @@ export default function PdfViewer() {
     dispatch(updateActiveBookPage(page));
   };
 
-  const onSwipeRight = () => {
-    console.log('asd');
+  const goPageForward = () => {
+    this.pdf.setPage(activeBook.currentPage + 1);
+  };
+
+  const goPageBackwards = () => {
+    this.pdf.setPage(activeBook.currentPage - 1);
   };
 
   console.log(Dimensions.get('window').height, 'height');
 
   return (
-    //   <SafeAreaView style={backgroundStyle}>
-    //     {/* <GestureRecognizer onSwipeRight={onSwipeRight}> */}
-    //     <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-    //     <ScrollView
-    //       contentInsetAdjustmentBehavior="automatic"
-    //       style={backgroundStyle}>
-    //       <View
-    //         style={{
-    //           backgroundColor: isDarkMode ? Colors.black : Colors.white,
-    //         }}>
-    //         <Pdf
-    //           singlePage={true}
-    //           enableAnnotationRendering={true}
-    //           enablePaging={true}
-    //           source={source}
-    //           style={styles.pdf}
-    //           ref={pdf => {
-    //             this.pdf = pdf;
-    //           }}
-    //           onPageChanged={onPageChanged}
-    //           onLoadComplete={() => this.pdf.setPage(activeBook.currentPage)}
-    //         />
-    //         <Button
-    //           title="page--"
-    //           onPress={() => this.pdf.setPage(activeBook.currentPage - 1)}
-    //         />
-    //         <Button
-    //           onPress={() => this.pdf.setPage(activeBook.currentPage + 1)}
-    //           title="page++"
-    //         />
-    //       </View>
-    //     </ScrollView>
-    //     {/* </GestureRecognizer> */}
-    //   </SafeAreaView>
     <View style={styles.container}>
-      <Pdf
-        singlePage={true}
-        enableAnnotationRendering={true}
-        enablePaging={true}
-        source={source}
-        style={styles.pdf}
-        ref={pdf => {
-          this.pdf = pdf;
-        }}
-        onPageChanged={onPageChanged}
-        onLoadComplete={() => this.pdf.setPage(activeBook.currentPage)}
-      />
+      <GestureRecognizer
+        onSwipeRight={goPageBackwards}
+        onSwipeLeft={goPageForward}
+        onSwipeUp={goPageForward}
+        onSwipeDown={goPageBackwards}>
+        <Pdf
+          singlePage={true}
+          enableAnnotationRendering={true}
+          enablePaging={true}
+          source={source}
+          style={styles.pdf}
+          ref={pdf => {
+            this.pdf = pdf;
+          }}
+          onPageChanged={onPageChanged}
+          onLoadComplete={() => this.pdf.setPage(activeBook.currentPage)}
+        />
+      </GestureRecognizer>
     </View>
   );
 }
@@ -109,22 +85,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     marginTop: 25,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
   },
   pdf: {
     flex: 1,
