@@ -20,6 +20,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { PlusIcon } from './src/components/header/PlusIcon';
 import { BookIcon } from './src/components/header/BookIcon';
 import { LibraryRightHeader } from './src/components/header/LibraryRightHeader';
+import { LibraryIcon } from './src/components/header/LibraryIcon';
 const { Navigator, Screen } = createNativeStackNavigator();
 
 const Application = () => {
@@ -40,7 +41,13 @@ const Application = () => {
             headerRight: PlusIcon,
           }}
         />
-        <Screen name="PdfViewer" component={PdfViewer} />
+        <Screen
+          name="PdfViewer"
+          component={PdfViewer}
+          options={{
+            headerRight: LibraryIcon,
+          }}
+        />
         <Screen
           name="Library"
           component={Library}
