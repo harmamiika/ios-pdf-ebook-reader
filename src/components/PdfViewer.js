@@ -10,6 +10,7 @@ import {
   View,
 } from 'react-native';
 import Pdf from 'react-native-pdf';
+import GestureRecognizer from 'react-native-swipe-gestures';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateActiveBookPage } from '../state/booksSlice';
@@ -44,43 +45,71 @@ export default function PdfViewer() {
     dispatch(updateActiveBookPage(page));
   };
 
+  const onSwipeRight = () => {
+    console.log('asd');
+  };
+
+  console.log(Dimensions.get('window').height, 'height');
+
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Pdf
-            singlePage={true}
-            enableAnnotationRendering={true}
-            enablePaging={true}
-            source={source}
-            style={styles.pdf}
-            ref={pdf => {
-              this.pdf = pdf;
-            }}
-            onPageChanged={onPageChanged}
-            onLoadComplete={() => this.pdf.setPage(activeBook.currentPage)}
-          />
-          <Button
-            title="page--"
-            onPress={() => this.pdf.setPage(activeBook.currentPage - 1)}
-          />
-          <Button
-            onPress={() => this.pdf.setPage(activeBook.currentPage + 1)}
-            title="page++"
-          />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    //   <SafeAreaView style={backgroundStyle}>
+    //     {/* <GestureRecognizer onSwipeRight={onSwipeRight}> */}
+    //     <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+    //     <ScrollView
+    //       contentInsetAdjustmentBehavior="automatic"
+    //       style={backgroundStyle}>
+    //       <View
+    //         style={{
+    //           backgroundColor: isDarkMode ? Colors.black : Colors.white,
+    //         }}>
+    //         <Pdf
+    //           singlePage={true}
+    //           enableAnnotationRendering={true}
+    //           enablePaging={true}
+    //           source={source}
+    //           style={styles.pdf}
+    //           ref={pdf => {
+    //             this.pdf = pdf;
+    //           }}
+    //           onPageChanged={onPageChanged}
+    //           onLoadComplete={() => this.pdf.setPage(activeBook.currentPage)}
+    //         />
+    //         <Button
+    //           title="page--"
+    //           onPress={() => this.pdf.setPage(activeBook.currentPage - 1)}
+    //         />
+    //         <Button
+    //           onPress={() => this.pdf.setPage(activeBook.currentPage + 1)}
+    //           title="page++"
+    //         />
+    //       </View>
+    //     </ScrollView>
+    //     {/* </GestureRecognizer> */}
+    //   </SafeAreaView>
+    <View style={styles.container}>
+      <Pdf
+        singlePage={true}
+        enableAnnotationRendering={true}
+        enablePaging={true}
+        source={source}
+        style={styles.pdf}
+        ref={pdf => {
+          this.pdf = pdf;
+        }}
+        onPageChanged={onPageChanged}
+        onLoadComplete={() => this.pdf.setPage(activeBook.currentPage)}
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginTop: 25,
+  },
   sectionContainer: {
     marginTop: 32,
     paddingHorizontal: 24,
@@ -98,8 +127,9 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   pdf: {
-    flex: 0.8,
+    flex: 1,
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
+    marginBottom: Dimensions.get('window').height / 35,
   },
 });

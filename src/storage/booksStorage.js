@@ -3,8 +3,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export const saveBookListToStorage = async books => {
   try {
     await AsyncStorage.setItem('bookList', JSON.stringify(books));
-    const bookListFromStore = await AsyncStorage.getItem('bookList');
-    console.log(bookListFromStore, 'from storage');
+    // const bookListFromStore = await AsyncStorage.getItem('bookList');
+    // console.log(bookListFromStore, 'from storage');
   } catch (e) {
     // saving error
     // set error
