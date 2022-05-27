@@ -3,10 +3,11 @@ import React from 'react';
 import { SafeAreaView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { setActiveBook } from '../state/booksSlice';
+import { CustomIonIcon } from './reusable/CustomIonIcon';
 
-export default function Menu() {
+export default function Library() {
   const dispatch = useDispatch();
-  const { bookList } = useSelector(state => state.books);
+  const { bookList, activeBook } = useSelector(state => state.books);
 
   const onItemPress = book => {
     dispatch(setActiveBook(book));
@@ -15,9 +16,12 @@ export default function Menu() {
   const renderBookListItem = ({ item }) => {
     return (
       <ListItem
-        title={`${item?.name}`}
+        title={`${item?.name} ${
+          item.id === activeBook.id ? ' - currently reading' : ''
+        }`}
         description={`Page ${item?.currentPage} / ${item?.totalPages || '?'}`}
         onPress={() => onItemPress(item)}
+        accessoryRight={DeleteButton}
       />
     );
   };
@@ -32,4 +36,9 @@ export default function Menu() {
       />
     </SafeAreaView>
   );
+}
+
+// remove with a popup
+function DeleteButton() {
+  return <CustomIonIcon name="trash-outline" />;
 }

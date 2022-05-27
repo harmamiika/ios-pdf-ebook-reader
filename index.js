@@ -3,33 +3,28 @@
  */
 
 import * as eva from '@eva-design/eva';
-import React, { useEffect } from 'react';
-import { AppRegistry } from 'react-native';
-import App from './App';
-import PdfViewer from './src/components/PdfViewer';
-import Library from './src/components/Library';
-import { name as appName } from './app.json';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { ApplicationProvider } from '@ui-kitten/components';
+import React, { useEffect } from 'react';
+import { AppRegistry } from 'react-native';
 import { Provider, useDispatch, useSelector } from 'react-redux';
-import { store } from './src/state/store';
-import { getBooks, getActiveBook } from './src/state/booksSlice';
-import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
-import { FontAwesome5Icon } from './src/components/reusable/FontAwesome5Icon';
-
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { PlusIcon } from './src/components/header/PlusIcon';
-import { BookIcon } from './src/components/header/BookIcon';
-import { LibraryRightHeader } from './src/components/header/LibraryRightHeader';
+import App from './App';
+import { name as appName } from './app.json';
 import { LibraryIcon } from './src/components/header/LibraryIcon';
+import { LibraryRightHeader } from './src/components/header/LibraryRightHeader';
+import { PlusIcon } from './src/components/header/PlusIcon';
+import Library from './src/components/Library';
 import { Menu } from './src/components/Menu';
+import PdfViewer from './src/components/PdfViewer';
+import { getActiveBook, getBooks } from './src/state/booksSlice';
+import { store } from './src/state/store';
+
 const { Navigator, Screen } = createNativeStackNavigator();
 
 const Application = () => {
   const dispatch = useDispatch();
   const activeBookTitle = useSelector(state => state.books.activeBook.name);
-
-  console.log(activeBookTitle, 'active book title');
 
   useEffect(() => {
     dispatch(getBooks());
@@ -39,13 +34,6 @@ const Application = () => {
   return (
     <NavigationContainer>
       <Navigator>
-        <Screen
-          name="App"
-          component={App}
-          options={{
-            headerRight: PlusIcon,
-          }}
-        />
         <Screen
           name="PdfViewer"
           component={PdfViewer}
@@ -69,6 +57,13 @@ const Application = () => {
           // options={{
           //   headerLeft: LibraryIcon,
           // }}
+        />
+        <Screen
+          name="App"
+          component={App}
+          options={{
+            headerRight: PlusIcon,
+          }}
         />
       </Navigator>
     </NavigationContainer>
