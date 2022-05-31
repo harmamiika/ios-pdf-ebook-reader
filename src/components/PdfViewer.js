@@ -58,6 +58,10 @@ export default function PdfViewer() {
     left: 0,
   });
 
+  const [isZooming, setIsZooming] = useState();
+
+  useEffect(() => console.log('mount'), []);
+
   function calcDistance(x1, y1, x2, y2) {
     let dx = Math.abs(x1 - x2);
     let dy = Math.abs(y1 - y2);
@@ -83,7 +87,9 @@ export default function PdfViewer() {
     // console.log(center, 'center');
     console.log(zoomState.isZooming, 'zoomstate pre check');
 
-    if (zoomState.isZooming === false) {
+    console.log(isZooming, 'is zooming');
+
+    if (!isZooming) {
       const newZoomState = {
         ...zoomState,
         isZooming: true,
@@ -96,10 +102,13 @@ export default function PdfViewer() {
         initialZoom: zoomState.initialZoom,
         // lisää  vaas mitä et 80% todnäk tarvitse
       };
-
       console.log(newZoomState, 'new zoom initial State');
 
+      setIsZooming(true);
+      console.log(isZooming, 'is zooming');
       setZoomState(newZoomState);
+
+      console.log('after setsate');
     } else {
       let touchZoom = distance / zoomState.initialDistance;
       let zoom =
@@ -117,13 +126,17 @@ export default function PdfViewer() {
 
   const panResponder = useRef(
     PanResponder.create({
-      onMoveShouldSetResponderCapture: () => true,
-      onMoveShouldSetPanResponderCapture: () => true,
-      onPanResponderGrant: (event, gestureState) => {},
+      onStartShouldSetPanResponder: (evt, gestureState) => true,
+      onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
+      onMoveShouldSetPanResponder: (evt, gestureState) => true,
+      onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
+      onPanResponderGrant: (evt, gestureState) => {},
       onPanResponderMove: (event, gestureState) => {
         const touches = event.nativeEvent.touches;
         if (touches.length >= 2) {
           // We have a pinch-to-zoom movement
+
+          setIsZooming(true);
 
           let touch1 = touches[0];
           let touch2 = touches[1];
@@ -140,13 +153,16 @@ export default function PdfViewer() {
       },
       onPanResponderRelease: (evt, gestureState) => {
         console.log('release');
+        // setIsZooming(false);
         setZoomState({
           ...zoomState,
           ...{ isZooming: false, isMoving: false },
         });
       },
       // hmmmm
-      // onShouldBlockNativeResponder: (evt, gestureState) => true,
+      onPanResponderTerminationRequest: (evt, gestureState) => true,
+      onPanResponderTerminate: (evt, gestureState) => {},
+      onShouldBlockNativeResponder: (evt, gestureState) => true,
     }),
   ).current;
 
