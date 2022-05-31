@@ -7,4 +7,4 @@ export const FontAwesome5Icon = ({
 }: {
   name: string;
   onPress: () => void;
-}) => <FontAwesome5 name={name} onPress={onPress} />;
+}) => <FontAwesome5 name={name} onPress={onPress} size={20} />;
