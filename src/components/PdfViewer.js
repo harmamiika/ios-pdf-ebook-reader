@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 import {
   Button,
   Dimensions,
@@ -15,6 +15,10 @@ import GestureRecognizer from 'react-native-swipe-gestures';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateActiveBookPage } from '../state/booksSlice';
+
+// mitä voi yrittää
+// class component
+// redux
 
 export default function PdfViewer() {
   const dispatch = useDispatch();
@@ -58,8 +62,6 @@ export default function PdfViewer() {
     left: 0,
   });
 
-  const [isZooming, setIsZooming] = useState();
-
   useEffect(() => console.log('mount'), []);
 
   function calcDistance(x1, y1, x2, y2) {
@@ -87,9 +89,7 @@ export default function PdfViewer() {
     // console.log(center, 'center');
     console.log(zoomState.isZooming, 'zoomstate pre check');
 
-    console.log(isZooming, 'is zooming');
-
-    if (!isZooming) {
+    if (!zoomState.isZooming) {
       const newZoomState = {
         ...zoomState,
         isZooming: true,
@@ -103,9 +103,6 @@ export default function PdfViewer() {
         // lisää  vaas mitä et 80% todnäk tarvitse
       };
       console.log(newZoomState, 'new zoom initial State');
-
-      setIsZooming(true);
-      console.log(isZooming, 'is zooming');
       setZoomState(newZoomState);
 
       console.log('after setsate');
@@ -121,50 +118,57 @@ export default function PdfViewer() {
         ...zoomState,
         zoom: zoom,
       });
+      console.log(zoomState, 'zoomstate');
     }
   };
 
-  const panResponder = useRef(
-    PanResponder.create({
-      onStartShouldSetPanResponder: (evt, gestureState) => true,
-      onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
-      onMoveShouldSetPanResponder: (evt, gestureState) => true,
-      onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
-      onPanResponderGrant: (evt, gestureState) => {},
-      onPanResponderMove: (event, gestureState) => {
-        const touches = event.nativeEvent.touches;
-        if (touches.length >= 2) {
-          // We have a pinch-to-zoom movement
+  const panResponder = useMemo(
+    () =>
+      PanResponder.create({
+        onStartShouldSetPanResponder: (evt, gestureState) => true,
+        onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
+        onMoveShouldSetPanResponder: (evt, gestureState) => true,
+        onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
+        onPanResponderGrant: (evt, gestureState) => {},
+        onPanResponderMove: (event, gestureState) => {
+          const touches = event.nativeEvent.touches;
+          if (touches.length >= 2) {
+            // We have a pinch-to-zoom movement
+            let touch1 = touches[0];
+            let touch2 = touches[1];
+            // console.log(touch1, 'touch1');
+            // console.log(touch2, 'touch2');
 
-          setIsZooming(true);
+            processPinch(
+              touch1.pageX,
+              touch1.pageY,
+              touch2.pageX,
+              touch2.pageY,
+            );
 
-          let touch1 = touches[0];
-          let touch2 = touches[1];
+            // Track locationX/locationY to know by how much the user moved their fingers
+          } else {
+            // We have a regular scroll movement
+          }
+        },
+        onPanResponderRelease: (evt, gestureState) => {
+          console.log('release');
+          // setIsZooming(false);
+          setZoomState({
+            ...zoomState,
+            ...{ isZooming: false, isMoving: false },
+          });
+        },
+        // hmmmm
+        onPanResponderTerminationRequest: (evt, gestureState) => true,
+        onPanResponderTerminate: (evt, gestureState) => {},
+        onShouldBlockNativeResponder: (evt, gestureState) => true,
+      }),
+    [zoomState],
+  );
 
-          // console.log(touch1, 'touch1');
-          // console.log(touch2, 'touch2');
-
-          processPinch(touch1.pageX, touch1.pageY, touch2.pageX, touch2.pageY);
-
-          // Track locationX/locationY to know by how much the user moved their fingers
-        } else {
-          // We have a regular scroll movement
-        }
-      },
-      onPanResponderRelease: (evt, gestureState) => {
-        console.log('release');
-        // setIsZooming(false);
-        setZoomState({
-          ...zoomState,
-          ...{ isZooming: false, isMoving: false },
-        });
-      },
-      // hmmmm
-      onPanResponderTerminationRequest: (evt, gestureState) => true,
-      onPanResponderTerminate: (evt, gestureState) => {},
-      onShouldBlockNativeResponder: (evt, gestureState) => true,
-    }),
-  ).current;
+  const [scaleZoomStart, setScaleZoomStart] = useState(1);
+  const [scale, setScale] = useState(1);
 
   return (
     <View style={styles.container} {...panResponder.panHandlers}>
@@ -184,6 +188,9 @@ export default function PdfViewer() {
         }}
         onPageChanged={onPageChanged}
         onLoadComplete={() => this.pdf.setPage(activeBook.currentPage)}
+        minScale={1}
+        maxScale={3}
+        scale={zoomState.zoom}
       />
       {/* </GestureRecognizer> */}
     </View>
