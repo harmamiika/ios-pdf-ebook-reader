@@ -16,9 +16,22 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateActiveBookPage } from '../state/booksSlice';
 
-// mitä voi yrittää
-// class component
-// redux
+function calcDistance(x1, y1, x2, y2) {
+  let dx = Math.abs(x1 - x2);
+  let dy = Math.abs(y1 - y2);
+  return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+}
+
+function calcCenter(x1, y1, x2, y2) {
+  function middle(p1, p2) {
+    return p1 > p2 ? p1 - (p1 - p2) / 2 : p2 - (p2 - p1) / 2;
+  }
+
+  return {
+    x: middle(x1, x2),
+    y: middle(y1, y2),
+  };
+}
 
 export default function PdfViewer() {
   const dispatch = useDispatch();
@@ -33,13 +46,6 @@ export default function PdfViewer() {
     console.log(`Current page: ${page}`);
     console.log(`number of pages ${numberOfPages}`);
     dispatch(updateActiveBookPage(page));
-  };
-
-  const goPageForward = () => {
-    this.pdf.setPage(activeBook.currentPage + 1);
-  };
-  const goPageBackwards = () => {
-    this.pdf.setPage(activeBook.currentPage - 1);
   };
 
   const [zoomState, setZoomState] = useState({
@@ -62,32 +68,9 @@ export default function PdfViewer() {
     left: 0,
   });
 
-  useEffect(() => console.log('mount'), []);
-
-  function calcDistance(x1, y1, x2, y2) {
-    let dx = Math.abs(x1 - x2);
-    let dy = Math.abs(y1 - y2);
-    return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
-  }
-
-  function calcCenter(x1, y1, x2, y2) {
-    function middle(p1, p2) {
-      return p1 > p2 ? p1 - (p1 - p2) / 2 : p2 - (p2 - p1) / 2;
-    }
-
-    return {
-      x: middle(x1, x2),
-      y: middle(y1, y2),
-    };
-  }
-
   const processPinch = (x1, y1, x2, y2) => {
     let distance = calcDistance(x1, y1, x2, y2);
     let center = calcCenter(x1, y1, x2, y2);
-
-    // console.log(distance, 'distance');
-    // console.log(center, 'center');
-    console.log(zoomState.isZooming, 'zoomstate pre check');
 
     if (!zoomState.isZooming) {
       const newZoomState = {
@@ -122,6 +105,30 @@ export default function PdfViewer() {
     }
   };
 
+  const [swipeState, setSwipeState] = useState({
+    center: undefined,
+    distance: undefined,
+  });
+
+  const processSwipe = (x, y) => {
+    if (!swipeState.center) {
+      setSwipeState({
+        center: { x, y },
+        distance: undefined,
+      });
+      console.log('inited swipe', swipeState);
+    } else {
+      const distanceX = swipeState.center.x - x;
+      const distanceY = swipeState.center.y - y;
+
+      if (distanceX > 50 || distanceY > 50) {
+        this.pdf.setPage(activeBook.currentPage + 1);
+      } else if (distanceX < -50 || distanceY < -50) {
+        this.pdf.setPage(activeBook.currentPage - 1);
+      }
+    }
+  };
+
   const panResponder = useMemo(
     () =>
       PanResponder.create({
@@ -132,12 +139,13 @@ export default function PdfViewer() {
         onPanResponderGrant: (evt, gestureState) => {},
         onPanResponderMove: (event, gestureState) => {
           const touches = event.nativeEvent.touches;
+          if (touches.length === 1) {
+            processSwipe(touches[0].pageX, touches[0].pageY);
+          }
+
           if (touches.length >= 2) {
-            // We have a pinch-to-zoom movement
             let touch1 = touches[0];
             let touch2 = touches[1];
-            // console.log(touch1, 'touch1');
-            // console.log(touch2, 'touch2');
 
             processPinch(
               touch1.pageX,
@@ -145,10 +153,6 @@ export default function PdfViewer() {
               touch2.pageX,
               touch2.pageY,
             );
-
-            // Track locationX/locationY to know by how much the user moved their fingers
-          } else {
-            // We have a regular scroll movement
           }
         },
         onPanResponderRelease: (evt, gestureState) => {
@@ -158,25 +162,21 @@ export default function PdfViewer() {
             ...zoomState,
             ...{ isZooming: false, isMoving: false },
           });
+          setSwipeState({
+            center: undefined,
+            distance: undefined,
+          });
         },
         // hmmmm
         onPanResponderTerminationRequest: (evt, gestureState) => true,
         onPanResponderTerminate: (evt, gestureState) => {},
         onShouldBlockNativeResponder: (evt, gestureState) => true,
       }),
-    [zoomState],
+    [zoomState, swipeState],
   );
-
-  const [scaleZoomStart, setScaleZoomStart] = useState(1);
-  const [scale, setScale] = useState(1);
 
   return (
     <View style={styles.container} {...panResponder.panHandlers}>
-      {/* <GestureRecognizer
-        onSwipeRight={goPageBackwards}
-        onSwipeLeft={goPageForward}
-        onSwipeUp={goPageForward}
-        onSwipeDown={goPageBackwards}> */}
       <Pdf
         singlePage={true}
         enableAnnotationRendering={true}
@@ -192,7 +192,6 @@ export default function PdfViewer() {
         maxScale={3}
         scale={zoomState.zoom}
       />
-      {/* </GestureRecognizer> */}
     </View>
   );
 }
