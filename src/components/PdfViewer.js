@@ -1,18 +1,6 @@
-import React, { useEffect, useState, useRef, useMemo } from 'react';
-import {
-  Button,
-  Dimensions,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  useColorScheme,
-  View,
-  PanResponder,
-} from 'react-native';
+import React, { useMemo, useState } from 'react';
+import { Dimensions, PanResponder, StyleSheet, View } from 'react-native';
 import Pdf from 'react-native-pdf';
-import GestureRecognizer from 'react-native-swipe-gestures';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateActiveBookPage } from '../state/booksSlice';
 
@@ -36,37 +24,27 @@ function calcCenter(x1, y1, x2, y2) {
 export default function PdfViewer() {
   const dispatch = useDispatch();
   const { activeBook } = useSelector(state => state.books);
-  const [source, setSource] = useState({ uri: undefined });
 
-  useEffect(() => {
-    setSource({ uri: activeBook?.file?.fileCopyUri });
-  }, [activeBook]);
+  const [swipeState, setSwipeState] = useState({
+    center: undefined,
+    distance: undefined,
+  });
+
+  const [zoomState, setZoomState] = useState({
+    zoom: null,
+    minZoom: null,
+    isZooming: false,
+    initialDistance: null,
+    initialX: null,
+    initalY: null,
+    initialZoom: 1,
+  });
 
   const onPageChanged = (page, numberOfPages) => {
     console.log(`Current page: ${page}`);
     console.log(`number of pages ${numberOfPages}`);
     dispatch(updateActiveBookPage(page));
   };
-
-  const [zoomState, setZoomState] = useState({
-    zoom: null,
-    minZoom: null,
-    layoutKnown: false,
-    isZooming: false,
-    isMoving: false,
-    initialDistance: null,
-    initialX: null,
-    initalY: null,
-    offsetTop: 0,
-    offsetLeft: 0,
-    initialTop: 0,
-    initialLeft: 0,
-    initialTopWithoutZoom: 0,
-    initialLeftWithoutZoom: 0,
-    initialZoom: 1,
-    top: 0,
-    left: 0,
-  });
 
   const processPinch = (x1, y1, x2, y2) => {
     let distance = calcDistance(x1, y1, x2, y2);
@@ -79,36 +57,20 @@ export default function PdfViewer() {
         initialDistance: distance,
         initialX: center.x,
         initialY: center.y,
-        //
-        initialTop: zoomState.top,
-        initialLeft: zoomState.left,
-        initialZoom: zoomState.initialZoom,
-        // lisää  vaas mitä et 80% todnäk tarvitse
       };
-      console.log(newZoomState, 'new zoom initial State');
       setZoomState(newZoomState);
-
-      console.log('after setsate');
     } else {
       let touchZoom = distance / zoomState.initialDistance;
       let zoom =
         touchZoom * zoomState.initialZoom > zoomState.minZoom
           ? touchZoom * zoomState.initialZoom
           : zoomState.minZoom;
-
-      console.log(zoom, 'zoom');
       setZoomState({
         ...zoomState,
         zoom: zoom,
       });
-      console.log(zoomState, 'zoomstate');
     }
   };
-
-  const [swipeState, setSwipeState] = useState({
-    center: undefined,
-    distance: undefined,
-  });
 
   const processSwipe = (x, y) => {
     if (!swipeState.center) {
@@ -116,11 +78,10 @@ export default function PdfViewer() {
         center: { x, y },
         distance: undefined,
       });
-      console.log('inited swipe', swipeState);
     } else {
       const distanceX = swipeState.center.x - x;
       const distanceY = swipeState.center.y - y;
-
+      // reset swipe is not necessary?
       if (distanceX > 50 || distanceY > 50) {
         this.pdf.setPage(activeBook.currentPage + 1);
       } else if (distanceX < -50 || distanceY < -50) {
@@ -139,6 +100,7 @@ export default function PdfViewer() {
         onPanResponderGrant: (evt, gestureState) => {},
         onPanResponderMove: (event, gestureState) => {
           const touches = event.nativeEvent.touches;
+
           if (touches.length === 1) {
             processSwipe(touches[0].pageX, touches[0].pageY);
           }
@@ -146,7 +108,6 @@ export default function PdfViewer() {
           if (touches.length >= 2) {
             let touch1 = touches[0];
             let touch2 = touches[1];
-
             processPinch(
               touch1.pageX,
               touch1.pageY,
@@ -156,8 +117,6 @@ export default function PdfViewer() {
           }
         },
         onPanResponderRelease: (evt, gestureState) => {
-          console.log('release');
-          // setIsZooming(false);
           setZoomState({
             ...zoomState,
             ...{ isZooming: false, isMoving: false },
@@ -181,7 +140,7 @@ export default function PdfViewer() {
         singlePage={true}
         enableAnnotationRendering={true}
         enablePaging={true}
-        source={source}
+        source={{ uri: activeBook?.file?.fileCopyUri }}
         style={styles.pdf}
         ref={pdf => {
           this.pdf = pdf;
