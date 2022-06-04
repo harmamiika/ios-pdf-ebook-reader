@@ -1,3 +1,16 @@
+<h2>Roadmap</h2>
+1. MVP - admob and finish lists at least
+2. Apple account & test
+3. Make app icon MVP
+4. Send app to review
+--------------------------------
+5. Make possible fixes
+6. If pass, take pictures
+7. Create SEO plan
+8. Make website
+9. Launch
+---------------------------------
+
 <h2>MVP APP store</h2>
 -ADmob
 -Login to remove ads planning - IOS native vs firebase
@@ -15,6 +28,10 @@ SMALL IMPROVEMENTS
 -- add to favourite
 -- mark as read
 --Button to open minimenu - oevrflow menu
+
+-Improve file pick
+--Add feedback text
+--create filename with no file extension
 
 BACKLOG
 List

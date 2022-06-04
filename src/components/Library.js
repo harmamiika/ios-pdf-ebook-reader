@@ -1,8 +1,9 @@
 import { Divider, List, ListItem } from '@ui-kitten/components';
 import React from 'react';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { setActiveBook } from '../state/booksSlice';
+import BookListItem from './BookListItem';
 import { CustomIonIcon } from './reusable/CustomIonIcon';
 
 export default function Library() {
@@ -28,12 +29,17 @@ export default function Library() {
 
   return (
     <SafeAreaView>
-      {/* <ScrollView>{bookList?.map(book => renderBookListItem(book))}</ScrollView> */}
-      <List
+      <ScrollView>
+        {/* <ScrollView>{bookList?.map(book => renderBookListItem(book))}</ScrollView> */}
+        {/* <List
         data={bookList}
         ItemSeparatorComponent={Divider}
         renderItem={renderBookListItem}
-      />
+      /> */}
+        {bookList.map(book => (
+          <BookListItem book={book} key={book.id} />
+        ))}
+      </ScrollView>
     </SafeAreaView>
   );
 }
