@@ -1,9 +1,41 @@
+<h2>MVP APP store</h2>
+-ADmob
+-Login to remove ads planning - IOS native vs firebase
+
+SMALL IMPROVEMENTS
+-Improve settings menu
+--add app info item
+--add greetings from dev item
+--add settings item
+---Add toggle for page switch right/left/both
+--add read books item
+
+-Improve list
+-- add delete confirm with modal
+-- add to favourite
+-- mark as read
+
+PDF viewer
+-add totalpages when changing page
+-store zoom in state?
+
+BACKLOG
+List
+
+- add thumbnail
+  -folders
+  -drag and drop ordering
+
+V1.1
+
+Premium sub disabloi adsit
+
+V2
+
+Share with friends
+Display message / poll modal
+
 <h2>TODOS</h2>
-
-- center pdf figure out view vs the other
-- add pdf optional zoom, stabile with
-
-1h - 5h
 
 - storage - use redux persist
   1-5h
@@ -44,3 +76,14 @@ Website - WITH WP!!
 
 - total = 25 - 75h
 - logaa tunteja
+
+DONE:
+-zooming
+
+- center pdf figure out view vs the other
+- add pdf optional zoom, stabile with
+
+1h - 5h TODELLISUUS: 5h
+
+-add pagecount
+5min
