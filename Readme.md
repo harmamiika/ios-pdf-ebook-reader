@@ -14,10 +14,7 @@ SMALL IMPROVEMENTS
 -- add delete confirm with modal
 -- add to favourite
 -- mark as read
-
-PDF viewer
--add totalpages when changing page
--store zoom in state?
+--Button to open minimenu - oevrflow menu
 
 BACKLOG
 List
@@ -87,3 +84,7 @@ DONE:
 
 -add pagecount
 5min
+
+PDF viewer
+-add totalpages when changing page
+-store zoom in state?

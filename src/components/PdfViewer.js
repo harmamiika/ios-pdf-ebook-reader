@@ -52,6 +52,7 @@ export default function PdfViewer() {
         }),
       );
     }
+    // trigger current zoom save to active book?
   };
 
   const processPinch = (x1, y1, x2, y2) => {
