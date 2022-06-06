@@ -23,6 +23,9 @@ SMALL IMPROVEMENTS
 ---Add toggle for page switch right/left/both
 --add read books item
 
+--Add ipad support
+--add sideways support -- or don't actually
+
 -Improve list
 -- add delete confirm with modal
 -- add to favourite

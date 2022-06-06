@@ -73,11 +73,11 @@ const Application = () => {
 const Root = () => {
   // AsyncStorage.clear();
   return (
-    // <ApplicationProvider {...eva} theme={eva.light}>
-    <Provider store={store}>
-      <Application />
-    </Provider>
-    // </ApplicationProvider>
+    <ApplicationProvider {...eva} theme={eva.light}>
+      <Provider store={store}>
+        <Application />
+      </Provider>
+    </ApplicationProvider>
   );
 };
 

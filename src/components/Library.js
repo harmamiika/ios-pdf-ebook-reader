@@ -3,7 +3,7 @@ import React from 'react';
 import { SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { setActiveBook } from '../state/booksSlice';
-import BookListItem from './BookListItem';
+import BookCard from './book-list/BookCard';
 import { CustomIonIcon } from './reusable/CustomIonIcon';
 
 export default function Library() {
@@ -37,14 +37,9 @@ export default function Library() {
         renderItem={renderBookListItem}
       /> */}
         {bookList.map(book => (
-          <BookListItem book={book} key={book.id} />
+          <BookCard book={book} key={book.id} />
         ))}
       </ScrollView>
     </SafeAreaView>
   );
-}
-
-// remove with a popup
-function DeleteButton() {
-  return <CustomIonIcon name="trash-outline" />;
 }
