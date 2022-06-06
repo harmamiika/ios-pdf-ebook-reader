@@ -10,7 +10,7 @@ import {
 // Book data model
 const createBook = file => ({
   id: uuid.v4(),
-  name: file.name,
+  name: file.name.replace(/\.[^/.]+$/, ''),
   file,
 
   // get pdf page count somehow

@@ -1,20 +1,9 @@
+import { Card, Layout, Text } from '@ui-kitten/components';
 import React, { useState } from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
-import booksSlice, { setActiveBook } from '../../state/booksSlice';
-import {
-  Text,
-  Button,
-  Divider,
-  List,
-  ListItem,
-  MenuItem,
-  OverflowMenu,
-  Card,
-  Layout,
-} from '@ui-kitten/components';
 import { IBook } from '../../interfaces';
-import { FontAwesome5Icon } from '../reusable/FontAwesome5Icon';
+import CardContent from './CardContent';
 import OverflowMenuButton from './OverFlowMenuButton';
 
 interface BookCardProps {
@@ -42,7 +31,9 @@ export default function BookCard({ book }: BookCardProps) {
 
   return (
     <Card header={renderHeader}>
-      <Layout></Layout>
+      <Layout>
+        <CardContent book={book} />
+      </Layout>
     </Card>
   );
 }
@@ -50,7 +41,7 @@ export default function BookCard({ book }: BookCardProps) {
 const styles = StyleSheet.create({
   headerLayout: {
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignContent: 'flex-end',
     backgroundColor: 'red',
   },
