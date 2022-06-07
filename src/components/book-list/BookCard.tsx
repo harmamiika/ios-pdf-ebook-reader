@@ -1,5 +1,5 @@
 import { Card, Layout, Text } from '@ui-kitten/components';
-import React, { useState } from 'react';
+import React from 'react';
 import { StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { IBook } from '../../interfaces';
@@ -12,8 +12,6 @@ interface BookCardProps {
 
 export default function BookCard({ book }: BookCardProps) {
   const dispatch = useDispatch();
-  const [selectedIndex, setSelectedIndex] = useState();
-  const [menuIsVisible, setMenuIsVisible] = useState<boolean>(false);
 
   console.log(book, 'book book');
 
@@ -23,15 +21,20 @@ export default function BookCard({ book }: BookCardProps) {
   // };
 
   const renderHeader = (props: any) => (
-    <Layout {...props} styles={styles.headerLayout}>
+    <Layout {...props}>
       <Text category="h6">{book.name}</Text>
+    </Layout>
+  );
+
+  const renderFooter = (props: any) => (
+    <Layout {...props}>
       <OverflowMenuButton />
     </Layout>
   );
 
   return (
-    <Card header={renderHeader}>
-      <Layout>
+    <Card header={renderHeader} footer={renderFooter}>
+      <Layout style={styles.contentLayout}>
         <CardContent book={book} />
       </Layout>
     </Card>
@@ -40,9 +43,13 @@ export default function BookCard({ book }: BookCardProps) {
 
 const styles = StyleSheet.create({
   headerLayout: {
+    // display: 'flex',
+    // justifyContent: 'space-between',
+    // backgroundColor: 'red',
+  },
+  contentLayout: {
     display: 'flex',
-    flexDirection: 'column',
-    alignContent: 'flex-end',
-    backgroundColor: 'red',
+    justifyContent: 'space-between',
+    backgroundColor: 'blue',
   },
 });

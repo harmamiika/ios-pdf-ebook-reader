@@ -11,9 +11,11 @@ export default function CardContent({ book }: CardContentProps) {
   return (
     <Layout style={styles.itemBottomSide}>
       <Layout style={styles.descriptionContainer}>
-        <Text style={styles.pages}>
-          {book.currentPage} /{' '}
-          {`Page ${book?.currentPage} / ${book?.totalPages || '?'}`}
+        <Text>
+          <Text style={styles.pages}>
+            {book.currentPage} /{' '}
+            {`Page ${book?.currentPage} / ${book?.totalPages || '?'}`}
+          </Text>
         </Text>
       </Layout>
     </Layout>
@@ -27,6 +29,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: 'yellow',
   },
   descriptionContainer: {},
   rightSideIconContainer: {},

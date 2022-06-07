@@ -19,6 +19,7 @@ import { Menu } from './src/components/Menu';
 import PdfViewer from './src/components/PdfViewer';
 import { getActiveBook, getBooks } from './src/state/booksSlice';
 import { store } from './src/state/store';
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { Navigator, Screen } = createNativeStackNavigator();
 

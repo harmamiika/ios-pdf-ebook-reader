@@ -4,6 +4,7 @@ import { SafeAreaView, ScrollView, Text, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { setActiveBook } from '../state/booksSlice';
 import BookCard from './book-list/BookCard';
+import BookListItem from './book-list/BookListItem';
 import { CustomIonIcon } from './reusable/CustomIonIcon';
 
 export default function Library() {
@@ -36,6 +37,9 @@ export default function Library() {
         ItemSeparatorComponent={Divider}
         renderItem={renderBookListItem}
       /> */}
+        {bookList.map(book => (
+          <BookListItem book={book} key={book.id} />
+        ))}
         {bookList.map(book => (
           <BookCard book={book} key={book.id} />
         ))}

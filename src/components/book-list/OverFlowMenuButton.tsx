@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
     // display: 'flex',
     // justifyContent: 'center',
     // alignItems: 'center',
+    alignSelf: 'flex-end',
     width: screenWidth / 50,
     margin: 2,
   },
