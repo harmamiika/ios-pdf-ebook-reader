@@ -21,7 +21,9 @@ const createBook = file => ({
   finishDate: undefined,
   lastPDFMountTime: undefined,
 
+  isFavorite: false,
   bookmarks: [],
+  notes: [],
 });
 
 export const getBooks = createAsyncThunk('books/getBookList', async () => {
@@ -47,6 +49,7 @@ const booksSlice = createSlice({
       saveBookListToStorage(bookList);
       state.bookList = bookList;
     },
+    deleteBook(state, action) {},
     setActiveBook(state, action) {
       const book = action.payload;
       saveActiveBookToStorage(book);

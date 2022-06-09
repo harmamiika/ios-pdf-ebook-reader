@@ -1,22 +1,14 @@
+import { Button, MenuItem, OverflowMenu } from '@ui-kitten/components';
 import React, { useState } from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import { Dimensions, StyleSheet, View } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { setActiveBook } from '../../state/booksSlice';
-import {
-  Text,
-  Button,
-  Divider,
-  List,
-  ListItem,
-  MenuItem,
-  OverflowMenu,
-} from '@ui-kitten/components';
-import { IBook } from '../../interfaces';
 import { FontAwesome5Icon } from '../reusable/FontAwesome5Icon';
 
 interface OverflowMenuButtonProps {}
 
 export default function OverflowMenuButton({}: OverflowMenuButtonProps) {
+  const dispatch = useDispatch();
+
   const [selectedIndex, setSelectedIndex] = useState();
   const [menuIsVisible, setMenuIsVisible] = useState<boolean>(false);
 
@@ -43,8 +35,7 @@ export default function OverflowMenuButton({}: OverflowMenuButtonProps) {
   );
 
   return (
-    <View style={styles.rightSideIconContainer}>
-      {/* <View style={styles.overflowMenuWrapper}> */}
+    <View style={styles.menuButtonContainer}>
       <OverflowMenu
         anchor={renderToggleButton}
         visible={menuIsVisible}
@@ -64,7 +55,6 @@ export default function OverflowMenuButton({}: OverflowMenuButtonProps) {
           accessoryLeft={() => <FontAwesome5Icon name="trash-alt" size={16} />}
         />
       </OverflowMenu>
-      {/* </View> */}
     </View>
   );
 }
@@ -72,13 +62,8 @@ export default function OverflowMenuButton({}: OverflowMenuButtonProps) {
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
-  rightSideIconContainer: {},
-  rightSideIcon: {},
+  menuButtonContainer: {},
   menuButton: {
-    // backgroundColor: 'gray',
-    // display: 'flex',
-    // justifyContent: 'center',
-    // alignItems: 'center',
     alignSelf: 'flex-end',
     width: screenWidth / 50,
     margin: 2,

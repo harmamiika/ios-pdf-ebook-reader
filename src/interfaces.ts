@@ -10,9 +10,10 @@ export interface IBook {
   finishDate: string | Date;
   lastPdfMountTime: string | Date;
 
+  isFavorite: boolean;
   bookmarks: [];
-  notes: [];
 }
+// TODO: Author?
 
 export interface IFile {
   name: string;
