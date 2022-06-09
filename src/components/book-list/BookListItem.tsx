@@ -20,7 +20,7 @@ export default function BookListItem({ book }: BookListItemProps) {
     <View style={styles.itemContainer}>
       <View style={styles.itemHeading}>
         <View style={styles.headerWrapper}>
-          <Text category="h5">{book.name}</Text>
+          <Text category="h6">{book.name}</Text>
         </View>
         <View style={styles.buttonContainer}>
           <OverflowMenuButton />

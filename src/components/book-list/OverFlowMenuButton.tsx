@@ -25,12 +25,12 @@ export default function OverflowMenuButton({}: OverflowMenuButtonProps) {
     setMenuIsVisible(false);
   };
 
+  // get blue theme color from somewhere
   const renderMenuIcon = () => (
     <FontAwesome5Icon
       name="ellipsis-v"
       color="rgba(0, 0, 0, 0.54)"
       onPress={() => setMenuIsVisible(true)}
-      // style={{ color: 'red' }}
     />
   );
 
@@ -51,9 +51,18 @@ export default function OverflowMenuButton({}: OverflowMenuButtonProps) {
         selectedIndex={selectedIndex}
         onSelect={onItemSelect}
         onBackdropPress={() => setMenuIsVisible(false)}>
-        <MenuItem title="Favourite" />
-        <MenuItem title="Mark as read" />
-        <MenuItem title="Delete" />
+        <MenuItem
+          accessoryLeft={() => <FontAwesome5Icon name="star" size={16} />}
+          title="Favourite"
+        />
+        <MenuItem
+          accessoryLeft={() => <FontAwesome5Icon name="check" size={16} />}
+          title="Mark as read"
+        />
+        <MenuItem
+          title="Delete"
+          accessoryLeft={() => <FontAwesome5Icon name="trash-alt" size={16} />}
+        />
       </OverflowMenu>
       {/* </View> */}
     </View>
