@@ -2,6 +2,7 @@ import { Divider, Text } from '@ui-kitten/components';
 import React from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { IBook } from '../../interfaces';
+import CardContent from './CardContent';
 import OverflowMenuButton from './OverFlowMenuButton';
 interface BookListItemProps {
   book: IBook;
@@ -18,23 +19,20 @@ export default function BookListItem({ book }: BookListItemProps) {
   return (
     <View style={styles.itemContainer}>
       <View style={styles.itemHeading}>
-        <Text category="h6">{book.name}</Text>
+        <View style={styles.headerWrapper}>
+          <Text category="h5">{book.name}</Text>
+        </View>
       </View>
       <Divider />
-      <View style={styles.itemBottomSide}>
-        <View style={styles.descriptionContainer}>
-          <Text>
-            {book.currentPage} /{' '}
-            {`Page ${book?.currentPage} / ${book?.totalPages || '?'}`}
-          </Text>
-        </View>
-        <OverflowMenuButton />
-      </View>
+      <CardContent book={book} />
     </View>
   );
 }
 
-const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
+export const { width: screenWidth, height: screenHeight } =
+  Dimensions.get('window');
+
+export const sideMargin = screenWidth / 15;
 
 const styles = StyleSheet.create({
   itemContainer: {
@@ -48,16 +46,13 @@ const styles = StyleSheet.create({
   },
   itemHeading: {
     width: '100%',
-    height: '25%',
-    backgroundColor: 'blue',
+    height: screenHeight / 20,
     display: 'flex',
+    flexDirection: 'column',
+    alignContent: 'center',
   },
-  itemBottomSide: {
-    flexBasis: '100%',
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
+  headerWrapper: {
+    marginLeft: sideMargin,
+    marginTop: screenHeight / 120,
   },
-  descriptionContainer: {},
 });

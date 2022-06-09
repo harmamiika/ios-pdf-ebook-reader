@@ -26,14 +26,8 @@ export default function BookCard({ book }: BookCardProps) {
     </Layout>
   );
 
-  const renderFooter = (props: any) => (
-    <Layout {...props}>
-      <OverflowMenuButton />
-    </Layout>
-  );
-
   return (
-    <Card header={renderHeader} footer={renderFooter}>
+    <Card header={renderHeader}>
       <Layout style={styles.contentLayout}>
         <CardContent book={book} />
       </Layout>

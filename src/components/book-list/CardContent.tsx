@@ -1,40 +1,65 @@
-import { Layout, Text } from '@ui-kitten/components';
+import { Divider, Layout, Text } from '@ui-kitten/components';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { IBook } from '../../interfaces';
+import { screenHeight, sideMargin } from './BookListItem';
+import OverflowMenuButton from './OverFlowMenuButton';
 
 interface CardContentProps {
   book: IBook;
 }
 
+interface ParagraphProps {
+  text: string;
+}
+
+const Paragraph: React.FC<ParagraphProps> = ({ text }) => {
+  return (
+    <Text category="p1" style={{ marginBottom: 10 }}>
+      {text}
+    </Text>
+  );
+};
+
 export default function CardContent({ book }: CardContentProps) {
   return (
-    <Layout style={styles.itemBottomSide}>
-      <Layout style={styles.descriptionContainer}>
-        <Text>
-          <Text style={styles.pages}>
-            {book.currentPage} /{' '}
-            {`Page ${book?.currentPage} / ${book?.totalPages || '?'}`}
-          </Text>
+    <View style={styles.itemBottomSide}>
+      <View style={styles.descriptionContainer}>
+        <Text category="p1" style={{ marginTop: 10 }}>
+          {`Page ${book?.currentPage} / ${book?.totalPages || '?'}`}
         </Text>
-      </Layout>
-    </Layout>
+        <Text category="p1">{`Started reading: 1.2.2022`}</Text>
+        <Paragraph text="Bookmarked pages: 1, 69" />
+      </View>
+      <View style={styles.buttonContainer}>
+        <OverflowMenuButton />
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   itemBottomSide: {
-    flexBasis: '100%',
-    height: '100%',
+    // height: '100%',
+    height: screenHeight / 6.66666666666666,
+    // height: 100,
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'yellow',
+    justifyContent: 'space-between',
+    // alignItems: 'flex-end',
+    // alignItems: 'center',
+    // alignContent: 'center',
+    // backgroundColor: 'red',
   },
-  descriptionContainer: {},
-  rightSideIconContainer: {},
-  pages: {
-    color: 'rgba(0, 0, 0, 0.6)',
+  descriptionContainer: {
+    marginLeft: sideMargin,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+
+    // backgroundColor: 'blue',
   },
-  description: {},
+  buttonContainer: {
+    marginRight: sideMargin / 2,
+  },
 });
