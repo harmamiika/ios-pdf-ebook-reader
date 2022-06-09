@@ -47,7 +47,7 @@ export default function CardContent({ book }: CardContentProps) {
 const styles = StyleSheet.create({
   itemBottomSide: {
     // height: '100%',
-    height: screenHeight / 6.66666666666666,
+    height: screenHeight / 6.66666666666666 || 0,
     // height: 100,
     display: 'flex',
     flexDirection: 'row',

@@ -1,5 +1,6 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import uuid from 'react-native-uuid';
+import { IBook } from '../interfaces';
 import {
   getActiveBookFromStorage,
   getBookListFromStorage,
@@ -8,8 +9,8 @@ import {
 } from '../storage/booksStorage';
 
 // Book data model
-const createBook = file => ({
-  id: uuid.v4(),
+const createBook = (file: IBook) => ({
+  id: uuid.v4().toString(),
   name: file.name.replace(/\.[^/.]+$/, ''),
   file,
 
@@ -19,7 +20,7 @@ const createBook = file => ({
 
   startDate: new Date().toString(),
   finishDate: undefined,
-  lastPDFMountTime: undefined,
+  lastPdfMountTime: undefined,
 
   isFavorite: false,
   bookmarks: [],
@@ -37,34 +38,41 @@ export const getActiveBook = createAsyncThunk(
   },
 );
 
-const booksSlice = createSlice({
+export interface SliceState {
+  bookList: IBook[];
+  activeBook: IBook | undefined;
+}
+
+const initialState: SliceState = {
+  bookList: [],
+  activeBook: undefined,
+};
+
+export const booksSlice = createSlice({
   name: 'books',
-  initialState: {
-    bookList: [],
-    activeBook: {},
-  },
+  initialState,
   reducers: {
-    addBookToList(state, action) {
+    addBookToList(state, action: PayloadAction<IBook>) {
       const bookList = [...state.bookList, createBook(action.payload)];
       saveBookListToStorage(bookList);
-      state.bookList = bookList;
+      if (bookList) state.bookList = bookList;
     },
-    deleteBook(state, action) {},
-    setActiveBook(state, action) {
+    deleteBook(state, action: PayloadAction<IBook>) {},
+    setActiveBook(state, action: PayloadAction<IBook>) {
       const book = action.payload;
       saveActiveBookToStorage(book);
       state.activeBook = book;
     },
-    updateActiveBookPage(state, action) {
+    updateActiveBookPage(state, action: PayloadAction<number>) {
       const updatedBook = { ...state.activeBook, currentPage: action.payload };
 
-      state.activeBook = updatedBook;
+      state.activeBook = updatedBook as IBook;
       saveActiveBookToStorage(updatedBook);
 
-      const newList = state.bookList.map(b =>
+      const newList = state.bookList.map((b: IBook) =>
         b.id === updatedBook.id ? updatedBook : b,
       );
-      state.bookList = newList;
+      state.bookList = newList as IBook[];
       saveBookListToStorage(newList);
     },
   },

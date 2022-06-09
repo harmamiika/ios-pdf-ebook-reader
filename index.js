@@ -25,7 +25,7 @@ const { Navigator, Screen } = createNativeStackNavigator();
 
 const Application = () => {
   const dispatch = useDispatch();
-  const activeBookTitle = useSelector(state => state.books.activeBook.name);
+  const activeBookTitle = useSelector(state => state.books.activeBook?.name);
 
   useEffect(() => {
     dispatch(getBooks());

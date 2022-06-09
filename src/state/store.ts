@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { useDispatch } from 'react-redux';
 import booksReducer from './booksSlice';
 
 export const store = configureStore({
@@ -7,6 +8,11 @@ export const store = configureStore({
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware(),
 });
+
+export type RootState = ReturnType<typeof store.getState>;
+
+// export type AppDispatch = typeof store.dispatch;
+// export const useAppDispatch = () => useDispatch<AppDispatch>(); //
 
 // interface Books {
 //   bookList: Book[]

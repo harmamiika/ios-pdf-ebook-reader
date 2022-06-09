@@ -3,15 +3,15 @@ export interface IBook {
   name: string;
   file: IFile;
 
-  totalPages: number;
+  totalPages: number | undefined;
   currentPage: number;
 
   startDate: string | Date;
-  finishDate: string | Date;
-  lastPdfMountTime: string | Date;
+  finishDate: string | Date | undefined;
+  lastPdfMountTime: string | Date | undefined;
 
   isFavorite: boolean;
-  bookmarks: [];
+  bookmarks: any[];
 }
 // TODO: Author?
 
