@@ -1,5 +1,7 @@
 <h2>Roadmap</h2>
-1. MVP - admob and finish lists at least
+1. MVP - admob and finish lists at least, also make responsive
+--medium tasks: option menu
+--small tasks, use redux persist, improve zoom to not bug - scale variable?, add bookmarks array
 2. Apple account & test
 3. Make app icon MVP
 4. Send app to review
@@ -14,6 +16,24 @@
 <h2>MVP APP store</h2>
 -ADmob
 -Login to remove ads planning - IOS native vs firebase
+
+feature:
+BOOKMARKS
+-stored in array in redux
+-on pdf reader - header has add boomarki icon
+-if bookmarks.contains currentpage - renderöi vaikka ikoni sivun nurkkaan
+-todo: note avaa teksti-ikkunan
+=> bookmarks on array bookmarkkeja
+
+interface BookMark {
+id: string
+page: number
+note: string
+color: BookMarkColor
+}
+
+1.1
+Bookmark avaa tekstin / inputin, jossa todo
 
 SMALL IMPROVEMENTS
 -Improve settings menu
@@ -51,6 +71,13 @@ V2
 
 Share with friends
 Display message / poll modal
+
+<h3>Ideas<h3>
+-get all books -functionality
+-organize by author -feature
+-analyze pdf text for quotes with ML
+-memorize archetypes to detect if delete and add back in
+-highlighted pages mark -- super easy to do
 
 <h2>TODOS</h2>
 
