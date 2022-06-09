@@ -40,9 +40,6 @@ export default function CardContent({ book }: CardContentProps) {
         <Text category="p1">{`Started reading: 1.2.2022`}</Text>
         <Paragraph text="Bookmarked pages: 1, 69" />
       </View>
-      <View style={styles.buttonContainer}>
-        <OverflowMenuButton />
-      </View>
     </View>
   );
 }

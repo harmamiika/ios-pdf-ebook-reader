@@ -22,6 +22,9 @@ export default function BookListItem({ book }: BookListItemProps) {
         <View style={styles.headerWrapper}>
           <Text category="h5">{book.name}</Text>
         </View>
+        <View style={styles.buttonContainer}>
+          <OverflowMenuButton />
+        </View>
       </View>
       <Divider />
       <CardContent book={book} />
@@ -37,7 +40,7 @@ export const sideMargin = screenWidth / 15;
 const styles = StyleSheet.create({
   itemContainer: {
     width: screenWidth,
-    height: screenHeight / 5,
+    height: (1.1 * screenHeight) / 5,
     backgroundColor: 'white',
     borderBottomColor: 'gray',
     borderBottomWidth: 1,
@@ -46,13 +49,16 @@ const styles = StyleSheet.create({
   },
   itemHeading: {
     width: '100%',
-    height: screenHeight / 20,
-    display: 'flex',
-    flexDirection: 'column',
-    alignContent: 'center',
+    height: (1.2 * screenHeight) / 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   headerWrapper: {
     marginLeft: sideMargin,
-    marginTop: screenHeight / 120,
+    // marginTop: screenHeight / 120,
+  },
+  buttonContainer: {
+    marginRight: sideMargin / 4,
   },
 });
