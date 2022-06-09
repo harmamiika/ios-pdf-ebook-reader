@@ -14,12 +14,21 @@ interface ParagraphProps {
 }
 
 const Paragraph: React.FC<ParagraphProps> = ({ text }) => {
+  // NOT RESPONSIVE
   return (
     <Text category="p1" style={{ marginBottom: 10 }}>
       {text}
     </Text>
   );
 };
+
+// TODO1: Place button better
+
+// TRY TO MAKE BUTTON SMALLEER
+
+// TODO: try more header sizes
+// after find perfect scale for component
+// => done !!
 
 export default function CardContent({ book }: CardContentProps) {
   return (
@@ -61,5 +70,6 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginRight: sideMargin / 2,
+    marginTop: 10,
   },
 });

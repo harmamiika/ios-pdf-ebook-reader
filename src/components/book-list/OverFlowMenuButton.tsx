@@ -73,5 +73,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     width: screenWidth / 50,
     margin: 2,
+    backgroundColor: 'white',
+    borderColor: 'white',
   },
 });
