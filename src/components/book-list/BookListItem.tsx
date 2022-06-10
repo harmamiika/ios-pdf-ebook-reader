@@ -51,7 +51,7 @@ export default function BookListItem({ book }: BookListItemProps) {
             <Text category="h6">{book.name}</Text>
           </View>
           <View style={styles.buttonContainer}>
-            <OverflowMenuButton />
+            <OverflowMenuButton book={book} />
           </View>
         </View>
         <Divider />

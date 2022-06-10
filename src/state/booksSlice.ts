@@ -57,7 +57,13 @@ export const booksSlice = createSlice({
       saveBookListToStorage(bookList);
       if (bookList) state.bookList = bookList;
     },
-    deleteBook(state, action: PayloadAction<IBook>) {},
+    deleteBook(state, action: PayloadAction<IBook>) {
+      const newBookList = state.bookList.filter(
+        b => b.id !== action.payload.id,
+      );
+      saveBookListToStorage(newBookList);
+      state.bookList = newBookList;
+    },
     setActiveBook(state, action: PayloadAction<IBook>) {
       const book = action.payload;
       saveActiveBookToStorage(book);
@@ -88,6 +94,10 @@ export const booksSlice = createSlice({
   },
 });
 
-export const { addBookToList, setActiveBook, updateActiveBookPage } =
-  booksSlice.actions;
+export const {
+  addBookToList,
+  setActiveBook,
+  deleteBook,
+  updateActiveBookPage,
+} = booksSlice.actions;
 export default booksSlice.reducer;

@@ -2,13 +2,17 @@ import { Button, MenuItem, OverflowMenu } from '@ui-kitten/components';
 import React, { useState } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { useDispatch } from 'react-redux';
+import { IBook } from '../../interfaces';
+import { deleteBook } from '../../state/booksSlice';
 import { FontAwesome5Icon } from '../reusable/FontAwesome5Icon';
+import DeleteModal from './DeleteModal';
 
-interface OverflowMenuButtonProps {}
+interface OverflowMenuButtonProps {
+  book: IBook;
+}
 
-export default function OverflowMenuButton({}: OverflowMenuButtonProps) {
+export default function OverflowMenuButton({ book }: OverflowMenuButtonProps) {
   const dispatch = useDispatch();
-
   const [selectedIndex, setSelectedIndex] = useState();
   const [menuIsVisible, setMenuIsVisible] = useState<boolean>(false);
 
@@ -34,6 +38,9 @@ export default function OverflowMenuButton({}: OverflowMenuButtonProps) {
       status="basic"></Button>
   );
 
+  const [deleteModalIsVisible, setDeleteModalIsVisible] =
+    useState<boolean>(false);
+
   return (
     <View style={styles.menuButtonContainer}>
       <OverflowMenu
@@ -53,8 +60,18 @@ export default function OverflowMenuButton({}: OverflowMenuButtonProps) {
         <MenuItem
           title="Delete"
           accessoryLeft={() => <FontAwesome5Icon name="trash-alt" size={16} />}
+          onPress={() =>
+            // dispatch(showDeleteModal({ isVisible: true, book }))
+            setDeleteModalIsVisible(true)
+          }
         />
       </OverflowMenu>
+      <DeleteModal
+        deleteBook={book => dispatch(deleteBook(book))}
+        isVisible={deleteModalIsVisible}
+        setIsVisible={setDeleteModalIsVisible}
+        book={book}
+      />
     </View>
   );
 }

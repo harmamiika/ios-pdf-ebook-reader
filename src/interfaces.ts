@@ -18,3 +18,8 @@ export interface IBook {
 export interface IFile {
   name: string;
 }
+
+export interface IDeleteModal {
+  isVisible: boolean;
+  book: IBook | undefined;
+}
