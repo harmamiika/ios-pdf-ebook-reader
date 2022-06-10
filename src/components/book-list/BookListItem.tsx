@@ -4,6 +4,7 @@ import { Dimensions, StyleSheet, TouchableHighlight, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { IBook } from '../../interfaces';
 import { setActiveBook } from '../../state/booksSlice';
+import { FontAwesome5Icon } from '../reusable/FontAwesome5Icon';
 import CardContent from './CardContent';
 import OverflowMenuButton from './OverFlowMenuButton';
 interface BookListItemProps {
@@ -16,32 +17,6 @@ export default function BookListItem({ book }: BookListItemProps) {
   const onItemPress = () => {
     dispatch(setActiveBook(book));
   };
-
-  const styles = StyleSheet.create({
-    itemContainer: {
-      width: screenWidth,
-      height: (1.1 * screenHeight) / 5 || 0,
-      backgroundColor: 'white',
-      borderTopColor: 'gray',
-      borderTopWidth: 1,
-      display: 'flex',
-      flexDirection: 'column',
-    },
-    itemHeading: {
-      width: '100%',
-      height: (1.2 * screenHeight) / 20 || 0,
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-    },
-    headerWrapper: {
-      marginLeft: sideMargin,
-      // marginTop: screenHeight / 120,
-    },
-    buttonContainer: {
-      marginRight: sideMargin / 4,
-    },
-  });
 
   return (
     <TouchableHighlight onPress={onItemPress}>
@@ -65,3 +40,32 @@ export const { width: screenWidth, height: screenHeight } =
   Dimensions.get('window');
 
 export const sideMargin = screenWidth / 15;
+
+const styles = StyleSheet.create({
+  itemContainer: {
+    width: screenWidth,
+    height: (1.1 * screenHeight) / 5 || 0,
+    backgroundColor: 'white',
+    borderTopColor: 'gray',
+    borderTopWidth: 1,
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  itemHeading: {
+    width: '100%',
+    height: (1.2 * screenHeight) / 20 || 0,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  headerWrapper: {
+    marginLeft: sideMargin,
+    // marginTop: screenHeight / 120,
+  },
+  buttonContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: sideMargin / 4,
+  },
+});

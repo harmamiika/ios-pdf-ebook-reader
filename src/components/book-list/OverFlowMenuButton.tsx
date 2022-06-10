@@ -13,11 +13,10 @@ interface OverflowMenuButtonProps {
 
 export default function OverflowMenuButton({ book }: OverflowMenuButtonProps) {
   const dispatch = useDispatch();
-  const [selectedIndex, setSelectedIndex] = useState();
   const [menuIsVisible, setMenuIsVisible] = useState<boolean>(false);
 
   const onItemSelect = (index: any) => {
-    setSelectedIndex(index);
+    // setSelectedIndex(index);
     setMenuIsVisible(false);
   };
 
@@ -46,7 +45,6 @@ export default function OverflowMenuButton({ book }: OverflowMenuButtonProps) {
       <OverflowMenu
         anchor={renderToggleButton}
         visible={menuIsVisible}
-        selectedIndex={selectedIndex}
         onSelect={onItemSelect}
         onBackdropPress={() => setMenuIsVisible(false)}>
         <MenuItem
@@ -58,7 +56,7 @@ export default function OverflowMenuButton({ book }: OverflowMenuButtonProps) {
           title="Mark as read"
         />
         <MenuItem
-          title="Delete"
+          title="Remove"
           accessoryLeft={() => <FontAwesome5Icon name="trash-alt" size={16} />}
           onPress={() =>
             // dispatch(showDeleteModal({ isVisible: true, book }))

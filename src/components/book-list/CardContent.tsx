@@ -1,10 +1,9 @@
-import { Divider, Layout, Text } from '@ui-kitten/components';
+import { format } from 'date-fns';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { IBook } from '../../interfaces';
 import { Paragraph } from '../reusable/Paragraph';
 import { screenHeight, sideMargin } from './BookListItem';
-import OverflowMenuButton from './OverFlowMenuButton';
 
 interface CardContentProps {
   book: IBook;
@@ -19,15 +18,30 @@ interface CardContentProps {
 // => done !!
 
 export default function CardContent({ book }: CardContentProps) {
+  console.log(book, 'book');
+
   return (
     <View style={styles.itemBottomSide}>
       <View style={styles.descriptionContainer}>
         <Paragraph
           text={`Page ${book?.currentPage} / ${book?.totalPages || '?'}`}
-          marginTop={10}
+          // marginTop={10}
         />
-        <Paragraph text={`Started reading: 1.2.2022`} />
-        <Paragraph text="Bookmarked pages: 1, 69" marginBottom={10} />
+
+        <Paragraph
+          text={
+            book.bookmarks.length > 0
+              ? `Bookmarked pages: ${book.bookmarks.join(', ')}`
+              : 'No bookmarks'
+          }
+          // marginBottom={10}
+        />
+        <Paragraph
+          text={`Started reading: ${format(
+            new Date(book.startDate),
+            'EEEE d. MMMM, y',
+          )}`}
+        />
       </View>
     </View>
   );
@@ -36,7 +50,7 @@ export default function CardContent({ book }: CardContentProps) {
 const styles = StyleSheet.create({
   itemBottomSide: {
     // height: '100%',
-    height: screenHeight / 6.66666666666666 || 0,
+    height: screenHeight / 6.66 || 0,
     // height: 100,
     display: 'flex',
     flexDirection: 'row',
@@ -55,7 +69,7 @@ const styles = StyleSheet.create({
     // backgroundColor: 'blue',
   },
   buttonContainer: {
-    marginRight: sideMargin / 2,
+    marginRight: sideMargin / 2 || 0,
     marginTop: 10,
   },
 });

@@ -15,6 +15,7 @@ export const FontAwesome5Icon = ({
   style,
   size,
   onPress,
+  ...props
 }: FontAwesome5IconProps) => (
   <FontAwesome5
     name={name}
@@ -22,5 +23,6 @@ export const FontAwesome5Icon = ({
     size={size || 20}
     color={color}
     style={style}
+    {...props}
   />
 );
