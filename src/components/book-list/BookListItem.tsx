@@ -1,9 +1,11 @@
 import { Divider, Text } from '@ui-kitten/components';
 import React from 'react';
 import { Dimensions, StyleSheet, TouchableHighlight, View } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { IBook } from '../../interfaces';
+import { RootState } from '../../state';
 import { setActiveBook } from '../../state/booksSlice';
+import { CustomIonIcon } from '../reusable/CustomIonIcon';
 import { FontAwesome5Icon } from '../reusable/FontAwesome5Icon';
 import CardContent from './CardContent';
 import OverflowMenuButton from './OverFlowMenuButton';
@@ -13,6 +15,7 @@ interface BookListItemProps {
 
 export default function BookListItem({ book }: BookListItemProps) {
   const dispatch = useDispatch();
+  const { activeBook } = useSelector((state: RootState) => state.books);
 
   const onItemPress = () => {
     dispatch(setActiveBook(book));
@@ -24,8 +27,13 @@ export default function BookListItem({ book }: BookListItemProps) {
         <View style={styles.itemHeading}>
           <View style={styles.headerWrapper}>
             <Text category="h6">{book.name}</Text>
+            {/* <Text category="h6" appearance={'hint'}>
+              {' '}
+              - reading
+            </Text> */}
           </View>
           <View style={styles.buttonContainer}>
+            {book.id === activeBook?.id && <CustomIonIcon name="bookmarks" />}
             <OverflowMenuButton book={book} />
           </View>
         </View>
@@ -60,6 +68,8 @@ const styles = StyleSheet.create({
   },
   headerWrapper: {
     marginLeft: sideMargin,
+    display: 'flex',
+    flexDirection: 'row',
     // marginTop: screenHeight / 120,
   },
   buttonContainer: {

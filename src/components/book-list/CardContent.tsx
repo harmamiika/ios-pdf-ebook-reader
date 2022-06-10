@@ -25,7 +25,7 @@ export default function CardContent({ book }: CardContentProps) {
       <View style={styles.descriptionContainer}>
         <Paragraph
           text={`Page ${book?.currentPage} / ${book?.totalPages || '?'}`}
-          // marginTop={10}
+          marginTop={10}
         />
 
         <Paragraph
@@ -34,13 +34,13 @@ export default function CardContent({ book }: CardContentProps) {
               ? `Bookmarked pages: ${book.bookmarks.join(', ')}`
               : 'No bookmarks'
           }
-          // marginBottom={10}
         />
         <Paragraph
           text={`Started reading: ${format(
             new Date(book.startDate),
             'EEEE d. MMMM, y',
           )}`}
+          marginBottom={10}
         />
       </View>
     </View>
