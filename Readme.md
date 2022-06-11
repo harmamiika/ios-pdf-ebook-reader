@@ -40,8 +40,12 @@ color: BookMarkColor
 74. Use testflight
     NO CODE LOW CODE TASKS
 75. Make app icon MVP
+    --watch app pictures / logos / videos
+    --Learn how to make logo - from udemy / yt / skillshare
+76. Pics and app videos
+    --make sample lorem pdf book
 
-76. Send app to review
+77. Send app to review
 
 V1
 

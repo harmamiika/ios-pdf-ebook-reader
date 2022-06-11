@@ -11,6 +11,7 @@ import { AppRegistry } from 'react-native';
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import App from './App';
 import { name as appName } from './app.json';
+
 import { LibraryIcon } from './src/components/header/LibraryIcon';
 import { LibraryRightHeader } from './src/components/header/LibraryRightHeader';
 import { PlusIcon } from './src/components/header/PlusIcon';
@@ -19,7 +20,11 @@ import { Menu } from './src/components/Menu';
 import PdfViewer from './src/components/PdfViewer';
 import { getActiveBook, getBooks } from './src/state/booksSlice';
 import { store } from './src/state/store';
+
 import mobileAds from 'react-native-google-mobile-ads';
+
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistStore } from 'redux-persist';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 
 async function InitializeAds() {
@@ -85,10 +90,13 @@ const Application = () => {
 
 const Root = () => {
   // AsyncStorage.clear();
+  const persistor = persistStore(store);
   return (
     <ApplicationProvider {...eva} theme={eva.light}>
       <Provider store={store}>
-        <Application />
+        <PersistGate loading={null} persistor={persistor}>
+          <Application />
+        </PersistGate>
       </Provider>
     </ApplicationProvider>
   );
