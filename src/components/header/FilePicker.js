@@ -25,6 +25,7 @@ export const PlusIcon = () => {
       //Setting the state to show single file attributes
       console.log(res, 'res2');
 
+      // FIXAA TÄMÄ
       if (!bookList.find(b => b.name === res[0].name)) {
         dispatch(addBookToList(res[0]));
       } else {

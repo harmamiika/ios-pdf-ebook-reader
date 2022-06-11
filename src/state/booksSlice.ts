@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { WritableDraft } from 'immer/dist/internal';
 import uuid from 'react-native-uuid';
 import { IBook, IBookmark, ICategory, IFile } from './../interfaces';
 
@@ -20,6 +21,27 @@ const createBook = (file: IFile): IBook => ({
   bookmarks: [],
   categories: [],
 });
+
+const createBookmark = (
+  bookmark: IBookmark,
+  currentPage: number,
+): IBookmark => ({
+  id: uuid.v4().toString(),
+  page: currentPage,
+  text: bookmark.text,
+  // color: 'black',
+});
+
+function addUpdatedBookToState(
+  state: WritableDraft<SliceState>,
+  updatedBook: IBook,
+) {
+  state.activeBook = updatedBook as IBook;
+  const newList = state.bookList.map((b: IBook) =>
+    b.id === updatedBook.id ? updatedBook : b,
+  );
+  state.bookList = newList as IBook[];
+}
 
 export interface SliceState {
   activeBook: IBook | undefined;
@@ -55,18 +77,20 @@ export const booksSlice = createSlice({
     },
     updateActiveBookPage(state, action: PayloadAction<number>) {
       const updatedBook = { ...state.activeBook, currentPage: action.payload };
-
-      state.activeBook = updatedBook as IBook;
-
-      const newList = state.bookList.map((b: IBook) =>
-        b.id === updatedBook.id ? updatedBook : b,
-      );
-      state.bookList = newList as IBook[];
+      addUpdatedBookToState(state, updatedBook as IBook);
     },
-    addBookmark(
-      state,
-      action: PayloadAction<{ book: IBook; bookmark: IBookmark }>,
-    ) {},
+    addBookmark(state, action: PayloadAction<IBookmark>) {
+      const activeBook = state.activeBook;
+      const bookmark = createBookmark(
+        action.payload,
+        activeBook?.currentPage || 1,
+      );
+      const updatedBook = {
+        ...activeBook,
+        bookmarks: activeBook?.bookmarks.concat(bookmark),
+      };
+      addUpdatedBookToState(state, updatedBook as IBook);
+    },
   },
 });
 
@@ -75,5 +99,6 @@ export const {
   setActiveBook,
   deleteBook,
   updateActiveBookPage,
+  addBookmark,
 } = booksSlice.actions;
 export default booksSlice.reducer;

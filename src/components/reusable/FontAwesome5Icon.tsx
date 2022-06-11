@@ -3,9 +3,9 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 interface FontAwesome5IconProps {
   name: string;
+  onPress?: () => void;
   color?: string;
   size?: number;
-  onPress?: () => void;
   style?: any;
 }
 

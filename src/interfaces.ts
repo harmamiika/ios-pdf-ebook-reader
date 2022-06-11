@@ -25,7 +25,7 @@ export interface ICategory {
 export interface IBookmark {
   id: string;
   page: number;
-  content: string;
+  text: string;
   color?: string;
 }
 

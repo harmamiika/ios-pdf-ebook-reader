@@ -17,7 +17,7 @@ import { name as appName } from './app.json';
 import Library from './src/components/book-list/Library';
 import { LibraryIcon } from './src/components/header/LibraryIcon';
 import { LibraryRightHeader } from './src/components/header/LibraryRightHeader';
-import { PlusIcon } from './src/components/header/PlusIcon';
+import { PlusIcon } from './src/components/header/FilePicker';
 import { Menu } from './src/components/menu/Menu';
 import PdfViewer from './src/components/pdf-viewer/PdfViewer';
 import { store } from './src/state/store';
@@ -58,7 +58,9 @@ const Application = () => {
           component={PdfViewer}
           options={({ navigation }) => ({
             headerLeft: () => <LibraryIcon navigation={navigation} />,
-            headerRight: () => <LibraryRightHeader navigation={navigation} />,
+            headerRight: props => (
+              <LibraryRightHeader navigation={navigation} {...props} />
+            ),
             title: activeBookTitle || 'Book',
           })}
           // headerRight: LibraryIcon,

@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { IBook } from '../../interfaces';
 import { Paragraph } from '../reusable/Paragraph';
@@ -19,6 +19,10 @@ interface CardContentProps {
 
 export default function CardContent({ book }: CardContentProps) {
   console.log(book, 'book');
+  const bookmarksString = useMemo(
+    () => book.bookmarks.map(m => m.page.toString()).join(', '),
+    [book],
+  );
 
   return (
     <View style={styles.itemBottomSide}>
@@ -31,7 +35,7 @@ export default function CardContent({ book }: CardContentProps) {
         <Paragraph
           text={
             book.bookmarks.length > 0
-              ? `Bookmarked pages: ${book.bookmarks.join(', ')}`
+              ? `Bookmarked pages: ${bookmarksString}`
               : 'No bookmarks'
           }
         />
