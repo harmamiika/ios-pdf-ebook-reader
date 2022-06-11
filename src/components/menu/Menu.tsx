@@ -6,7 +6,7 @@ import { GambaAd } from '../reusable/ads/GAMBannerAd';
 
 export const Menu = (): JSX.Element => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <Text>menu</Text>
       <AdmobBannerAd />
       <GambaAd />
@@ -14,4 +14,8 @@ export const Menu = (): JSX.Element => {
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

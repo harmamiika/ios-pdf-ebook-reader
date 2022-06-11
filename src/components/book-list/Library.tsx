@@ -22,8 +22,7 @@ export default function Library() {
 
 const styles = StyleSheet.create({
   container: {
-    width: screenWidth,
-    height: screenHeight,
+    flex: 1,
     // backgroundColor: 'blue',
     display: 'flex',
     alignContent: 'flex-end',

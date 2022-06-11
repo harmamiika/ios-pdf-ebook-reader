@@ -16,7 +16,6 @@ export function AdmobBannerAd() {
 
 const s = StyleSheet.create({
   adContainer: {
-    marginBottom: 100,
     width: '100%',
     display: 'flex',
     alignItems: 'center',
