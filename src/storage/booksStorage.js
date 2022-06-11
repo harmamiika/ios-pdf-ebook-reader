@@ -33,7 +33,7 @@ export const saveActiveBookToStorage = async activeBook => {
 export const getActiveBookFromStorage = async () => {
   try {
     const activeBook = await AsyncStorage.getItem('activeBook');
-    console.log(activeBook, 'activeBook from storeage');
+    // console.log(activeBook, 'activeBook from storeage');
     return activeBook !== null ? JSON.parse(activeBook) : {};
   } catch (e) {
     //

@@ -19,7 +19,18 @@ import { Menu } from './src/components/Menu';
 import PdfViewer from './src/components/PdfViewer';
 import { getActiveBook, getBooks } from './src/state/booksSlice';
 import { store } from './src/state/store';
+import mobileAds from 'react-native-google-mobile-ads';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
+
+async function InitializeAds() {
+  const adapterStatuses = await mobileAds().initialize();
+  console.log(adapterStatuses, 'adapter statuses');
+
+  // .then(adapterStatuses => {
+  //   console.log(adapterStatuses, 'adapter statuses');
+  //   // Initialization complete!
+  // });
+}
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -30,6 +41,7 @@ const Application = () => {
   useEffect(() => {
     dispatch(getBooks());
     dispatch(getActiveBook());
+    InitializeAds();
   }, []);
 
   return (
