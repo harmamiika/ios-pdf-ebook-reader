@@ -2,16 +2,17 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { Dimensions, PanResponder, StyleSheet, View } from 'react-native';
 import Pdf from 'react-native-pdf';
 import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../state';
 import { setActiveBook, updateActiveBookPage } from '../../state/booksSlice';
 
-function calcDistance(x1, y1, x2, y2) {
+function calcDistance(x1: number, y1: number, x2: number, y2: number) {
   let dx = Math.abs(x1 - x2);
   let dy = Math.abs(y1 - y2);
   return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
 }
 
-function calcCenter(x1, y1, x2, y2) {
-  function middle(p1, p2) {
+function calcCenter(x1: number, y1: number, x2: number, y2: number) {
+  function middle(p1: number, p2: number) {
     return p1 > p2 ? p1 - (p1 - p2) / 2 : p2 - (p2 - p1) / 2;
   }
 
@@ -23,14 +24,14 @@ function calcCenter(x1, y1, x2, y2) {
 
 export default function PdfViewer() {
   const dispatch = useDispatch();
-  const { activeBook } = useSelector(state => state.books);
+  const { activeBook } = useSelector((state: RootState) => state.books);
 
-  const [swipeState, setSwipeState] = useState({
+  const [swipeState, setSwipeState] = useState<any>({
     center: undefined,
     distance: undefined,
   });
 
-  const [zoomState, setZoomState] = useState({
+  const [zoomState, setZoomState] = useState<any>({
     zoom: null,
     minZoom: null,
     isZooming: false,
@@ -40,11 +41,11 @@ export default function PdfViewer() {
     initialZoom: 1,
   });
 
-  const onPageChanged = (page, numberOfPages) => {
+  const onPageChanged = (page: number, numberOfPages: number) => {
     console.log(`Current page: ${page}`);
     console.log(`number of pages ${numberOfPages}`);
     dispatch(updateActiveBookPage(page));
-    if (!activeBook.totalPages) {
+    if (activeBook && !activeBook.totalPages) {
       dispatch(
         setActiveBook({
           ...activeBook,
@@ -55,7 +56,7 @@ export default function PdfViewer() {
     // trigger current zoom save to active book?
   };
 
-  const processPinch = (x1, y1, x2, y2) => {
+  const processPinch = (x1: number, y1: number, x2: number, y2: number) => {
     let distance = calcDistance(x1, y1, x2, y2);
     let center = calcCenter(x1, y1, x2, y2);
 
@@ -81,7 +82,7 @@ export default function PdfViewer() {
     }
   };
 
-  const processSwipe = (x, y) => {
+  const processSwipe = (x: number, y: number) => {
     if (!swipeState.center) {
       setSwipeState({
         center: { x, y },
@@ -92,8 +93,10 @@ export default function PdfViewer() {
       const distanceY = swipeState.center.y - y;
       // reset swipe is not necessary?
       if (distanceX > 50 || distanceY > 50) {
-        this.pdf.setPage(activeBook.currentPage + 1);
+        // @ts-ignore
+        this.pdf.setPage(activeBook?.currentPage + 1 || 1);
       } else if (distanceX < -50 || distanceY < -50) {
+        // @ts-ignore
         this.pdf.setPage(activeBook.currentPage - 1);
       }
     }
@@ -151,10 +154,12 @@ export default function PdfViewer() {
         enablePaging={true}
         source={{ uri: activeBook?.uri }}
         style={styles.pdf}
-        ref={pdf => {
+        ref={(pdf: any) => {
+          // @ts-ignore
           this.pdf = pdf;
         }}
         onPageChanged={onPageChanged}
+        // @ts-ignore
         onLoadComplete={() => this.pdf.setPage(activeBook.currentPage)}
         minScale={1}
         maxScale={3}
