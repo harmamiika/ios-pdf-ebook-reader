@@ -1,23 +1,16 @@
 <h2>Roadmap</h2>
-1. MVP - admob and finish lists at least, also make responsive
---medium tasks: option menu
---small tasks, use redux persist, improve zoom to not bug - scale variable?, add bookmarks array
-2. Apple account & test
-3. Make app icon MVP
-4. Send app to review
---------------------------------
-5. Make possible fixes
-6. If pass, take pictures
-7. Create SEO plan
-8. Make website
-9. Launch
----------------------------------
+--small tasks, use redux persist, improve zoom to not bug - scale variable?, add bookmarks array, if no activebook => different screen than pdfreader
 
-<h2>MVP APP store</h2>
--ADmob
--Login to remove ads planning - IOS native vs firebase
+1. MVP - finish lists at least
+   --medium tasks: option menu
+   ---create menuItem component
+   ---add components with required functionality
+   ----At least App info
+   ----Settings
+   ----Library
+   ----(TBD PREMIUM, REFER A FRIND, GIVE FEEDBACK?)
+   ----FAQ / Help
 
-feature:
 BOOKMARKS
 -stored in array in redux
 -on pdf reader - header has add boomarki icon
@@ -31,6 +24,63 @@ page: number
 note: string
 color: BookMarkColor
 }
+
+--Consider foldering data model - make data model not completely shit
+
+72. Make app responsive to 4 devices
+    -learn how to switch simulator device (yt)
+    -small phone
+    -ipad small
+    -ipad big
+
+73. Consent
+    -add concent asking from the docx
+    -figure out how to detect location
+
+74. Use testflight
+    NO CODE LOW CODE TASKS
+75. Make app icon MVP
+
+76. Send app to review
+
+V1
+
+---
+
+5. Make possible fixes
+6. If pass, take pictures
+7. Create SEO plan
+8. Make website
+9. Launch
+
+10. Onboarding tips => helpers to file picking, (using settings)
+
+---
+
+V2 FEATURES
+
+1.Apple sub to become premium
+
+2.Disable ads
+
+V2 Possible features
+
+-Folders/Categories
+
+-Add dark mode
+
+-Add create thumbnail images from pdf
+
+-Refer a friend link
+
+Premium upgrades
+-Add data storage to firebase
+-add themes
+
+<h2>MVP APP store</h2>
+-Login to remove ads planning - IOS native vs firebase
+
+feature:
 
 1.1
 Bookmark avaa tekstin / inputin, jossa todo
@@ -134,4 +184,4 @@ DONE:
 
 PDF viewer
 -add totalpages when changing page
--store zoom in state?
+-store zoom in state? 2. Apple account & test
