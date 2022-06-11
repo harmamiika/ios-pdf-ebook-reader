@@ -4,6 +4,7 @@ import Pdf from 'react-native-pdf';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../state';
 import { setActiveBook, updateActiveBookPage } from '../../state/booksSlice';
+import { Paragraph } from '../reusable/Paragraph';
 
 function calcDistance(x1: number, y1: number, x2: number, y2: number) {
   let dx = Math.abs(x1 - x2);
@@ -147,27 +148,37 @@ export default function PdfViewer() {
   );
 
   return (
-    <View style={styles.container} {...panResponder.panHandlers}>
-      <Pdf
-        singlePage={true}
-        enableAnnotationRendering={true}
-        enablePaging={true}
-        source={{ uri: activeBook?.uri }}
-        style={styles.pdf}
-        ref={(pdf: any) => {
-          // @ts-ignore
-          this.pdf = pdf;
-        }}
-        onPageChanged={onPageChanged}
-        // @ts-ignore
-        onLoadComplete={() => this.pdf.setPage(activeBook.currentPage)}
-        minScale={1}
-        maxScale={3}
-        scale={zoomState.zoom}
-      />
+    <View style={styles.container}>
+      {activeBook ? (
+        <View {...panResponder.panHandlers}>
+          <Pdf
+            singlePage={true}
+            enableAnnotationRendering={true}
+            enablePaging={true}
+            source={{ uri: activeBook?.uri }}
+            style={styles.pdf}
+            ref={(pdf: any) => {
+              // @ts-ignore
+              this.pdf = pdf;
+            }}
+            onPageChanged={onPageChanged}
+            // @ts-ignore
+            onLoadComplete={() => this.pdf.setPage(activeBook.currentPage)}
+            minScale={1}
+            maxScale={3}
+            scale={zoomState.zoom}
+          />
+        </View>
+      ) : (
+        <View>
+          <Paragraph text="No book selected" />
+          <Paragraph text="You can select and add books in library" />
+        </View>
+      )}
     </View>
   );
 }
+// add login for first open
 
 const styles = StyleSheet.create({
   container: {

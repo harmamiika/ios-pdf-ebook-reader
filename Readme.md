@@ -25,6 +25,9 @@ note: string
 color: BookMarkColor
 }
 
+ADSIT
+lisää adsien aloitukseen timeri - 7 pv?
+
 --Consider foldering data model - make data model not completely shit
 
 72. Make app responsive to 4 devices

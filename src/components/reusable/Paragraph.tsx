@@ -6,24 +6,33 @@ interface ParagraphProps {
   text: string;
   marginTop?: number;
   marginBottom?: number;
+  category?: string;
 }
 
 export const Paragraph: React.FC<ParagraphProps> = ({
   text,
   marginBottom = 0,
   marginTop = 0,
+  category = 'p1',
+  ...props
 }) => {
-  const s = StyleSheet.create({
-    paragraph: {
-      marginBottom: marginBottom,
-      marginTop: marginTop,
-    },
-  });
-
   // NOT RESPONSIVE
   return (
-    <Text category="p1" style={s.paragraph}>
+    <Text
+      category={category}
+      style={{
+        marginBottom: marginBottom,
+        marginTop: marginTop,
+      }}
+      {...props}>
       {text}
     </Text>
   );
 };
+
+// const s = StyleSheet.create({
+//   paragraph: {
+//     marginBottom: marginBottom,
+//     marginTop: marginTop,
+//   },
+// });
