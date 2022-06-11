@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { Dimensions, PanResponder, StyleSheet, View } from 'react-native';
 import Pdf from 'react-native-pdf';
 import { useDispatch, useSelector } from 'react-redux';
@@ -149,7 +149,7 @@ export default function PdfViewer() {
         singlePage={true}
         enableAnnotationRendering={true}
         enablePaging={true}
-        source={{ uri: activeBook?.file?.fileCopyUri }}
+        source={{ uri: activeBook?.uri }}
         style={styles.pdf}
         ref={pdf => {
           this.pdf = pdf;

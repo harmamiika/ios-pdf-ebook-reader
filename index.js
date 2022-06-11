@@ -25,6 +25,7 @@ import mobileAds from 'react-native-google-mobile-ads';
 
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
+
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 
 async function InitializeAds() {
@@ -40,12 +41,9 @@ async function InitializeAds() {
 const { Navigator, Screen } = createNativeStackNavigator();
 
 const Application = () => {
-  const dispatch = useDispatch();
   const activeBookTitle = useSelector(state => state.books.activeBook?.name);
 
   useEffect(() => {
-    dispatch(getBooks());
-    dispatch(getActiveBook());
     InitializeAds();
   }, []);
 

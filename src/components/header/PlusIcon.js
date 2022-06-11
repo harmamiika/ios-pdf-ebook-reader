@@ -25,7 +25,7 @@ export const PlusIcon = () => {
       //Setting the state to show single file attributes
       console.log(res, 'res2');
 
-      if (!bookList.find(b => b.name === res.name)) {
+      if (!bookList.find(b => b.name === res[0].name)) {
         dispatch(addBookToList(res[0]));
       } else {
         console.log('duplicate file');

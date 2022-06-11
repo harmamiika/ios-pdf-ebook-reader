@@ -1,6 +1,6 @@
+import { IFile, ICategory, IBook, IBookmark } from './../interfaces';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import uuid from 'react-native-uuid';
-import { IBook } from '../interfaces';
 import {
   getActiveBookFromStorage,
   getBookListFromStorage,
@@ -9,10 +9,11 @@ import {
 } from '../storage/booksStorage';
 
 // Book data model
-const createBook = (file: IBook) => ({
+const createBook = (file: IFile): IBook => ({
   id: uuid.v4().toString(),
   name: file.name.replace(/\.[^/.]+$/, ''),
   file,
+  uri: file.fileCopyUri,
 
   // get pdf page count somehow
   totalPages: undefined,
@@ -22,9 +23,8 @@ const createBook = (file: IBook) => ({
   finishDate: undefined,
   lastPdfMountTime: undefined,
 
-  isFavorite: false,
   bookmarks: [],
-  notes: [],
+  categories: [],
 });
 
 export const getBooks = createAsyncThunk('books/getBookList', async () => {
@@ -39,58 +39,51 @@ export const getActiveBook = createAsyncThunk(
 );
 
 export interface SliceState {
-  bookList: IBook[];
   activeBook: IBook | undefined;
+  bookList: IBook[];
+  categoriesList?: ICategory[];
 }
 
 const initialState: SliceState = {
-  bookList: [],
   activeBook: undefined,
+  bookList: [],
+  categoriesList: [],
 };
+
+// PERFORMANCE IMPROVEMENT - ONLY UPDATE LIST WHEN ACTIVE BOOK SWITCHES OUT?
 
 export const booksSlice = createSlice({
   name: 'books',
   initialState,
   reducers: {
-    addBookToList(state, action: PayloadAction<IBook>) {
+    addBookToList(state, action: PayloadAction<IFile>) {
       const bookList = [...state.bookList, createBook(action.payload)];
-      saveBookListToStorage(bookList);
       if (bookList) state.bookList = bookList;
     },
     deleteBook(state, action: PayloadAction<IBook>) {
       const newBookList = state.bookList.filter(
         b => b.id !== action.payload.id,
       );
-      saveBookListToStorage(newBookList);
       state.bookList = newBookList;
     },
     setActiveBook(state, action: PayloadAction<IBook>) {
-      const book = action.payload;
-      saveActiveBookToStorage(book);
-      state.activeBook = book;
+      const id = action.payload;
+      state.activeBook = id;
     },
     updateActiveBookPage(state, action: PayloadAction<number>) {
       const updatedBook = { ...state.activeBook, currentPage: action.payload };
 
       state.activeBook = updatedBook as IBook;
-      saveActiveBookToStorage(updatedBook);
 
       const newList = state.bookList.map((b: IBook) =>
         b.id === updatedBook.id ? updatedBook : b,
       );
       state.bookList = newList as IBook[];
-      saveBookListToStorage(newList);
     },
-  },
-  extraReducers: builder => {
-    builder.addCase(getBooks.fulfilled, (state, action) => {
-      console.log(state, 'store state on load');
-      state.bookList = action.payload;
-    });
-    builder.addCase(getActiveBook.fulfilled, (state, action) => {
-      console.log(action, 'action');
-      state.activeBook = action.payload;
-    });
+    addBookmark(
+      state,
+      action: PayloadAction<{ book: IBook; bookmark: IBookmark }>,
+    ) {},
   },
 });
 
