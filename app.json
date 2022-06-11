@@ -1,4 +1,7 @@
 {
   "name": "mybookpdf",
-  "displayName": "mybookpdf"
+  "displayName": "mybookpdf",
+  "react-native-google-mobile-ads": {
+    "ios_app_id": "ca-app-pub-8279790179515379~9722847087"
+  }
 }

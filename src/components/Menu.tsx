@@ -1,10 +1,15 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { AdmobBannerAd } from './BannerAd';
 
 export const Menu = (): JSX.Element => {
   return (
-    <View>
+    <SafeAreaView>
       <Text>menu</Text>
-    </View>
+      <AdmobBannerAd />
+    </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({});
