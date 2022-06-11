@@ -2,7 +2,7 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { Dimensions, PanResponder, StyleSheet, View } from 'react-native';
 import Pdf from 'react-native-pdf';
 import { useDispatch, useSelector } from 'react-redux';
-import { setActiveBook, updateActiveBookPage } from '../state/booksSlice';
+import { setActiveBook, updateActiveBookPage } from '../../state/booksSlice';
 
 function calcDistance(x1, y1, x2, y2) {
   let dx = Math.abs(x1 - x2);

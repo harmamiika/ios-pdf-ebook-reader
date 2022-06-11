@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { AdmobBannerAd } from './BannerAd';
-import { GambaAd } from './GAMBannerAd';
+import { AdmobBannerAd } from '../reusable/ads/BannerAd';
+import { GambaAd } from '../reusable/ads/GAMBannerAd';
 
 export const Menu = (): JSX.Element => {
   return (

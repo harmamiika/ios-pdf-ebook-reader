@@ -1,12 +1,9 @@
 import React from 'react';
 import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
-import { RootState } from '../state';
-import { AdmobBannerAd } from './BannerAd';
-import BookListItem, {
-  screenHeight,
-  screenWidth,
-} from './book-list/BookListItem';
+import { RootState } from '../../state';
+import { AdmobBannerAd } from '../reusable/ads/BannerAd';
+import BookListItem, { screenHeight, screenWidth } from './BookListItem';
 
 export default function Library() {
   const { bookList } = useSelector((state: RootState) => state.books);

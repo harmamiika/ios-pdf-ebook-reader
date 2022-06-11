@@ -1,5 +1,5 @@
 <h2>Roadmap</h2>
---small tasks, use redux persist, improve zoom to not bug - scale variable?, add bookmarks array, if no activebook => different screen than pdfreader
+--small tasks, improve zoom to not bug - scale variable?, add bookmarks array, if no activebook => different screen than pdfreader
 
 1. MVP - finish lists at least
    --medium tasks: option menu
@@ -189,3 +189,5 @@ DONE:
 PDF viewer
 -add totalpages when changing page
 -store zoom in state? 2. Apple account & test
+
+use redux persist,

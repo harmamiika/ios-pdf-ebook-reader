@@ -1,12 +1,6 @@
-import { IFile, ICategory, IBook, IBookmark } from './../interfaces';
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import uuid from 'react-native-uuid';
-import {
-  getActiveBookFromStorage,
-  getBookListFromStorage,
-  saveActiveBookToStorage,
-  saveBookListToStorage,
-} from '../storage/booksStorage';
+import { IBook, IBookmark, ICategory, IFile } from './../interfaces';
 
 // Book data model
 const createBook = (file: IFile): IBook => ({
@@ -26,17 +20,6 @@ const createBook = (file: IFile): IBook => ({
   bookmarks: [],
   categories: [],
 });
-
-export const getBooks = createAsyncThunk('books/getBookList', async () => {
-  return await getBookListFromStorage();
-});
-
-export const getActiveBook = createAsyncThunk(
-  'books/getActiveBook',
-  async () => {
-    return await getActiveBookFromStorage();
-  },
-);
 
 export interface SliceState {
   activeBook: IBook | undefined;
