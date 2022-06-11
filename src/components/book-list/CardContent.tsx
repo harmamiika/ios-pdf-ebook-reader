@@ -1,9 +1,9 @@
 import { format } from 'date-fns';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Dimensions, StyleSheet, View } from 'react-native';
 import { IBook } from '../../interfaces';
 import { Paragraph } from '../reusable/Paragraph';
-import { screenHeight, sideMargin } from './BookListItem';
+import { screenHeight, sideMargin } from '../../utils/cssHelpers';
 
 interface CardContentProps {
   book: IBook;

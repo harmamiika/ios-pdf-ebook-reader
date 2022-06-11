@@ -8,23 +8,19 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ApplicationProvider } from '@ui-kitten/components';
 import React, { useEffect } from 'react';
 import { AppRegistry } from 'react-native';
-import { Provider, useDispatch, useSelector } from 'react-redux';
+import mobileAds from 'react-native-google-mobile-ads';
+import { Provider, useSelector } from 'react-redux';
+import { persistStore } from 'redux-persist';
+import { PersistGate } from 'redux-persist/integration/react';
 import App from './App';
 import { name as appName } from './app.json';
-
+import Library from './src/components/book-list/Library';
 import { LibraryIcon } from './src/components/header/LibraryIcon';
 import { LibraryRightHeader } from './src/components/header/LibraryRightHeader';
 import { PlusIcon } from './src/components/header/PlusIcon';
-import Library from './src/components/book-list/Library';
 import { Menu } from './src/components/menu/Menu';
 import PdfViewer from './src/components/pdf-viewer/PdfViewer';
-import { getActiveBook, getBooks } from './src/state/booksSlice';
 import { store } from './src/state/store';
-
-import mobileAds from 'react-native-google-mobile-ads';
-
-import { PersistGate } from 'redux-persist/integration/react';
-import { persistStore } from 'redux-persist';
 
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -37,6 +33,13 @@ async function InitializeAds() {
   //   // Initialization complete!
   // });
 }
+
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs([
+  'ViewPropTypes will be removed',
+  'ColorPropType will be removed',
+]);
 
 const { Navigator, Screen } = createNativeStackNavigator();
 

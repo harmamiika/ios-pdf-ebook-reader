@@ -6,7 +6,6 @@ import { IBook } from '../../interfaces';
 import { RootState } from '../../state';
 import { setActiveBook } from '../../state/booksSlice';
 import { CustomIonIcon } from '../reusable/CustomIonIcon';
-import { FontAwesome5Icon } from '../reusable/FontAwesome5Icon';
 import CardContent from './CardContent';
 import OverflowMenuButton from './OverFlowMenuButton';
 interface BookListItemProps {

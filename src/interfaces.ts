@@ -26,14 +26,10 @@ export interface IBookmark {
   id: string;
   page: number;
   content: string;
+  color?: string;
 }
 
 export interface IFile {
   name: string;
   fileCopyUri: string;
-}
-
-export interface IDeleteModal {
-  isVisible: boolean;
-  book: IBook | undefined;
 }
