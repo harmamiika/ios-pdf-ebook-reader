@@ -7,7 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ApplicationProvider } from '@ui-kitten/components';
 import React, { useEffect } from 'react';
-import { AppRegistry } from 'react-native';
+import { AppRegistry, Appearance } from 'react-native';
 import mobileAds from 'react-native-google-mobile-ads';
 import { Provider, useSelector } from 'react-redux';
 import { persistStore } from 'redux-persist';
@@ -93,6 +93,9 @@ const Application = () => {
 
 const Root = () => {
   // AsyncStorage.clear();
+  const colorScheme = Appearance.getColorScheme();
+  console.log(colorScheme, 'color shcmee');
+
   const persistor = persistStore(store);
   return (
     <ApplicationProvider {...eva} theme={eva.light}>

@@ -1,7 +1,10 @@
 <h2>Roadmap</h2>
 --small tasks, improve zoom to not bug - scale variable?
 -remove bookmark / improve
+
 -icon colors
+-app theming
+-dark mode
 
 1. MVP - finish lists at least
    --medium tasks: option menu
