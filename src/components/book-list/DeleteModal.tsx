@@ -2,7 +2,7 @@ import { Button, Card, Modal, Text } from '@ui-kitten/components';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { IBook } from '../../interfaces';
-import { Paragraph } from '../reusable/Paragraph';
+import { MiikaText } from '../reusable/MiikaText';
 
 const Header = (props: any) => {
   return (
@@ -67,8 +67,8 @@ export default function DeleteModal({
           />
         )}>
         <View>
-          <Paragraph text={`Remove ${book?.name} from list?`} />
-          <Paragraph text="(Does not remove the file from your phone)" />
+          <MiikaText text={`Remove ${book?.name} from list?`} />
+          <MiikaText text="(Does not remove the file from your phone)" />
         </View>
       </Card>
     </Modal>

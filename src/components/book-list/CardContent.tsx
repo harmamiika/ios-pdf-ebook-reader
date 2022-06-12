@@ -1,9 +1,9 @@
 import { format } from 'date-fns';
 import React, { useMemo } from 'react';
-import { Dimensions, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { IBook } from '../../interfaces';
-import { Paragraph } from '../reusable/Paragraph';
 import { screenHeight, sideMargin } from '../../utils/cssHelpers';
+import { MiikaText } from '../reusable/MiikaText';
 
 interface CardContentProps {
   book: IBook;
@@ -27,19 +27,19 @@ export default function CardContent({ book }: CardContentProps) {
   return (
     <View style={styles.itemBottomSide}>
       <View style={styles.descriptionContainer}>
-        <Paragraph
+        <MiikaText
           text={`Page ${book?.currentPage} / ${book?.totalPages || '?'}`}
           marginTop={10}
         />
 
-        <Paragraph
+        <MiikaText
           text={
             book.bookmarks.length > 0
               ? `Bookmarked pages: ${bookmarksString}`
               : 'No bookmarks'
           }
         />
-        <Paragraph
+        <MiikaText
           text={`Started reading: ${format(
             new Date(book.startDate),
             'EEEE d. MMMM, y',

@@ -1,5 +1,7 @@
 <h2>Roadmap</h2>
---small tasks, improve zoom to not bug - scale variable?, add bookmarks array,
+--small tasks, improve zoom to not bug - scale variable?
+-remove bookmark / improve
+-icon colors
 
 1. MVP - finish lists at least
    --medium tasks: option menu
@@ -10,23 +12,6 @@
    ----Library
    ----(TBD PREMIUM, REFER A FRIND, GIVE FEEDBACK?)
    ----FAQ / Help
-
-BOOKMARKS
--stored in array in redux
--on pdf reader - header has add boomarki icon
--if bookmarks.contains currentpage - renderöi vaikka ikoni sivun nurkkaan
--todo: note avaa teksti-ikkunan
-=> bookmarks on array bookmarkkeja
-
-interface BookMark {
-id: string
-page: number
-note: string
-color: BookMarkColor
-}
-
-ADSIT
-lisää adsien aloitukseen timeri - 7 pv?
 
 --Consider foldering data model - make data model not completely shit
 
@@ -43,16 +28,31 @@ lisää adsien aloitukseen timeri - 7 pv?
 74. Use testflight
     NO CODE LOW CODE TASKS
 75. Make app icon MVP
+    --ota vaan joku random filu ja koita saada appi testipilottiin
+
     --watch app pictures / logos / videos
     --Learn how to make logo - from udemy / yt / skillshare
+
 76. Pics and app videos
     --make sample lorem pdf book
+
+KUVISSA:
+1 PDF
+2 PDF lista
+3
+
+Featuret - smooth pdf viewing - manage books - track books
+
+KEKSI NIMI
 
 77. Send app to review
 
 V1
 
 ---
+
+ADSIT
+lisää adsien aloitukseen timeri - 7 pv?
 
 5. Make possible fixes
 6. If pass, take pictures
@@ -71,6 +71,8 @@ V2 FEATURES
 2.Disable ads
 
 V2 Possible features
+
+-Bookmark text
 
 -Folders/Categories
 
@@ -195,3 +197,17 @@ PDF viewer
 
 use redux persist,
 if no activebook => different screen than pdfreader
+
+BOOKMARKS
+-stored in array in redux
+-on pdf reader - header has add boomarki icon
+-if bookmarks.contains currentpage - renderöi vaikka ikoni sivun nurkkaan
+-todo: note avaa teksti-ikkunan
+=> bookmarks on array bookmarkkeja
+
+interface BookMark {
+id: string
+page: number
+note: string
+color: BookMarkColor
+}

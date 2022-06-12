@@ -4,7 +4,7 @@ import Pdf from 'react-native-pdf';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../state';
 import { setActiveBook, updateActiveBookPage } from '../../state/booksSlice';
-import { Paragraph } from '../reusable/Paragraph';
+import { MiikaText } from '../reusable/MiikaText';
 import Bookmark from './Bookmark';
 
 function calcDistance(x1: number, y1: number, x2: number, y2: number) {
@@ -169,14 +169,15 @@ export default function PdfViewer() {
             maxScale={3}
             scale={zoomState.zoom}
           />
-          {activeBook.bookmarks.find(
-            m => m.page === activeBook.currentPage,
-          ) && <Bookmark />}
+          {activeBook &&
+            activeBook?.bookmarks?.find(
+              m => m.page === activeBook.currentPage,
+            ) && <Bookmark />}
         </View>
       ) : (
         <View>
-          <Paragraph text="No book selected" />
-          <Paragraph text="You can select and add books in library" />
+          <MiikaText text="No book selected" />
+          <MiikaText text="You can select and add books in library" />
         </View>
       )}
     </View>

@@ -2,17 +2,19 @@ import { Text } from '@ui-kitten/components';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 
-interface ParagraphProps {
+interface MiikaTextProps {
   text: string;
   marginTop?: number;
   marginBottom?: number;
+  marginLeft?: number;
   category?: string;
 }
 
-export const Paragraph: React.FC<ParagraphProps> = ({
+export const MiikaText: React.FC<MiikaTextProps> = ({
   text,
   marginBottom = 0,
   marginTop = 0,
+  marginLeft = 0,
   category = 'p1',
   ...props
 }) => {
@@ -21,8 +23,9 @@ export const Paragraph: React.FC<ParagraphProps> = ({
     <Text
       category={category}
       style={{
-        marginBottom: marginBottom,
-        marginTop: marginTop,
+        marginBottom,
+        marginTop,
+        marginLeft,
       }}
       {...props}>
       {text}
