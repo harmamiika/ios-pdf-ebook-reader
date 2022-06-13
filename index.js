@@ -22,7 +22,7 @@ import { Menu } from './src/components/menu/Menu';
 import PdfViewer from './src/components/pdf-viewer/PdfViewer';
 import { store } from './src/state/store';
 
-// import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 async function InitializeAds() {
   const adapterStatuses = await mobileAds().initialize();

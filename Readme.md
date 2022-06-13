@@ -13,6 +13,10 @@ FIXES
 -remove bookmark
 -wrap header icons to buttons
 
+STUDY
+-react-native cache directory how it works
+-filecopyuri, uri - differences
+
 1. MVP - finish lists at least
    --medium tasks: option menu
    ---create menuItem component

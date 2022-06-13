@@ -335,6 +335,8 @@ PODS:
     - React-Core
   - react-native-pdf (6.5.0):
     - React-Core
+  - react-native-pdf-thumbnail (1.0.2):
+    - React
   - react-native-safe-area-context (4.2.5):
     - RCT-Folly
     - RCTRequired
@@ -470,6 +472,7 @@ DEPENDENCIES:
   - react-native-blob-util (from `../node_modules/react-native-blob-util`)
   - react-native-document-picker (from `../node_modules/react-native-document-picker`)
   - react-native-pdf (from `../node_modules/react-native-pdf`)
+  - react-native-pdf-thumbnail (from `../node_modules/react-native-pdf-thumbnail`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -557,6 +560,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-document-picker"
   react-native-pdf:
     :path: "../node_modules/react-native-pdf"
+  react-native-pdf-thumbnail:
+    :path: "../node_modules/react-native-pdf-thumbnail"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   React-perflogger:
@@ -637,6 +642,7 @@ SPEC CHECKSUMS:
   react-native-blob-util: 2d49d135d6fe1410c019fb5bff241dac7f12d73d
   react-native-document-picker: 5663fe4bcdb646200683a41790464d2793307ac8
   react-native-pdf: de35db0d8f1e5d37e65e887554f7d4bd062af56b
+  react-native-pdf-thumbnail: 2610e6c7ed8fad03b8768fe126846d91db61a473
   react-native-safe-area-context: ebf8c413eb8b5f7c392a036a315eb7b46b96845f
   React-perflogger: a18b4f0bd933b8b24ecf9f3c54f9bf65180f3fe6
   React-RCTActionSheet: 547fe42fdb4b6089598d79f8e1d855d7c23e2162

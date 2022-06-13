@@ -1,7 +1,7 @@
 import React from 'react';
 import DocumentPicker from 'react-native-document-picker';
 import { useDispatch, useSelector } from 'react-redux';
-import { addBookToList } from '../../state/booksSlice';
+import { addBookToList, addNewBook } from '../../state/booksSlice';
 
 import { FontAwesome5Icon } from '../reusable/FontAwesome5Icon';
 
@@ -27,7 +27,7 @@ export const PlusIcon = () => {
 
       // FIXAA TÄMÄ
       if (!bookList.find(b => b.name === res[0].name)) {
-        dispatch(addBookToList(res[0]));
+        dispatch(addNewBook(res[0]));
       } else {
         console.log('duplicate file');
       }

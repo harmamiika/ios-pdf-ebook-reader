@@ -4,6 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import { IBook } from '../../interfaces';
 import { screenHeight, sideMargin } from '../../utils/cssHelpers';
 import { MiikaText } from '../reusable/MiikaText';
+import ThumbnailImage from './ThumbnailImage';
 
 interface CardContentProps {
   book: IBook;
@@ -39,7 +40,7 @@ export default function CardContent({ book }: CardContentProps) {
               : 'No bookmarks'
           }
         />
-
+        <ThumbnailImage book={book} />
         <MiikaText
           text={`Started reading: ${format(
             new Date(book.startDate),

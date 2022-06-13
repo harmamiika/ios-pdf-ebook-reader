@@ -1,15 +1,24 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from './store';
+import { createThumbnail } from './../utils/createThumbnail';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
 import uuid from 'react-native-uuid';
-import { IBook, IBookmark, ICategory, IFile } from './../interfaces';
+import {
+  IBook,
+  IBookmark,
+  ICategory,
+  IFile,
+  IThumbnail,
+} from './../interfaces';
 
 // Book data model
-const createBook = (file: IFile): IBook => ({
+const createBook = (file: IFile, thumbnail?: IThumbnail): IBook => ({
   id: uuid.v4().toString(),
   name: file.name.replace(/\.[^/.]+$/, ''),
   file,
   uri: file.fileCopyUri,
 
+  thumbnail: thumbnail || { uri: undefined, width: 0, height: 0 },
   // get pdf page count somehow
   totalPages: undefined,
   currentPage: 1,
@@ -57,6 +66,14 @@ const initialState: SliceState = {
 
 // PERFORMANCE IMPROVEMENT - ONLY UPDATE LIST WHEN ACTIVE BOOK SWITCHES OUT?
 
+export const addNewBook = createAsyncThunk(
+  'books/addBook',
+  async (file: IFile) => {
+    const thumbnail = await createThumbnail(file.fileCopyUri);
+    return { file, thumbnail };
+  },
+);
+
 export const booksSlice = createSlice({
   name: 'books',
   initialState,
@@ -91,6 +108,20 @@ export const booksSlice = createSlice({
       };
       addUpdatedBookToState(state, updatedBook as IBook);
     },
+  },
+  extraReducers: builder => {
+    builder.addCase(addNewBook.fulfilled, (state, action) => {
+      const bookList = [
+        ...state.bookList,
+        createBook(action.payload.file, action.payload.thumbnail || undefined),
+      ];
+      console.log(
+        createBook(action.payload.file, action.payload.thumbnail || undefined)
+          .thumbnail,
+        'thumbnail',
+      );
+      if (bookList) state.bookList = bookList;
+    });
   },
 });
 

@@ -2,6 +2,7 @@ export interface IBook {
   id: string;
   name: string;
   file: IFile;
+  thumbnail: IThumbnail;
   // MINIMIZE THIS
   uri: string;
 
@@ -32,4 +33,10 @@ export interface IBookmark {
 export interface IFile {
   name: string;
   fileCopyUri: string;
+}
+
+export interface IThumbnail {
+  uri: string | undefined;
+  width: number;
+  height: number;
 }
