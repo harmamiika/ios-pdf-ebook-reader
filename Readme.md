@@ -6,6 +6,13 @@
 -app theming
 -dark mode
 
+-right / left side press => change page
+
+FIXES
+-book name line / container max length
+-remove bookmark
+-wrap header icons to buttons
+
 1. MVP - finish lists at least
    --medium tasks: option menu
    ---create menuItem component

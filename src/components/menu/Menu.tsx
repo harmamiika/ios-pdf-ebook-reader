@@ -1,3 +1,4 @@
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { StyleSheet, View, SafeAreaView } from 'react-native';
 import { screenWidth, screenHeight } from '../../utils/cssHelpers';
@@ -9,11 +10,13 @@ interface IMenuItem {
   onPress: () => void;
 }
 
-export const Menu = (): JSX.Element => {
+export const Menu = ({
+  navigation,
+}: NativeStackScreenProps<any>): JSX.Element => {
   const menuItems: IMenuItem[] = [
     {
       text: 'Settings',
-      onPress: () => {},
+      onPress: () => navigation.navigate('Settings'),
     },
     {
       text: 'App info',

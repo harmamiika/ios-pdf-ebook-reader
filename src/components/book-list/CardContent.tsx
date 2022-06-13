@@ -39,6 +39,7 @@ export default function CardContent({ book }: CardContentProps) {
               : 'No bookmarks'
           }
         />
+
         <MiikaText
           text={`Started reading: ${format(
             new Date(book.startDate),
