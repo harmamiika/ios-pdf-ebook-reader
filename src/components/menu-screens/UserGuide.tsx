@@ -1,5 +1,6 @@
+import React from 'react';
 import SimpleScreen from './SimpleScreen';
 
-export default function Settings() {
+export default function UserGuide() {
   return <SimpleScreen header="User guide"></SimpleScreen>;
 }

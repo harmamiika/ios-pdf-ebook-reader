@@ -35,6 +35,9 @@ async function InitializeAds() {
 }
 
 import { LogBox } from 'react-native';
+import Settings from './src/components/menu-screens/Settings';
+import AppInfo from './src/components/menu-screens/AppInfo';
+import UserGuide from './src/components/menu-screens/UserGuide';
 
 LogBox.ignoreLogs([
   'ViewPropTypes will be removed',
@@ -79,13 +82,9 @@ const Application = () => {
           //   headerLeft: LibraryIcon,
           // }}
         />
-        <Screen
-          name="App"
-          component={App}
-          options={{
-            headerRight: PlusIcon,
-          }}
-        />
+        <Screen name="Settings" component={Settings} />
+        <Screen name="AppInfo" component={AppInfo} />
+        <Screen name="UserGuide" component={UserGuide} />
       </Navigator>
     </NavigationContainer>
   );

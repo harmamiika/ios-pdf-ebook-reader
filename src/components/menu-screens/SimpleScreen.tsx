@@ -1,5 +1,7 @@
-import { Children } from 'react';
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import { topMargin } from '../../utils/cssHelpers';
+import { sideMargin } from '../book-list/BookListItem';
 import { MiikaText } from '../reusable/MiikaText';
 
 interface SimpleScreenProps {
@@ -12,7 +14,7 @@ export default function ({
 }: React.PropsWithChildren<SimpleScreenProps>) {
   return (
     <View style={styles.container}>
-      <MiikaText category="h6" text={header} />
+      <MiikaText category="h3" text={header} />
       {children}
     </View>
   );
@@ -22,5 +24,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     display: 'flex',
+    // alignItems: 'center',
+    backgroundColor: 'white',
+    paddingRight: sideMargin,
+    paddingLeft: sideMargin,
+    paddingTop: topMargin,
   },
 });

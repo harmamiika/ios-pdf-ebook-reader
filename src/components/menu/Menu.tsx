@@ -15,12 +15,16 @@ export const Menu = ({
 }: NativeStackScreenProps<any>): JSX.Element => {
   const menuItems: IMenuItem[] = [
     {
+      text: 'User guide',
+      onPress: () => navigation.navigate('UserGuide'),
+    },
+    {
       text: 'Settings',
       onPress: () => navigation.navigate('Settings'),
     },
     {
       text: 'App info',
-      onPress: () => {},
+      onPress: () => navigation.navigate('AppInfo'),
     },
     // {
     //   text: 'Library',
