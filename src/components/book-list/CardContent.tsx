@@ -27,7 +27,7 @@ export default function CardContent({ book }: CardContentProps) {
 
   return (
     <View style={styles.itemBottomSide}>
-      <View style={styles.descriptionContainer}>
+      {/* <View style={styles.descriptionContainer}>
         <MiikaText
           text={`Page ${book?.currentPage} / ${book?.totalPages || '?'}`}
           marginTop={10}
@@ -40,7 +40,6 @@ export default function CardContent({ book }: CardContentProps) {
               : 'No bookmarks'
           }
         />
-        <ThumbnailImage book={book} />
         <MiikaText
           text={`Started reading: ${format(
             new Date(book.startDate),
@@ -48,19 +47,21 @@ export default function CardContent({ book }: CardContentProps) {
           )}`}
           marginBottom={10}
         />
-      </View>
+      </View> */}
+      <ThumbnailImage book={book} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   itemBottomSide: {
+    flex: 1,
     // height: '100%',
-    height: screenHeight / 6.66 || 0,
+    // height: (screenHeight * 1.5) / 6.66 || 0,
     // height: 100,
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     // alignItems: 'flex-end',
     // alignItems: 'center',
     // alignContent: 'center',
@@ -71,7 +72,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-around',
-
     // backgroundColor: 'blue',
   },
   buttonContainer: {

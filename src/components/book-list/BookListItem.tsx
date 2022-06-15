@@ -16,7 +16,8 @@ export default function BookListItem({ book }: BookListItemProps) {
   const dispatch = useDispatch();
   const { activeBook } = useSelector((state: RootState) => state.books);
 
-  const onItemPress = () => {
+  const onItemPress = (event: any) => {
+    console.log(event, 'event');
     dispatch(setActiveBook(book));
   };
 
@@ -51,8 +52,8 @@ export const sideMargin = screenWidth / 15;
 const styles = StyleSheet.create({
   itemContainer: {
     width: screenWidth,
-    height: (1.1 * screenHeight) / 5 || 0,
-    backgroundColor: 'white',
+    height: (1.1 * screenHeight * 1.5) / 5 || 0,
+    backgroundColor: 'blue',
     borderTopColor: 'gray',
     borderTopWidth: 1,
     display: 'flex',

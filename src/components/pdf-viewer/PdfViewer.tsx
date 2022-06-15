@@ -1,5 +1,12 @@
+import { TouchableWithoutFeedback } from '@ui-kitten/components/devsupport';
 import React, { useMemo, useState } from 'react';
-import { Dimensions, PanResponder, StyleSheet, View } from 'react-native';
+import {
+  Dimensions,
+  GestureResponderEvent,
+  PanResponder,
+  StyleSheet,
+  View,
+} from 'react-native';
 import Pdf from 'react-native-pdf';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../state';
@@ -58,6 +65,17 @@ export default function PdfViewer() {
     // trigger current zoom save to active book?
   };
 
+  const onPdfPress = (event: any) => {
+    const positionX = event.nativeEvent.pageX;
+    if (positionX > 200) {
+      // @ts-ignore
+      this.pdf.setPage(activeBook?.currentPage + 1 || 1);
+    } else if (positionX < 200) {
+      // @ts-ignore
+      this.pdf.setPage(activeBook?.currentPage - 1 || 1);
+    }
+  };
+
   const processPinch = (x1: number, y1: number, x2: number, y2: number) => {
     let distance = calcDistance(x1, y1, x2, y2);
     let center = calcCenter(x1, y1, x2, y2);
@@ -108,12 +126,17 @@ export default function PdfViewer() {
     () =>
       PanResponder.create({
         onStartShouldSetPanResponder: (evt, gestureState) => true,
-        onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
-        onMoveShouldSetPanResponder: (evt, gestureState) => true,
+        onStartShouldSetPanResponderCapture: (evt, gestureState) => false,
+        onMoveShouldSetPanResponder: (evt, gestureState) => {
+          return !(gestureState.dx === 0 && gestureState.dy === 0);
+        },
         onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
         onPanResponderGrant: (evt, gestureState) => {},
         onPanResponderMove: (event, gestureState) => {
           const touches = event.nativeEvent.touches;
+
+          console.log('start');
+          // double tap
 
           if (touches.length === 1) {
             processSwipe(touches[0].pageX, touches[0].pageY);
@@ -139,6 +162,7 @@ export default function PdfViewer() {
             center: undefined,
             distance: undefined,
           });
+          console.log('release');
         },
         // hmmmm
         onPanResponderTerminationRequest: (evt, gestureState) => true,
@@ -152,27 +176,29 @@ export default function PdfViewer() {
     <View style={styles.container}>
       {activeBook ? (
         <View {...panResponder.panHandlers}>
-          <Pdf
-            singlePage={true}
-            enableAnnotationRendering={true}
-            enablePaging={true}
-            source={{ uri: activeBook?.uri }}
-            style={styles.pdf}
-            ref={(pdf: any) => {
+          <TouchableWithoutFeedback onPress={onPdfPress}>
+            <Pdf
+              singlePage={true}
+              enableAnnotationRendering={true}
+              enablePaging={true}
+              source={{ uri: activeBook?.uri }}
+              style={styles.pdf}
+              ref={(pdf: any) => {
+                // @ts-ignore
+                this.pdf = pdf;
+              }}
+              onPageChanged={onPageChanged}
               // @ts-ignore
-              this.pdf = pdf;
-            }}
-            onPageChanged={onPageChanged}
-            // @ts-ignore
-            onLoadComplete={() => this.pdf.setPage(activeBook.currentPage)}
-            minScale={1}
-            maxScale={3}
-            scale={zoomState.zoom}
-          />
-          {activeBook &&
-            activeBook?.bookmarks?.find(
-              m => m.page === activeBook.currentPage,
-            ) && <Bookmark />}
+              onLoadComplete={() => this.pdf.setPage(activeBook.currentPage)}
+              minScale={1}
+              maxScale={3}
+              scale={zoomState.zoom}
+            />
+            {activeBook &&
+              activeBook?.bookmarks?.find(
+                m => m.page === activeBook.currentPage,
+              ) && <Bookmark />}
+          </TouchableWithoutFeedback>
         </View>
       ) : (
         <View>
