@@ -30,21 +30,26 @@ export default function CardContent({ book }: CardContentProps) {
       <View style={styles.descriptionContainer}>
         <MiikaText
           text={`Page ${book?.currentPage} / ${book?.totalPages || '?'}`}
-          marginTop={10}
+          marginTop={15}
         />
 
-        <MiikaText
-          text={
-            book.bookmarks.length > 0
-              ? `Bookmarked pages: ${bookmarksString}`
-              : 'No bookmarks'
-          }
-        />
-        <MiikaText text={`Started reading: `} marginBottom={10} />
+        <View>
+          <MiikaText
+            text={
+              book.bookmarks.length > 0
+                ? `Bookmarked pages: ${bookmarksString}`
+                : 'No bookmarks'
+            }
+          />
+        </View>
 
-        <MiikaText
-          text={`${format(new Date(book.startDate), 'EEEE d. MMMM, y')}`}
-        />
+        <View>
+          <MiikaText text={`Started reading: `} />
+          <MiikaText
+            text={`${format(new Date(book.startDate), 'EEEE d. MMMM, y')}`}
+            marginBottom={15}
+          />
+        </View>
       </View>
 
       <View style={styles.imageWrapper}>
@@ -71,15 +76,16 @@ const styles = StyleSheet.create({
     // backgroundColor: 'red',
   },
   descriptionContainer: {
-    marginLeft: sideMargin,
+    marginLeft: sideMargin / 2,
+    height: '90%',
+    width: '50%',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-around',
-    // backgroundColor: 'blue',
+    justifyContent: 'space-between',
+    backgroundColor: 'yellow',
   },
   imageWrapper: {
-    // marginRight: sideMargin / 100 || 0,
-    // marginTop: 10,
+    marginRight: sideMargin / 2 || 0,
     backgroundColor: 'red',
   },
 });
