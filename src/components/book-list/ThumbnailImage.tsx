@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     // flex: 1,
   },
   container: {
-    height: '100%',
+    height: '90%',
     width: 150,
     // marginRight: 500,
   },
