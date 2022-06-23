@@ -53,7 +53,8 @@ const styles = StyleSheet.create({
   itemContainer: {
     width: screenWidth,
     height: (1.1 * screenHeight * 1.5) / 5 || 0,
-    backgroundColor: 'blue',
+    // backgroundColor: 'blue',
+    backgroundColor: 'white',
     borderTopColor: 'gray',
     borderTopWidth: 1,
     display: 'flex',
@@ -70,7 +71,6 @@ const styles = StyleSheet.create({
     marginLeft: sideMargin,
     display: 'flex',
     flexDirection: 'row',
-    // marginTop: screenHeight / 120,
   },
   buttonContainer: {
     display: 'flex',

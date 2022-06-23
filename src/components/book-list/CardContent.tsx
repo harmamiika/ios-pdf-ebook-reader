@@ -62,30 +62,23 @@ export default function CardContent({ book }: CardContentProps) {
 const styles = StyleSheet.create({
   itemBottomSide: {
     flex: 1,
-    // height: '100%',
-    // height: (screenHeight * 1.5) / 6.66 || 0,
-    // height: 100,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    // paddingRight: 5,
     justifyContent: 'space-between',
-    // alignItems: 'flex-end',
-    // alignItems: 'center',
-    // alignContent: 'center',
     // backgroundColor: 'red',
   },
   descriptionContainer: {
-    marginLeft: sideMargin / 2,
+    marginLeft: sideMargin / 1.3333,
     height: '90%',
     width: '50%',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    backgroundColor: 'yellow',
+    // backgroundColor: 'yellow',
   },
   imageWrapper: {
-    marginRight: sideMargin / 2 || 0,
+    marginRight: sideMargin / 1.3333 || 0,
     backgroundColor: 'red',
   },
 });

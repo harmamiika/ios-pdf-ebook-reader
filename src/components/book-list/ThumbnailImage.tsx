@@ -34,13 +34,13 @@ export default function ThumbnailImage({ book }: ThumbnailImageProps) {
 
 const styles = StyleSheet.create({
   image: {
-    height: '100%',
-    width: '100%',
-    // flex: 1,
+    flex: 1,
   },
   container: {
     height: '90%',
     width: 150,
-    // marginRight: 500,
+    borderWidth: 0.5,
+    border: 1,
+    borderColor: 'rgb(245, 245, 245)',
   },
 });
