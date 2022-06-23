@@ -3,29 +3,31 @@ import { StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../state';
 import { addBookmark } from '../../state/booksSlice';
+import { headerIconSidePadding } from '../../utils/cssHelpers';
 import { CustomIonIcon } from '../reusable/CustomIonIcon';
 import { FontAwesome5Icon } from '../reusable/FontAwesome5Icon';
+import { IconButton, IconType } from '../reusable/IconButton';
 
-interface LibraryRightHeaderProps {
+interface ReaderRightHeaderProps {
   navigation: any;
 }
 
-export const LibraryRightHeader = ({ navigation }: LibraryRightHeaderProps) => {
+export const ReaderRightHeader = ({ navigation }: ReaderRightHeaderProps) => {
   const dispatch = useAppDispatch();
   const activeBook = useSelector((state: RootState) => state.books.activeBook);
   return (
     <View style={styles.container}>
       {activeBook && (
-        <CustomIonIcon
+        <IconButton
           name="bookmark"
           style={styles.leftIcon}
           onPress={() => dispatch(addBookmark({ id: '', text: '', page: 0 }))}
+          iconType={IconType.IonIcon}
+          // iconColor="lightgray"
         />
+        // 3 different types of bookmars - empty - filled - scroll empty - scroll filled
+        // perhaps empty bookmark can be lighter too
       )}
-      <FontAwesome5Icon
-        name="bars"
-        onPress={() => navigation.navigate('Menu')}
-      />
     </View>
   );
 };
@@ -38,6 +40,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   leftIcon: {
-    paddingRight: 21,
+    // paddingRight: headerIconSidePadding,
+    // paddingBottom: 1,
   },
 });

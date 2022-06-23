@@ -6,3 +6,7 @@ export const { width: screenWidth, height: screenHeight } =
 export const sideMargin = screenWidth / 15;
 
 export const topMargin = screenHeight / 50;
+
+export const headerIconsize = 28;
+
+export const headerIconSidePadding = 15;

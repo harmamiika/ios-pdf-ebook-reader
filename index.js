@@ -16,7 +16,7 @@ import App from './App';
 import { name as appName } from './app.json';
 import Library from './src/components/book-list/Library';
 import { LibraryIcon } from './src/components/header/LibraryIcon';
-import { LibraryRightHeader } from './src/components/header/LibraryRightHeader';
+import { ReaderRightHeader } from './src/components/header/ReaderRightHeader';
 import { PlusIcon } from './src/components/header/FilePicker';
 import { Menu } from './src/components/menu/Menu';
 import PdfViewer from './src/components/pdf-viewer/PdfViewer';
@@ -38,6 +38,7 @@ import { LogBox } from 'react-native';
 import Settings from './src/components/menu-screens/Settings';
 import AppInfo from './src/components/menu-screens/AppInfo';
 import UserGuide from './src/components/menu-screens/UserGuide';
+import LibraryRightHeader from './src/components/book-list/LibraryRightHeader';
 
 LogBox.ignoreLogs([
   'ViewPropTypes will be removed',
@@ -62,7 +63,7 @@ const Application = () => {
           options={({ navigation }) => ({
             headerLeft: () => <LibraryIcon navigation={navigation} />,
             headerRight: props => (
-              <LibraryRightHeader navigation={navigation} {...props} />
+              <ReaderRightHeader navigation={navigation} {...props} />
             ),
             title: activeBookTitle || 'Book',
           })}
@@ -72,7 +73,7 @@ const Application = () => {
           name="Library"
           component={Library}
           options={({ navigation }) => ({
-            headerRight: () => <PlusIcon />,
+            headerRight: () => <LibraryRightHeader navigation={navigation} />,
           })}
         />
         <Screen

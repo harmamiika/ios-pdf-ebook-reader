@@ -18,9 +18,6 @@ STUDY
 -filecopyuri, uri - differences
 
 1. MVP - finish lists at least
-   --medium tasks: option menu
-   ---create menuItem component
-   ---add components with required functionality
    ----At least App info
    ----Settings
    ----Library
@@ -225,3 +222,6 @@ page: number
 note: string
 color: BookMarkColor
 }
+--medium tasks: option menu
+---create menuItem component
+---add components with required functionality

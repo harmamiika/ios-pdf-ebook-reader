@@ -79,6 +79,6 @@ const styles = StyleSheet.create({
   },
   imageWrapper: {
     marginRight: sideMargin / 1.3333 || 0,
-    backgroundColor: 'red',
+    backgroundColor: 'lightgray',
   },
 });

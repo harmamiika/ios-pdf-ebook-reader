@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addBookToList, addNewBook } from '../../state/booksSlice';
 
 import { FontAwesome5Icon } from '../reusable/FontAwesome5Icon';
+import { IconButton } from '../reusable/IconButton';
 
-export const PlusIcon = () => {
+export const FilePicker = () => {
   const dispatch = useDispatch();
   const { bookList } = useSelector(state => state.books);
 
@@ -44,5 +45,12 @@ export const PlusIcon = () => {
     }
   };
 
-  return <FontAwesome5Icon name={'plus'} onPress={() => getFile()} />;
+  return (
+    <IconButton
+      name={'plus'}
+      onPress={() => getFile()}
+      iconType={1}
+      iconSize={27}
+    />
+  );
 };

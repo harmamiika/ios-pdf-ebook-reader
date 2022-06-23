@@ -1,11 +1,15 @@
 import React from 'react';
-import { CustomIonIcon } from '../reusable/CustomIonIcon';
+import { View } from 'react-native';
+import { IconButton, IconType } from '../reusable/IconButton';
 
 export const LibraryIcon = ({ navigation }: { navigation: any }) => {
   return (
-    <CustomIonIcon
-      name="library-outline"
-      onPress={() => navigation.navigate('Library')}
-    />
+    <View style={{ marginTop: -1 }}>
+      <IconButton
+        name="library-outline"
+        onPress={() => navigation.navigate('Library')}
+        iconType={IconType.IonIcon}
+      />
+    </View>
   );
 };
