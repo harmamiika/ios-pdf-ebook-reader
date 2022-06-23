@@ -45,12 +45,19 @@ export const FilePicker = () => {
     }
   };
 
+  const gap = 12;
+
+  const childStyle = {
+    marginHorizontal: gap / 2,
+  };
+
   return (
     <IconButton
       name={'plus'}
       onPress={() => getFile()}
       iconType={1}
       iconSize={27}
+      style={childStyle}
     />
   );
 };

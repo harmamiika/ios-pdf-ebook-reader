@@ -1,17 +1,14 @@
 <h2>Roadmap</h2>
 --small tasks, improve zoom to not bug - scale variable?
 -remove bookmark / improve
-
 -icon colors
--app theming
--dark mode
 
--right / left side press => change page
+-make header title component => wrappaa ui kitten fontin siihen
+-Make booklist item header a bit bigger
 
 FIXES
 -book name line / container max length
 -remove bookmark
--wrap header icons to buttons
 
 STUDY
 -react-native cache directory how it works
@@ -76,6 +73,9 @@ lisää adsien aloitukseen timeri - 7 pv?
 ---
 
 V2 FEATURES
+
+-app theming
+-dark mode
 
 1.Apple sub to become premium
 
@@ -225,3 +225,5 @@ color: BookMarkColor
 --medium tasks: option menu
 ---create menuItem component
 ---add components with required functionality
+-wrap header icons to buttons
+-right / left side press => change page

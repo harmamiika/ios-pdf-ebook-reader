@@ -1,18 +1,11 @@
 import { TouchableWithoutFeedback } from '@ui-kitten/components/devsupport';
 import React, { useMemo, useState } from 'react';
-import {
-  Dimensions,
-  GestureResponderEvent,
-  PanResponder,
-  StyleSheet,
-  View,
-} from 'react-native';
+import { Dimensions, PanResponder, StyleSheet, View } from 'react-native';
 import Pdf from 'react-native-pdf';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../state';
 import { setActiveBook, updateActiveBookPage } from '../../state/booksSlice';
 import { MiikaText } from '../reusable/MiikaText';
-import Bookmark from './Bookmark';
 
 function calcDistance(x1: number, y1: number, x2: number, y2: number) {
   let dx = Math.abs(x1 - x2);
@@ -194,10 +187,6 @@ export default function PdfViewer() {
               maxScale={3}
               scale={zoomState.zoom}
             />
-            {activeBook &&
-              activeBook?.bookmarks?.find(
-                m => m.page === activeBook.currentPage,
-              ) && <Bookmark />}
           </TouchableWithoutFeedback>
         </View>
       ) : (

@@ -23,9 +23,9 @@ export default function LibraryRightHeader({ navigation }: Props) {
         alignItems: 'center',
         paddingHorizontal: gap / -2,
       }}>
-      <View style={childStyle}>
-        <FilePicker />
-      </View>
+      {/* <View style={childStyle}> */}
+      <FilePicker />
+      {/* </View> */}
 
       <IconButton
         name="folder-open-o"

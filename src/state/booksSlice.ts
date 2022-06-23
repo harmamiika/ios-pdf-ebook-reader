@@ -98,6 +98,8 @@ export const booksSlice = createSlice({
     },
     addBookmark(state, action: PayloadAction<IBookmark>) {
       const activeBook = state.activeBook;
+      if (activeBook?.bookmarks.find(b => b.page === activeBook.currentPage))
+        return;
       const bookmark = createBookmark(
         action.payload,
         activeBook?.currentPage || 1,
