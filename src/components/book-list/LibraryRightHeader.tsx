@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default function LibraryRightHeader({ navigation }: Props) {
-  const gap = 12;
+  const gap = 18;
 
   const childStyle = {
     marginHorizontal: gap / 2,
@@ -37,7 +37,7 @@ export default function LibraryRightHeader({ navigation }: Props) {
         iconName="bars"
         onPress={() => navigation.navigate('Menu')}
         iconType={IconType.FontAwesome5Icon}
-        style={childStyle}
+        style={{ ...childStyle, marginRight: -5 }}
       />
     </View>
   );

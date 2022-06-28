@@ -64,7 +64,10 @@ export const FilePicker = () => {
       onPress={() => getFile()}
       iconType={1}
       iconSize={27}
-      style={childStyle}
+      style={{
+        ...childStyle,
+        marginRight: gap * 0.75,
+      }}
     />
   );
 };
