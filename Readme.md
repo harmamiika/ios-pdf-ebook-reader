@@ -1,6 +1,5 @@
 <h2>Roadmap</h2>
 --small tasks, improve zoom to not bug - scale variable?
--remove bookmark / improve
 -icon colors
 
 -make header title component => wrappaa ui kitten fontin siihen
@@ -8,7 +7,10 @@
 
 FIXES
 -book name line / container max length
--remove bookmark
+-improve
+-document picker improvements
+--cancel message
+--prevent duplicates
 
 STUDY
 -react-native cache directory how it works
@@ -72,7 +74,18 @@ lisää adsien aloitukseen timeri - 7 pv?
 
 ---
 
-V2 FEATURES
+-------------------V2 FEATURES
+--Single book view
+-Big picture
+-show original filename
+-filepath
+-Book name
+-bookmarks
+-started reading
+-folders
+
+-add bookmark note
+-change book name
 
 -app theming
 -dark mode
@@ -227,3 +240,5 @@ color: BookMarkColor
 ---add components with required functionality
 -wrap header icons to buttons
 -right / left side press => change page
+-remove bookmark
+-remove bookmark / improve

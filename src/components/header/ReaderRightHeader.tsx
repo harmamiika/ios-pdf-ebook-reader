@@ -15,8 +15,8 @@ interface ReaderRightHeaderProps {
 export const ReaderRightHeader = ({ navigation }: ReaderRightHeaderProps) => {
   const dispatch = useAppDispatch();
   const activeBook = useSelector((state: RootState) => state.books.activeBook);
-
   const [iconName, setIconName] = useState<string>('');
+
   useEffect(() => {
     const pageHasBookmarks = activeBook?.bookmarks.find(
       b => b.page === activeBook.currentPage,

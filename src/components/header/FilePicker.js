@@ -27,16 +27,16 @@ export const FilePicker = () => {
       console.log(res, 'res2');
 
       // FIXAA TÄMÄ
-      if (!bookList.find(b => b.name === res[0].name)) {
-        dispatch(addNewBook(res[0]));
-      } else {
+      if (bookList.find(b => b.name === res[0].name)) {
         console.log('duplicate file');
+        alert('Book with this filename already exists');
+      } else {
+        dispatch(addNewBook(res[0]));
       }
     } catch (err) {
       //Handling any exception (If any)
       if (DocumentPicker.isCancel(err)) {
         //If user canceled the document selection
-        alert('Canceled from single doc picker');
       } else {
         //For Unknown Errorgit
         alert('Unknown Error: ' + JSON.stringify(err));
