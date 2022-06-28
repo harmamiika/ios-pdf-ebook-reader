@@ -10,6 +10,7 @@ import {
   IFile,
   IThumbnail,
 } from './../interfaces';
+import { DocumentPickerResponse } from 'react-native-document-picker';
 
 // Book data model
 const createBook = (file: IFile, thumbnail?: IThumbnail): IBook => ({
@@ -68,8 +69,11 @@ const initialState: SliceState = {
 
 export const addNewBook = createAsyncThunk(
   'books/addBook',
-  async (file: IFile) => {
-    const thumbnail = await createThumbnail(file.fileCopyUri);
+  async (file: DocumentPickerResponse) => {
+    let thumbnail;
+    if (file.fileCopyUri) {
+      thumbnail = await createThumbnail(file.fileCopyUri);
+    }
     return { file, thumbnail };
   },
 );
@@ -78,10 +82,10 @@ export const booksSlice = createSlice({
   name: 'books',
   initialState,
   reducers: {
-    addBookToList(state, action: PayloadAction<IFile>) {
-      const bookList = [...state.bookList, createBook(action.payload)];
-      if (bookList) state.bookList = bookList;
-    },
+    // addBookToList(state, action: PayloadAction<IFile>) {
+    //   const bookList = [...state.bookList, createBook(action.payload)];
+    //   if (bookList) state.bookList = bookList;
+    // },
     deleteBook(state, action: PayloadAction<IBook>) {
       const newBookList = state.bookList.filter(
         b => b.id !== action.payload.id,
@@ -113,13 +117,15 @@ export const booksSlice = createSlice({
   },
   extraReducers: builder => {
     builder.addCase(addNewBook.fulfilled, (state, action) => {
+      const file = action.payload.file as IFile;
+      // if no file file => exit create at some point
+      // also can clean up the code above
       const bookList = [
         ...state.bookList,
-        createBook(action.payload.file, action.payload.thumbnail || undefined),
+        createBook(file, action.payload.thumbnail || undefined),
       ];
       console.log(
-        createBook(action.payload.file, action.payload.thumbnail || undefined)
-          .thumbnail,
+        createBook(file, action.payload.thumbnail || undefined).thumbnail,
         'thumbnail',
       );
       if (bookList) state.bookList = bookList;
@@ -128,7 +134,7 @@ export const booksSlice = createSlice({
 });
 
 export const {
-  addBookToList,
+  // addBookToList,
   setActiveBook,
   deleteBook,
   updateActiveBookPage,

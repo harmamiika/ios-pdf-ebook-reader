@@ -10,7 +10,7 @@ interface ThumbnailImageProps {
 // todo: backup image
 
 export default function ThumbnailImage({ book }: ThumbnailImageProps) {
-  console.log(book.thumbnail, 'humb');
+  // console.log(book.thumbnail, 'humb');
 
   if (!book.thumbnail.uri) {
     return (

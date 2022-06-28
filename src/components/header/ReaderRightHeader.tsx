@@ -15,7 +15,7 @@ interface ReaderRightHeaderProps {
 export const ReaderRightHeader = ({ navigation }: ReaderRightHeaderProps) => {
   const dispatch = useAppDispatch();
   const activeBook = useSelector((state: RootState) => state.books.activeBook);
-  const [iconName, setIconName] = useState<string>('');
+  const [iconName, setIconName] = useState<string>('ios-bookmarks');
 
   useEffect(() => {
     const pageHasBookmarks = activeBook?.bookmarks.find(
@@ -33,7 +33,7 @@ export const ReaderRightHeader = ({ navigation }: ReaderRightHeaderProps) => {
     <View style={styles.container}>
       {activeBook && (
         <IconButton
-          name={iconName}
+          iconName={iconName}
           style={styles.leftIcon}
           onPress={() => dispatch(addBookmark({ id: '', text: '', page: 0 }))}
           iconType={IconType.IonIcon}

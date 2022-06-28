@@ -28,13 +28,13 @@ export default function LibraryRightHeader({ navigation }: Props) {
       {/* </View> */}
 
       <IconButton
-        name="folder-open-o"
+        iconName="folder-open-o"
         iconType={IconType.FAIcon}
         style={childStyle}
       />
 
       <IconButton
-        name="bars"
+        iconName="bars"
         onPress={() => navigation.navigate('Menu')}
         iconType={IconType.FontAwesome5Icon}
         style={childStyle}

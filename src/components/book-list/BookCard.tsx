@@ -11,7 +11,7 @@ interface BookCardProps {
 }
 
 export default function BookCard({ book }: BookCardProps) {
-  console.log(book, 'book book');
+  // console.log(book, 'book book');
 
   // const onItemPress = () => {
   //   console.log('press');

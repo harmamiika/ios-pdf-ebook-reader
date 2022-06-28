@@ -6,7 +6,7 @@ export const LibraryIcon = ({ navigation }: { navigation: any }) => {
   return (
     <View style={{ marginTop: -1 }}>
       <IconButton
-        name="library-outline"
+        iconName="library-outline"
         onPress={() => navigation.navigate('Library')}
         iconType={IconType.IonIcon}
       />

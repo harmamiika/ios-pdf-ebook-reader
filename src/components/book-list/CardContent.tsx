@@ -19,7 +19,7 @@ interface CardContentProps {
 // => done !!
 
 export default function CardContent({ book }: CardContentProps) {
-  console.log(book, 'book');
+  // console.log(book, 'book');
   const bookmarksString = useMemo(
     () => book.bookmarks.map(m => m.page.toString()).join(', '),
     [book],

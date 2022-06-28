@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from './FontAwesomerIcon';
 interface IconButtonProps {
   onPress: () => any;
   iconType: IconType;
+  iconName: string;
 }
 
 export enum IconType {
@@ -23,7 +24,7 @@ export enum IconType {
 
 export function IconButton({
   onPress,
-  name,
+  iconName,
   iconType,
   iconColor,
   iconSize,
@@ -33,7 +34,7 @@ export function IconButton({
     if (iconType === IconType.IonIcon)
       return (
         <CustomIonIcon
-          name={name}
+          name={iconName}
           size={iconSize ? iconSize : headerIconsize}
           color={iconColor}
         />
@@ -41,14 +42,14 @@ export function IconButton({
     else if (iconType === IconType.FontAwesome5Icon)
       return (
         <FontAwesome5Icon
-          name={name}
+          name={iconName}
           size={iconSize ? iconSize : headerIconsize}
         />
       );
     else if (iconType === IconType.FAIcon)
       return (
         <FontAwesomeIcon
-          name={name}
+          name={iconName}
           size={iconSize ? iconSize : headerIconsize}
         />
       );
