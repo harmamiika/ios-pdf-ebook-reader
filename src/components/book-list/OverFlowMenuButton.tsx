@@ -24,7 +24,6 @@ export default function OverflowMenuButton({ book }: OverflowMenuButtonProps) {
   const renderMenuIcon = () => (
     <FontAwesome5Icon
       name="ellipsis-v"
-      color="rgba(0, 0, 0, 0.54)"
       onPress={() => setMenuIsVisible(true)}
     />
   );
@@ -47,14 +46,14 @@ export default function OverflowMenuButton({ book }: OverflowMenuButtonProps) {
         visible={menuIsVisible}
         onSelect={onItemSelect}
         onBackdropPress={() => setMenuIsVisible(false)}>
-        <MenuItem
+        {/* <MenuItem
           accessoryLeft={() => <FontAwesome5Icon name="star" size={16} />}
           title="Favourite"
-        />
-        <MenuItem
+        /> */}
+        {/* <MenuItem
           accessoryLeft={() => <FontAwesome5Icon name="check" size={16} />}
           title="Mark as read"
-        />
+        /> */}
         <MenuItem
           title="Remove"
           accessoryLeft={() => <FontAwesome5Icon name="trash-alt" size={16} />}

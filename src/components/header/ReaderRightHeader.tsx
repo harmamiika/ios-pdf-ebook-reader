@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../state';
-import { addBookmark } from '../../state/booksSlice';
+import { addBookmark, deleteBookmark } from '../../state/booksSlice';
 import { headerIconSidePadding } from '../../utils/cssHelpers';
 import { CustomIonIcon } from '../reusable/CustomIonIcon';
 import { FontAwesome5Icon } from '../reusable/FontAwesome5Icon';
@@ -35,7 +35,17 @@ export const ReaderRightHeader = ({ navigation }: ReaderRightHeaderProps) => {
         <IconButton
           iconName={iconName}
           style={styles.leftIcon}
-          onPress={() => dispatch(addBookmark({ id: '', text: '', page: 0 }))}
+          onPress={() =>
+            iconName === 'ios-bookmarks-outline'
+              ? dispatch(addBookmark({ id: '', text: '', page: 0 }))
+              : dispatch(
+                  deleteBookmark(
+                    activeBook.bookmarks.find(
+                      bm => bm.page === activeBook.currentPage,
+                    )?.id!,
+                  ),
+                )
+          }
           iconType={IconType.IonIcon}
           // iconColor="lightgray"
         />

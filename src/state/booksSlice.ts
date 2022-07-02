@@ -82,10 +82,7 @@ export const booksSlice = createSlice({
   name: 'books',
   initialState,
   reducers: {
-    // addBookToList(state, action: PayloadAction<IFile>) {
-    //   const bookList = [...state.bookList, createBook(action.payload)];
-    //   if (bookList) state.bookList = bookList;
-    // },
+    // BOOKS
     deleteBook(state, action: PayloadAction<IBook>) {
       const newBookList = state.bookList.filter(
         b => b.id !== action.payload.id,
@@ -100,6 +97,7 @@ export const booksSlice = createSlice({
       const updatedBook = { ...state.activeBook, currentPage: action.payload };
       addUpdatedBookToState(state, updatedBook as IBook);
     },
+    // BOOKMARKS
     addBookmark(state, action: PayloadAction<IBookmark>) {
       const activeBook = state.activeBook;
       if (activeBook?.bookmarks.find(b => b.page === activeBook.currentPage))
@@ -113,6 +111,15 @@ export const booksSlice = createSlice({
         bookmarks: activeBook?.bookmarks.concat(bookmark),
       };
       addUpdatedBookToState(state, updatedBook as IBook);
+    },
+    deleteBookmark(state, action: PayloadAction<string>) {
+      const updatedBookmarks = state.activeBook?.bookmarks.filter(
+        bm => bm.id !== action.payload,
+      );
+      addUpdatedBookToState(state, {
+        ...state.activeBook,
+        bookmarks: updatedBookmarks || [],
+      } as IBook);
     },
   },
   extraReducers: builder => {
@@ -141,5 +148,6 @@ export const {
   deleteBook,
   updateActiveBookPage,
   addBookmark,
+  deleteBookmark,
 } = booksSlice.actions;
 export default booksSlice.reducer;

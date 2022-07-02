@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   },
   itemHeading: {
     width: '100%',
-    height: (1.2 * screenHeight) / 20 || 0,
+    height: (1.7 * screenHeight) / 20 || 0,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
