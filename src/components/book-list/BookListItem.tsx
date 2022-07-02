@@ -6,6 +6,7 @@ import { IBook } from '../../interfaces';
 import { RootState } from '../../state';
 import { setActiveBook } from '../../state/booksSlice';
 import { CustomIonIcon } from '../reusable/CustomIonIcon';
+import { MiikaText } from '../reusable/MiikaText';
 import CardContent from './CardContent';
 import OverflowMenuButton from './OverFlowMenuButton';
 interface BookListItemProps {
@@ -27,7 +28,11 @@ export default function BookListItem({ book }: BookListItemProps) {
         <View style={styles.itemHeading}>
           {/* HEADER */}
           <View style={styles.headerWrapper}>
-            <Text category="h6">{book.name}</Text>
+            <MiikaText
+              text={book.name}
+              category="h6"
+              width={screenWidth * 0.61}
+            />
           </View>
           <View style={styles.buttonContainer}>
             {book.id === activeBook?.id && (

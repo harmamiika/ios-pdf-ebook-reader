@@ -1,13 +1,15 @@
 <h2>Roadmap</h2>
 --small tasks, improve zoom to not bug - scale variable?
-
--make header title component => wrappaa ui kitten fontin siihen
--Make booklist item header a bit bigger
+  -make header title component => wrappaa ui kitten fontin siihen
 
 FIXES
--book name line / container max length
--improve
 -improve menu list a little - make border gray
+-make pdf view full screen - strech? / zoom in a bit? (make optional)
+-activebook switch fix
+
+73. Consent
+    -add concent asking from the docx
+    -figure out how to detect location
 
 STUDY
 -react-native cache directory how it works
@@ -28,19 +30,10 @@ STUDY
     -ipad small
     -ipad big
 
-73. Consent
-    -add concent asking from the docx
-    -figure out how to detect location
-
-74. Use testflight
     NO CODE LOW CODE TASKS
-75. Make app icon MVP
-    --ota vaan joku random filu ja koita saada appi testipilottiin
 
-    --watch app pictures / logos / videos
-    --Learn how to make logo - from udemy / yt / skillshare
-
-76. Pics and app videos
+73. Make app icon MVP
+    --buy logo and ads from fiverr 20 -100€
     --make sample lorem pdf book
 
 KUVISSA:
@@ -74,6 +67,8 @@ lisää adsien aloitukseen timeri - 7 pv?
 -------------------V2 FEATURES
 -icon colors
 --wrap icons to ui kitten
+
+--file browseriin pdf fileihin -- avaa sovelluksessa
 
 --Single book view
 -Big picture
@@ -246,3 +241,8 @@ color: BookMarkColor
 --cancel message
 --prevent duplicates
 -icon padding
+-Make booklist item header a bit bigger
+--ota vaan joku random filu ja koita saada appi testipilottiin  
+ --Learn how to make logo - from udemy / yt / skillshare
+--76. Pics and app videos 74. Use testflight
+-book name line / container max length - in reader and list (50% done)

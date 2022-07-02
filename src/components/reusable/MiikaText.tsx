@@ -8,6 +8,7 @@ interface MiikaTextProps {
   marginBottom?: number;
   marginLeft?: number;
   category?: string;
+  width?: number | string;
 }
 
 export const MiikaText: React.FC<MiikaTextProps> = ({
@@ -15,17 +16,20 @@ export const MiikaText: React.FC<MiikaTextProps> = ({
   marginBottom = 0,
   marginTop = 0,
   marginLeft = 0,
+  width = undefined,
   category = 'p1',
   ...props
 }) => {
   // NOT RESPONSIVE
   return (
     <Text
+      numberOfLines={2}
       category={category}
       style={{
         marginBottom,
         marginTop,
         marginLeft,
+        width,
       }}
       {...props}>
       {text}

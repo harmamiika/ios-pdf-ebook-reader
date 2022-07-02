@@ -65,7 +65,10 @@ const Application = () => {
             headerRight: props => (
               <ReaderRightHeader navigation={navigation} {...props} />
             ),
-            title: activeBookTitle || 'Book',
+            title:
+              activeBookTitle?.length < 29
+                ? `${activeBookTitle}`
+                : `${activeBookTitle.substring(0, 26)}...` || 'Book',
           })}
           // headerRight: LibraryIcon,
         />
