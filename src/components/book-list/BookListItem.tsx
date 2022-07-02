@@ -25,15 +25,17 @@ export default function BookListItem({ book }: BookListItemProps) {
     <TouchableHighlight onPress={onItemPress}>
       <View style={styles.itemContainer}>
         <View style={styles.itemHeading}>
+          {/* HEADER */}
           <View style={styles.headerWrapper}>
             <Text category="h6">{book.name}</Text>
-            {/* <Text category="h6" appearance={'hint'}>
-              {' '}
-              - reading
-            </Text> */}
           </View>
           <View style={styles.buttonContainer}>
-            {book.id === activeBook?.id && <CustomIonIcon name="bookmarks" />}
+            {book.id === activeBook?.id && (
+              <CustomIonIcon
+                name="ios-book-sharp"
+                style={{ paddingRight: 15, paddingTop: 3 }}
+              />
+            )}
             <OverflowMenuButton book={book} />
           </View>
         </View>

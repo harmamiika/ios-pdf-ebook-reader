@@ -29,7 +29,9 @@ export default function CardContent({ book }: CardContentProps) {
     <View style={styles.itemBottomSide}>
       <View style={styles.descriptionContainer}>
         <MiikaText
-          text={`Page ${book?.currentPage} / ${book?.totalPages || '?'}`}
+          text={`Page ${book?.currentPage}${
+            book.totalPages ? ` / ${book.totalPages}` : ''
+          }`}
           marginTop={15}
         />
 

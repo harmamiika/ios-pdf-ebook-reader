@@ -5,7 +5,7 @@ import { RootState } from '../../state';
 import { addNewBook } from '../../state/booksSlice';
 
 import { FontAwesome5Icon } from '../reusable/FontAwesome5Icon';
-import { IconButton } from '../reusable/IconButton';
+import { IconButton, IconType } from '../reusable/IconButton';
 
 export const FilePicker = () => {
   const dispatch = useDispatch();
@@ -36,6 +36,7 @@ export const FilePicker = () => {
       } else {
         console.log(res[0], 'resssRESS');
         // HUOM
+
         // @ts-ignore
         dispatch(addNewBook(res[0]));
       }
@@ -62,7 +63,7 @@ export const FilePicker = () => {
     <IconButton
       iconName="plus"
       onPress={() => getFile()}
-      iconType={1}
+      iconType={IconType.FontAwesome5Icon}
       iconSize={27}
       style={{
         ...childStyle,

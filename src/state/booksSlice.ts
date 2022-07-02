@@ -128,7 +128,9 @@ export const booksSlice = createSlice({
         createBook(file, action.payload.thumbnail || undefined).thumbnail,
         'thumbnail',
       );
-      if (bookList) state.bookList = bookList;
+      state.bookList = bookList;
+      // if first book, make automatically active
+      if (bookList.length === 1) setActiveBook(bookList[0]);
     });
   },
 });

@@ -28,8 +28,8 @@ export default function LibraryRightHeader({ navigation }: Props) {
       {/* </View> */}
 
       <IconButton
-        iconName="folder-open-o"
-        iconType={IconType.FAIcon}
+        iconName="folder-open"
+        iconType={IconType.FontAwesome5Icon}
         style={childStyle}
       />
 

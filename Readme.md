@@ -7,6 +7,7 @@
 FIXES
 -book name line / container max length
 -improve
+-improve menu list a little - make border gray
 
 STUDY
 -react-native cache directory how it works
@@ -72,6 +73,7 @@ lisää adsien aloitukseen timeri - 7 pv?
 
 -------------------V2 FEATURES
 -icon colors
+--wrap icons to ui kitten
 
 --Single book view
 -Big picture
