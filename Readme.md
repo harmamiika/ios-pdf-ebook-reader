@@ -3,7 +3,6 @@
   -make header title component => wrappaa ui kitten fontin siihen
 
 FIXES
--improve menu list a little - make border gray
 -make pdf view full screen - strech? / zoom in a bit? (make optional)
 -activebook switch fix
 
@@ -246,3 +245,4 @@ color: BookMarkColor
  --Learn how to make logo - from udemy / yt / skillshare
 --76. Pics and app videos 74. Use testflight
 -book name line / container max length - in reader and list (50% done)
+-improve menu list a little - make border gray

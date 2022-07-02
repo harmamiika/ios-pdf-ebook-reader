@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    borderTopColor: 'gray',
+    borderTopColor: 'lightgray',
     borderTopWidth: 1,
   },
 });
