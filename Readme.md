@@ -91,6 +91,8 @@ lisää adsien aloitukseen timeri - 7 pv?
 
 V2 Possible features
 
+-full screen view
+
 -Bookmark text
 
 -Folders/Categories
