@@ -80,6 +80,8 @@ export default function PdfViewer() {
         initialDistance: distance,
         initialX: center.x,
         initialY: center.y,
+        // set initial zoom
+        initialZoom: zoomState.zoom,
       };
       setZoomState(newZoomState);
     } else {
