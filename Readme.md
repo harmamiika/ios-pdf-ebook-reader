@@ -1,10 +1,13 @@
 <h2>Roadmap</h2>
+-prevent sideways view
+-activebook switch fix
+
 --small tasks, improve zoom to not bug - scale variable?
-  -make header title component => wrappaa ui kitten fontin siihen
+
+-make header title component => wrappaa ui kitten fontin siihen
 
 FIXES
 -make pdf view full screen - strech? / zoom in a bit? (make optional)
--activebook switch fix
 
 73. Consent
     -add concent asking from the docx
@@ -246,3 +249,4 @@ color: BookMarkColor
 --76. Pics and app videos 74. Use testflight
 -book name line / container max length - in reader and list (50% done)
 -improve menu list a little - make border gray
+---also make zoom in the beginning zoom the

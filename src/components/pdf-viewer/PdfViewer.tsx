@@ -205,12 +205,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    marginTop: 25,
+    backgroundColor: 'red',
   },
   pdf: {
     flex: 1,
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
-    marginBottom: Dimensions.get('window').height / 35,
   },
 });

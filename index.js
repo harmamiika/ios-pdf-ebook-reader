@@ -68,7 +68,9 @@ const Application = () => {
             title:
               activeBookTitle?.length < 29
                 ? `${activeBookTitle}`
-                : `${activeBookTitle.substring(0, 26)}...` || 'Book',
+                : activeBookTitle
+                ? `${activeBookTitle?.substring(0, 26)}...`
+                : 'Book',
           })}
           // headerRight: LibraryIcon,
         />
@@ -96,9 +98,9 @@ const Application = () => {
 
 const Root = () => {
   // AsyncStorage.clear();
+
   const colorScheme = Appearance.getColorScheme();
   console.log(colorScheme, 'color shcmee');
-
   const persistor = persistStore(store);
   return (
     <ApplicationProvider {...eva} theme={eva.light}>
