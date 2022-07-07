@@ -90,8 +90,8 @@ export const booksSlice = createSlice({
       state.bookList = newBookList;
     },
     setActiveBook(state, action: PayloadAction<IBook>) {
-      const id = action.payload;
-      state.activeBook = id;
+      const book = action.payload;
+      state.activeBook = book;
     },
     updateActiveBookPage(state, action: PayloadAction<number>) {
       const updatedBook = { ...state.activeBook, currentPage: action.payload };

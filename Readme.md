@@ -2,8 +2,6 @@
 -prevent sideways view
 -activebook switch fix
 
---small tasks, improve zoom to not bug - scale variable?
-
 -make header title component => wrappaa ui kitten fontin siihen
 
 FIXES
@@ -250,3 +248,4 @@ color: BookMarkColor
 -book name line / container max length - in reader and list (50% done)
 -improve menu list a little - make border gray
 ---also make zoom in the beginning zoom the
+--small tasks, improve zoom to not bug - scale variable?
