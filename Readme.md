@@ -1,11 +1,11 @@
 <h2>Roadmap</h2>
--prevent sideways view
 -activebook switch fix
 
 -make header title component => wrappaa ui kitten fontin siihen
 
 FIXES
--make pdf view full screen - strech? / zoom in a bit? (make optional)
+-make library ad position absolute and bottom
+-- so looks maybe a tiny bit better
 
 73. Consent
     -add concent asking from the docx
@@ -249,3 +249,5 @@ color: BookMarkColor
 -improve menu list a little - make border gray
 ---also make zoom in the beginning zoom the
 --small tasks, improve zoom to not bug - scale variable?
+-make pdf view full screen - strech? / zoom in a bit? (make optional)
+-prevent sideways view
