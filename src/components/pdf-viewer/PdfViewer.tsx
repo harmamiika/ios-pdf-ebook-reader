@@ -73,6 +73,9 @@ export default function PdfViewer() {
     let distance = calcDistance(x1, y1, x2, y2);
     let center = calcCenter(x1, y1, x2, y2);
 
+    console.log(zoomState.zoom, 'zoom');
+    console.log(zoomState.initialZoom, 'initial');
+
     if (!zoomState.isZooming) {
       const newZoomState = {
         ...zoomState,
@@ -86,6 +89,7 @@ export default function PdfViewer() {
       setZoomState(newZoomState);
     } else {
       let touchZoom = distance / zoomState.initialDistance;
+      console.log(zoomState.initialDistance, 'initial');
       let zoom =
         touchZoom * zoomState.initialZoom > zoomState.minZoom
           ? touchZoom * zoomState.initialZoom
@@ -129,8 +133,6 @@ export default function PdfViewer() {
         onPanResponderGrant: (evt, gestureState) => {},
         onPanResponderMove: (event, gestureState) => {
           const touches = event.nativeEvent.touches;
-
-          console.log('start');
           // double tap
 
           if (touches.length === 1) {

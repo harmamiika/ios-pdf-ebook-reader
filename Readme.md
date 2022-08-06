@@ -7,6 +7,8 @@ FIXES
 -make library ad position absolute and bottom
 -- so looks maybe a tiny bit better
 
+-react native pdf/image reference (filecopy uri) gets destroyed on update
+
 73. Consent
     -add concent asking from the docx
     -figure out how to detect location

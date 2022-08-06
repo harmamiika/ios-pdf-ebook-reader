@@ -24,8 +24,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // backgroundColor: 'blue',
-    display: 'flex',
-    alignContent: 'flex-end',
+    // display: 'flex',
+    // alignContent: 'flex-end',
   },
   scrollView: {
     width: screenWidth,

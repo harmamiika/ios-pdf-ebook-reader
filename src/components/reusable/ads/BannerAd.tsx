@@ -20,6 +20,8 @@ const s = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     alignContent: 'center',
+    // position: 'absolute',
+    // bottom: 0,
     // opacity: 0,
   },
 });
