@@ -33,10 +33,14 @@ export interface IBookmark {
 export interface IFile {
   name: string;
   fileCopyUri: string;
+  uri: string;
+  size: number;
+  type: string;
 }
 
 export interface IThumbnail {
   uri: string | undefined;
   width: number;
   height: number;
+  originalUri?: string | undefined;
 }

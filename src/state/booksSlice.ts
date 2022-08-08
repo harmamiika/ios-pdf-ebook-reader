@@ -1,8 +1,8 @@
-import { RootState } from './store';
-import { createThumbnail } from './../utils/createThumbnail';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
+import { DocumentPickerResponse } from 'react-native-document-picker';
 import uuid from 'react-native-uuid';
+import { createAppUri, PDFFileCopyUriSearchString } from '../utils/uri';
 import {
   IBook,
   IBookmark,
@@ -10,16 +10,22 @@ import {
   IFile,
   IThumbnail,
 } from './../interfaces';
-import { DocumentPickerResponse } from 'react-native-document-picker';
+import { createThumbnail } from './../utils/createThumbnail';
 
 // Book data model
 const createBook = (file: IFile, thumbnail?: IThumbnail): IBook => ({
   id: uuid.v4().toString(),
   name: file.name.replace(/\.[^/.]+$/, ''),
-  file,
-  uri: file.fileCopyUri,
+  uri: createAppUri(file.fileCopyUri, PDFFileCopyUriSearchString),
 
-  thumbnail: thumbnail || { uri: undefined, width: 0, height: 0 },
+  thumbnail: thumbnail || {
+    uri: undefined,
+    width: 0,
+    height: 0,
+  },
+
+  file,
+
   // get pdf page count somehow
   totalPages: undefined,
   currentPage: 1,

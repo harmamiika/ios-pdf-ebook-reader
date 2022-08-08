@@ -185,7 +185,7 @@ export default function PdfViewer() {
               singlePage={true}
               enableAnnotationRendering={true}
               enablePaging={true}
-              source={{ uri: activeBook?.uri }}
+              source={{ uri: activeBook?.file.fileCopyUri }}
               style={styles.pdf}
               ref={(pdf: any) => {
                 // @ts-ignore

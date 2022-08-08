@@ -9,6 +9,8 @@ interface ThumbnailImageProps {
 
 // todo: backup image
 
+// /tmp/com.app.librarian-Inbox/Ticket-Wien-Budapest-3022097197.pdf
+
 export default function ThumbnailImage({ book }: ThumbnailImageProps) {
   // console.log(book.thumbnail, 'humb');
 
@@ -20,17 +22,28 @@ export default function ThumbnailImage({ book }: ThumbnailImageProps) {
     );
   }
 
+  // FOR WORKING STORED FILES - JUST USE TILDE AND CUT THE FILEPATH!!
+
+  const uri = book.thumbnail.uri;
+  const searchString = '/Library/Caches/';
+  const indexOf = uri.indexOf(searchString);
+  const uriSlice = uri.slice(indexOf);
+  const returnUri = '~' + uriSlice;
+
   return (
     <View style={styles.container}>
       <Image
         source={{
-          uri: book.thumbnail.uri,
+          uri: returnUri,
+          // uri: book.thumbnail.uri,
         }}
         style={styles.image}
       />
     </View>
   );
 }
+
+// '~/Library/Caches/Ticket-Wien-Budapest-3022097197-pdf-thumbnail-0-6919282611132667011.jpg'
 
 const styles = StyleSheet.create({
   image: {

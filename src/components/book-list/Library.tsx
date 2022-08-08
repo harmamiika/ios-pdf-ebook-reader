@@ -8,6 +8,8 @@ import BookListItem, { screenHeight, screenWidth } from './BookListItem';
 export default function Library() {
   const { bookList } = useSelector((state: RootState) => state.books);
 
+  console.log(bookList[1], 'book1');
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
