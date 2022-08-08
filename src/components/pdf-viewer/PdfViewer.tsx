@@ -33,13 +33,15 @@ export default function PdfViewer() {
     distance: undefined,
   });
 
+  // could save zoom in book
+
   const [zoomState, setZoomState] = useState<any>({
-    zoom: null,
-    minZoom: null,
+    zoom: 1,
+    minZoom: 0.5,
     isZooming: false,
     initialDistance: null,
     initialX: null,
-    initalY: null,
+    initialY: null,
     initialZoom: 1,
   });
 
@@ -73,10 +75,9 @@ export default function PdfViewer() {
     let distance = calcDistance(x1, y1, x2, y2);
     let center = calcCenter(x1, y1, x2, y2);
 
-    console.log(zoomState.zoom, 'zoom');
-    console.log(zoomState.initialZoom, 'initial');
-
     if (!zoomState.isZooming) {
+      console.log(zoomState, 'zoomState');
+
       const newZoomState = {
         ...zoomState,
         isZooming: true,
@@ -89,11 +90,16 @@ export default function PdfViewer() {
       setZoomState(newZoomState);
     } else {
       let touchZoom = distance / zoomState.initialDistance;
-      console.log(zoomState.initialDistance, 'initial');
+      console.log(
+        zoomState.initialDistance,
+        'initial distance in activated zoom',
+      );
       let zoom =
         touchZoom * zoomState.initialZoom > zoomState.minZoom
           ? touchZoom * zoomState.initialZoom
           : zoomState.minZoom;
+
+      console.log(zoom, 'zooom');
       setZoomState({
         ...zoomState,
         zoom: zoom,
@@ -160,6 +166,7 @@ export default function PdfViewer() {
             distance: undefined,
           });
           console.log('release');
+          // save zoom in book state
         },
         // hmmmm
         onPanResponderTerminationRequest: (evt, gestureState) => true,
@@ -203,6 +210,12 @@ export default function PdfViewer() {
   );
 }
 // add login for first open
+
+// zoomstate bug notes:
+// checkaa miten mounttaa
+// miten säilyy kirjojen välillä
+
+// mitä pinch prosessissa tapahtuu => console.logit
 
 const styles = StyleSheet.create({
   container: {

@@ -1,4 +1,14 @@
 <h2>Roadmap</h2>
+- If filepath is invalid
+  --Disable activating the book
+  --in picture show a guide to reload book
+  ---reload book => if book filename is same as picked file => replace
+  -in book viewer show directions to reload a book
+
+-save book in zoom state
+-click on middle on pdf viewer => switch to full screen
+-- full screen mode => google
+
 -activebook switch fix
 
 -make header title component => wrappaa ui kitten fontin siihen
