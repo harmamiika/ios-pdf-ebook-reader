@@ -6,6 +6,9 @@ export interface IBook {
   // MINIMIZE THIS
   uri: string;
 
+  copyFileUri: string;
+  copyFile: {};
+
   totalPages: number | undefined;
   currentPage: number;
 

@@ -21,6 +21,7 @@
     "react-native": "0.68.2",
     "react-native-blob-util": "^0.16.0",
     "react-native-document-picker": "^8.1.0",
+    "react-native-fs": "^2.20.0",
     "react-native-google-mobile-ads": "^6.3.0",
     "react-native-pdf": "^6.5.0",
     "react-native-pdf-thumbnail": "^1.0.2",

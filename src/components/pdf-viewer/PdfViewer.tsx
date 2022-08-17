@@ -1,6 +1,7 @@
 import { TouchableWithoutFeedback } from '@ui-kitten/components/devsupport';
 import React, { useMemo, useState } from 'react';
 import { Dimensions, PanResponder, StyleSheet, View } from 'react-native';
+import { readdir, readDir } from 'react-native-fs';
 import Pdf from 'react-native-pdf';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../state';
@@ -24,7 +25,7 @@ function calcCenter(x1: number, y1: number, x2: number, y2: number) {
   };
 }
 
-export default function PdfViewer() {
+const PdfViewer = () => {
   const dispatch = useDispatch();
   const { activeBook } = useSelector((state: RootState) => state.books);
 
@@ -127,6 +128,10 @@ export default function PdfViewer() {
     }
   };
 
+  (async function adsread() {
+    console.log(await readdir('~./').catch(e => console.log(e, 'EE')));
+  })();
+
   const panResponder = useMemo(
     () =>
       PanResponder.create({
@@ -185,7 +190,10 @@ export default function PdfViewer() {
               singlePage={true}
               enableAnnotationRendering={true}
               enablePaging={true}
-              source={{ uri: activeBook.uri }}
+              source={{
+                uri: activeBook.uri,
+                // activeBook.file.fileCopyUri
+              }}
               style={styles.pdf}
               ref={(pdf: any) => {
                 // @ts-ignore
@@ -208,7 +216,9 @@ export default function PdfViewer() {
       )}
     </View>
   );
-}
+};
+
+export default PdfViewer;
 // add login for first open
 
 // zoomstate bug notes:
