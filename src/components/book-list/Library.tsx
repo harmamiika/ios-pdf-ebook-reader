@@ -8,7 +8,13 @@ import BookListItem, { screenHeight, screenWidth } from './BookListItem';
 export default function Library() {
   const { bookList } = useSelector((state: RootState) => state.books);
 
-  console.log(bookList[1], 'book1');
+  for (let book of bookList) {
+    console.log(book.uri, 'APP uri');
+    // console.log(book.file.fileCopyUri, 'file copy uri');
+    // console.log(book.file.uri, 'file uri');
+  }
+
+  console.log(bookList, 'book List');
 
   return (
     <SafeAreaView style={styles.container}>

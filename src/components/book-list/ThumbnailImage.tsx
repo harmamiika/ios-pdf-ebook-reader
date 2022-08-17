@@ -34,8 +34,8 @@ export default function ThumbnailImage({ book }: ThumbnailImageProps) {
     <View style={styles.container}>
       <Image
         source={{
-          uri: returnUri,
-          // uri: book.thumbnail.uri,
+          // uri: returnUri,
+          uri: book.thumbnail.uri,
         }}
         style={styles.image}
       />

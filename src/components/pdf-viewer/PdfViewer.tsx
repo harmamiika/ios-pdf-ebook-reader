@@ -185,7 +185,7 @@ export default function PdfViewer() {
               singlePage={true}
               enableAnnotationRendering={true}
               enablePaging={true}
-              source={{ uri: activeBook?.file.fileCopyUri }}
+              source={{ uri: activeBook.uri }}
               style={styles.pdf}
               ref={(pdf: any) => {
                 // @ts-ignore
@@ -216,6 +216,12 @@ export default function PdfViewer() {
 // miten säilyy kirjojen välillä
 
 // mitä pinch prosessissa tapahtuu => console.logit
+
+// VAIHTOEHDOT
+
+// tsekkaa pathit läpi - filecopy uri - normi uri
+
+// savee file erikseen librarylla ja readaa tallennettu copy
 
 const styles = StyleSheet.create({
   container: {

@@ -1,4 +1,5 @@
-export const PDFFileCopyUriSearchString = '/tmp/com.app.librarian-Inbox/';
+// export const PDFFileCopyUriSearchString = '/tmp/com.app.librarian-Inbox/';
+export const PDFFileCopyUriSearchString = '/Documents/';
 export const thumbnailUriSearchString = '/Library/Caches/';
 
 export function createAppUri(originalUri: string, searchString: string) {
