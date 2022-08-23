@@ -73,6 +73,7 @@ const Application = () => {
                 : 'Book',
           })}
           // headerRight: LibraryIcon,
+          // add key // see if something changes with reset
         />
         <Screen
           name="Library"

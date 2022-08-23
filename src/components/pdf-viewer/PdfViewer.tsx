@@ -1,7 +1,14 @@
 import { TouchableWithoutFeedback } from '@ui-kitten/components/devsupport';
 import React, { useMemo, useState } from 'react';
 import { Dimensions, PanResponder, StyleSheet, View } from 'react-native';
-import { readdir, readDir } from 'react-native-fs';
+import {
+  CachesDirectoryPath,
+  DocumentDirectoryPath,
+  exists,
+  MainBundlePath,
+  readdir,
+  readDir,
+} from 'react-native-fs';
 import Pdf from 'react-native-pdf';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../state';
@@ -129,7 +136,27 @@ const PdfViewer = () => {
   };
 
   (async function adsread() {
-    console.log(await readdir('~./').catch(e => console.log(e, 'EE')));
+    console.log(
+      await readdir(DocumentDirectoryPath).catch(e => console.log(e, 'EE')),
+      'DOCUMENT DIR STUFF',
+    );
+    console.log(
+      await readdir(DocumentDirectoryPath + '/PDFS').catch(e =>
+        console.log(e, 'EE'),
+      ),
+      'PDFS STUFF',
+    );
+    console.log('own copy', await exists(activeBook?.copyFileUri!));
+    console.log('own uri', await exists(activeBook?.uri!));
+    console.log('og filecopyuri', await exists(activeBook?.file.fileCopyUri!));
+    console.log('own copy uri', activeBook?.copyFileUri);
+    console.log('item uri', activeBook?.uri);
+    console.log('og filecopyuri', activeBook?.file.fileCopyUri);
+
+    console.log(
+      `file://${DocumentDirectoryPath}/${activeBook?.name}`,
+      'DYNAMIC URI',
+    );
   })();
 
   const panResponder = useMemo(
@@ -181,6 +208,11 @@ const PdfViewer = () => {
     [zoomState, swipeState],
   );
 
+  console.log(
+    `file://${CachesDirectoryPath + activeBook?.uri}`,
+    'CURRENT ACTIVE URI',
+  );
+
   return (
     <View style={styles.container}>
       {activeBook ? (
@@ -191,8 +223,8 @@ const PdfViewer = () => {
               enableAnnotationRendering={true}
               enablePaging={true}
               source={{
-                uri: activeBook.uri,
-                // activeBook.file.fileCopyUri
+                // uri: `${CachesDirectoryPath + activeBook?.uri}`,
+                uri: activeBook.file.fileCopyUri,
               }}
               style={styles.pdf}
               ref={(pdf: any) => {
@@ -246,3 +278,16 @@ const styles = StyleSheet.create({
     height: Dimensions.get('window').height,
   },
 });
+
+// TODOS:
+
+// - ongelma, paska sanoo että sen niminen file on jo
+
+// ratkaisut:
+
+// - tallenna copy cacheen, ei libraryyn, lue cachea
+// - clearaa muisti, jollain fs komennolla
+// --riskit ?
+
+// solutions - try to copy normal uri ? maybe cant copy a copy?
+// no idea man

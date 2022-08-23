@@ -1,7 +1,14 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
 import { DocumentPickerResponse } from 'react-native-document-picker';
-import { copyFile, moveFile } from 'react-native-fs';
+import {
+  CachesDirectoryPath,
+  copyFile,
+  DocumentDirectoryPath,
+  FileOptions,
+  mkdir,
+  moveFile,
+} from 'react-native-fs';
 import uuid from 'react-native-uuid';
 import { createAppUri, PDFFileCopyUriSearchString } from '../utils/uri';
 import {
@@ -12,40 +19,29 @@ import {
   IThumbnail,
 } from './../interfaces';
 import { createThumbnail } from './../utils/createThumbnail';
+import { createBook } from './createBook';
+const meme: FileOptions = {};
 
 const createPdfCopy = async (file: IFile) => {
-  const res = await copyFile(file.fileCopyUri, '~/Pdfs/').catch(e => 'err');
+  console.log('CREATING');
+  await mkdir(DocumentDirectoryPath + '/PDFS').catch(e =>
+    console.log(e, 'DIR CREATE ERR'),
+  );
+
+  const res = await copyFile(
+    file.fileCopyUri,
+    // 'file://' +
+    CachesDirectoryPath + '/PDFS',
+  ).catch(e => console.log('errRORO IN CREATE', e));
   console.log(res, 'IT SAVED');
 };
 
-// Book data model
-const createBook = (file: IFile, thumbnail?: IThumbnail): IBook => ({
-  id: uuid.v4().toString(),
-  name: file.name.replace(/\.[^/.]+$/, ''),
-  uri: createAppUri(file.fileCopyUri, PDFFileCopyUriSearchString),
+// etsi downloadsfolderin hex koodi
+// tai sitten createe directory ja lue sieltä
 
-  copyFileUri: `~/Pdfs/${file.name}`,
-  copyFile: {},
-
-  thumbnail: thumbnail || {
-    uri: undefined,
-    width: 0,
-    height: 0,
-  },
-
-  file,
-
-  // get pdf page count somehow
-  totalPages: undefined,
-  currentPage: 1,
-
-  startDate: new Date().toString(),
-  finishDate: undefined,
-  lastPdfMountTime: undefined,
-
-  bookmarks: [],
-  categories: [],
-});
+export const removeFileExtension = (fileName: string) => {
+  return fileName.replace(/\.[^/.]+$/, '');
+};
 
 const createBookmark = (
   bookmark: IBookmark,

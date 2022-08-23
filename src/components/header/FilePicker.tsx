@@ -16,7 +16,8 @@ export const FilePicker = () => {
       const res = await DocumentPicker.pick({
         type: [DocumentPicker.types.pdf],
         // DocumentPicker.types.allFiles
-        copyTo: 'documentDirectory',
+        copyTo: 'cachesDirectory',
+        // mode: 'import'
       });
       //Printing the log realted to the file
       console.log('res : ' + JSON.stringify(res));
