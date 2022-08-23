@@ -1,4 +1,8 @@
-<h2>Roadmap</h2>
+blob-struggle-branch is the most up to date branch, you can use it
+
+-npm run ios
+
+<!-- <h2>Roadmap</h2>
 - If filepath is invalid
   --Disable activating the book
   --in picture show a guide to reload book
@@ -256,7 +260,7 @@ color: BookMarkColor
 --prevent duplicates
 -icon padding
 -Make booklist item header a bit bigger
---ota vaan joku random filu ja koita saada appi testipilottiin  
+--ota vaan joku random filu ja koita saada appi testipilottiin
  --Learn how to make logo - from udemy / yt / skillshare
 --76. Pics and app videos 74. Use testflight
 -book name line / container max length - in reader and list (50% done)
@@ -264,4 +268,4 @@ color: BookMarkColor
 ---also make zoom in the beginning zoom the
 --small tasks, improve zoom to not bug - scale variable?
 -make pdf view full screen - strech? / zoom in a bit? (make optional)
--prevent sideways view
+-prevent sideways view -->
