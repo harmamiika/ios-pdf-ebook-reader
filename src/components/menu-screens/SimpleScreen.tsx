@@ -8,7 +8,7 @@ interface SimpleScreenProps {
   header: string;
 }
 
-export default function ({
+export default function SimpleScreen({
   header,
   children,
 }: React.PropsWithChildren<SimpleScreenProps>) {
