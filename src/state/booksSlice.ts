@@ -1,61 +1,39 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
 import { DocumentPickerResponse } from 'react-native-document-picker';
-import RNFS, {
-  CachesDirectoryPath,
-  copyFile,
-  DocumentDirectoryPath,
-  ExternalDirectoryPath,
-  ExternalStorageDirectoryPath,
-  FileOptions,
-  LibraryDirectoryPath,
-  mkdir,
-  moveFile,
-} from 'react-native-fs';
+import { copyFile, LibraryDirectoryPath, unlink } from 'react-native-fs';
 import uuid from 'react-native-uuid';
-import { createAppUri, PDFFileCopyUriSearchString } from '../utils/uri';
-import {
-  IBook,
-  IBookmark,
-  ICategory,
-  IFile,
-  IThumbnail,
-} from './../interfaces';
-import { createThumbnail } from './../utils/createThumbnail';
+import { createThumbnail, removeThumbnail } from '../utils/thumbnails';
+import { IBook, IBookmark, ICategory, IFile } from './../interfaces';
 import { createBook } from './createBook';
-const meme: FileOptions = {};
-
-const createPdfCopy = async (file: IFile) => {
-  console.log('CREATING');
-  await mkdir(DocumentDirectoryPath + '/PDFS').catch(e =>
-    console.log(e, 'DIR CREATE ERR'),
-  );
-
-  const res = await copyFile(
-    file.fileCopyUri,
-    // 'file://' +
-    CachesDirectoryPath + '/PDFS',
-  ).catch(e => console.log('errRORO IN CREATE', e));
-  console.log(res, 'IT SAVED');
-};
-
-// documentDirectoryPath ? libraryDirectoryPath?
 
 const savePdf = async (file: IFile) => {
-  // console.log(RNFS.getAllExternalFilesDirs(), 'ALL PATHS');
+  // todo: add check if there is space on device
   const { name, fileCopyUri } = file;
   console.log(name, 'name');
   const newPath = `${LibraryDirectoryPath}/${name}`;
+
   console.log(newPath, 'newPath');
-  await copyFile(fileCopyUri, newPath).catch(e => console.log(e, 'err öäöäöä'));
+  try {
+    await copyFile(fileCopyUri, newPath);
+    return newPath;
+  } catch (e) {
+    console.log(e, 'err');
+    return undefined;
+  }
 };
 
-// etsi downloadsfolderin hex koodi
-// tai sitten createe directory ja lue sieltä
-
-export const removeFileExtension = (fileName: string) => {
-  return fileName.replace(/\.[^/.]+$/, '');
+const deletePdfCopy = async (book: IBook) => {
+  const { copyFileUri } = book;
+  try {
+    await unlink(copyFileUri);
+  } catch (e) {
+    console.log(e, 'err');
+  }
 };
+
+export const removeFileExtension = (fileName: string) =>
+  fileName.replace(/\.[^/.]+$/, '');
 
 const createBookmark = (
   bookmark: IBookmark,
@@ -106,17 +84,23 @@ export const addNewBook = createAsyncThunk(
   },
 );
 
+export const deleteBook = createAsyncThunk(
+  'books/removeBook',
+  async (book: IBook) => {
+    if (book.thumbnail.uri) await removeThumbnail(book.thumbnail.uri);
+    await deletePdfCopy(book);
+
+    // if book is active, set active book to undefined
+    // get active book from redux state
+    return book;
+  },
+);
+
 export const booksSlice = createSlice({
   name: 'books',
   initialState,
   reducers: {
     // BOOKS
-    deleteBook(state, action: PayloadAction<IBook>) {
-      const newBookList = state.bookList.filter(
-        b => b.id !== action.payload.id,
-      );
-      state.bookList = newBookList;
-    },
     setActiveBook(state, action: PayloadAction<IBook>) {
       const book = action.payload;
       state.activeBook = book;
@@ -167,13 +151,22 @@ export const booksSlice = createSlice({
       // if first book, make automatically active
       if (bookList.length === 1) setActiveBook(bookList[0]);
     });
+    builder.addCase(deleteBook.fulfilled, (state, action) => {
+      const newBookList = state.bookList.filter(
+        b => b.id !== action.payload.id,
+      );
+      state.bookList = newBookList;
+      // if active book is deleted, set active book to undefined
+      if (state.activeBook?.id === action.payload.id) {
+        state.activeBook = undefined;
+      }
+    });
   },
 });
 
 export const {
   // addBookToList,
   setActiveBook,
-  deleteBook,
   updateActiveBookPage,
   addBookmark,
   deleteBookmark,

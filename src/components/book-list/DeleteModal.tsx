@@ -68,7 +68,7 @@ export default function DeleteModal({
         )}>
         <View>
           <MiikaText text={`Remove ${book?.name} from list?`} />
-          <MiikaText text="(Does not remove the file from your phone)" />
+          <MiikaText text="(This does not remove the file from your phone)" />
         </View>
       </Card>
     </Modal>

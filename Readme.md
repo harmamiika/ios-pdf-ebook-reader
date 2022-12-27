@@ -3,7 +3,7 @@ new-hope is the most up to date branch, you can use it
 
 <!-- <h2>Roadmap</h2>
   -reload book => if book filename is same as picked file => replace
-  -in book viewer show directions to reload a book
+  -add delete to delete fiel reference
 
 -save book in zoom state
 -make header title component => wrappaa ui kitten fontin siihen
@@ -256,7 +256,8 @@ color: BookMarkColor
 --small tasks, improve zoom to not bug - scale variable?
 -make pdf view full screen - strech? / zoom in a bit? (make optional)
 -prevent sideways view -->
-
+<!--
 - If filepath is invalid
   --Disable activating the book
   --in picture show a guide to reload book
+  -in book viewer show directions to reload a book -->

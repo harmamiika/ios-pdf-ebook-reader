@@ -1,4 +1,8 @@
-import { CachesDirectoryPath, DocumentDirectoryPath } from 'react-native-fs';
+import {
+  CachesDirectoryPath,
+  DocumentDirectoryPath,
+  LibraryDirectoryPath,
+} from 'react-native-fs';
 import uuid from 'react-native-uuid';
 import { IBook, IFile, IThumbnail } from '../interfaces';
 import { removeFileExtension } from './booksSlice';
@@ -8,9 +12,9 @@ export const createBook = (file: IFile, thumbnail?: IThumbnail): IBook => ({
   id: uuid.v4().toString(),
   name: removeFileExtension(file.name),
   // uri: `file://${DocumentDirectoryPath}/CC8E13F0-CD04-4D0F-9109-1EA51AEC56C8/${file.name}`,
-  uri: `/PDFS/${file.name}`,
+  uri: `${LibraryDirectoryPath}/${file.name}`,
 
-  copyFileUri: `file://${CachesDirectoryPath}/PDFS/${file.name}`,
+  copyFileUri: `${LibraryDirectoryPath}/${file.name}`,
   copyFile: {},
 
   thumbnail: thumbnail || {

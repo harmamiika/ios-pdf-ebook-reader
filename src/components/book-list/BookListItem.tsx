@@ -1,4 +1,4 @@
-import { Divider, Text } from '@ui-kitten/components';
+import { Divider } from '@ui-kitten/components';
 import React from 'react';
 import { Dimensions, StyleSheet, TouchableHighlight, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
