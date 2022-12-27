@@ -1,11 +1,14 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
 import { DocumentPickerResponse } from 'react-native-document-picker';
-import {
+import RNFS, {
   CachesDirectoryPath,
   copyFile,
   DocumentDirectoryPath,
+  ExternalDirectoryPath,
+  ExternalStorageDirectoryPath,
   FileOptions,
+  LibraryDirectoryPath,
   mkdir,
   moveFile,
 } from 'react-native-fs';
@@ -34,6 +37,18 @@ const createPdfCopy = async (file: IFile) => {
     CachesDirectoryPath + '/PDFS',
   ).catch(e => console.log('errRORO IN CREATE', e));
   console.log(res, 'IT SAVED');
+};
+
+// documentDirectoryPath ? libraryDirectoryPath?
+
+const savePdf = async (file: IFile) => {
+  // console.log(RNFS.getAllExternalFilesDirs(), 'ALL PATHS');
+
+  const { name, fileCopyUri } = file;
+  console.log(name, 'name');
+  const newPath = `${LibraryDirectoryPath}/${name}`;
+  console.log(newPath, 'newPath');
+  await copyFile(fileCopyUri, newPath).catch(e => console.log(e, 'err öäöäöä'));
 };
 
 // etsi downloadsfolderin hex koodi
@@ -85,7 +100,9 @@ export const addNewBook = createAsyncThunk(
     if (file.fileCopyUri) {
       thumbnail = await createThumbnail(file.fileCopyUri);
     }
-    await createPdfCopy(file as IFile);
+    // await createPdfCopy(file as IFile);
+    await savePdf(file as IFile);
+
     return { file, thumbnail };
   },
 );

@@ -5,6 +5,9 @@ import {
   CachesDirectoryPath,
   DocumentDirectoryPath,
   exists,
+  ExternalDirectoryPath,
+  ExternalStorageDirectoryPath,
+  LibraryDirectoryPath,
   MainBundlePath,
   readdir,
   readDir,
@@ -135,29 +138,29 @@ const PdfViewer = () => {
     }
   };
 
-  (async function adsread() {
-    console.log(
-      await readdir(DocumentDirectoryPath).catch(e => console.log(e, 'EE')),
-      'DOCUMENT DIR STUFF',
-    );
-    console.log(
-      await readdir(DocumentDirectoryPath + '/PDFS').catch(e =>
-        console.log(e, 'EE'),
-      ),
-      'PDFS STUFF',
-    );
-    console.log('own copy', await exists(activeBook?.copyFileUri!));
-    console.log('own uri', await exists(activeBook?.uri!));
-    console.log('og filecopyuri', await exists(activeBook?.file.fileCopyUri!));
-    console.log('own copy uri', activeBook?.copyFileUri);
-    console.log('item uri', activeBook?.uri);
-    console.log('og filecopyuri', activeBook?.file.fileCopyUri);
+  // (async function adsread() {
+  //   console.log(
+  //     await readdir(DocumentDirectoryPath).catch(e => console.log(e, 'EE')),
+  //     'DOCUMENT DIR STUFF',
+  //   );
+  //   console.log(
+  //     await readdir(DocumentDirectoryPath + '/PDFS').catch(e =>
+  //       console.log(e, 'EE'),
+  //     ),
+  //     'PDFS STUFF',
+  //   );
+  //   console.log('own copy', await exists(activeBook?.copyFileUri!));
+  //   console.log('own uri', await exists(activeBook?.uri!));
+  //   console.log('og filecopyuri', await exists(activeBook?.file.fileCopyUri!));
+  //   console.log('own copy uri', activeBook?.copyFileUri);
+  //   console.log('item uri', activeBook?.uri);
+  //   console.log('og filecopyuri', activeBook?.file.fileCopyUri);
 
-    console.log(
-      `file://${DocumentDirectoryPath}/${activeBook?.name}`,
-      'DYNAMIC URI',
-    );
-  })();
+  //   console.log(
+  //     `file://${DocumentDirectoryPath}/${activeBook?.name}`,
+  //     'DYNAMIC URI',
+  //   );
+  // })();
 
   const panResponder = useMemo(
     () =>
@@ -223,8 +226,8 @@ const PdfViewer = () => {
               enableAnnotationRendering={true}
               enablePaging={true}
               source={{
-                // uri: `${CachesDirectoryPath + activeBook?.uri}`,
-                uri: activeBook.file.fileCopyUri,
+                uri: `${LibraryDirectoryPath}/${activeBook.file.name}`,
+                // uri: activeBook.file.fileCopyUri,
               }}
               style={styles.pdf}
               ref={(pdf: any) => {

@@ -18,7 +18,7 @@ export default function BookListItem({ book }: BookListItemProps) {
   const { activeBook } = useSelector((state: RootState) => state.books);
 
   const onItemPress = (event: any) => {
-    console.log(event, 'event');
+    // console.log(event, 'event');
     dispatch(setActiveBook(book));
   };
 
