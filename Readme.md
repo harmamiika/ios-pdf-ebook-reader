@@ -1,22 +1,12 @@
-blob-struggle-branch is the most up to date branch, you can use it
-
+new-hope is the most up to date branch, you can use it
 -npm run ios
 
 <!-- <h2>Roadmap</h2>
-- If filepath is invalid
-  --Disable activating the book
-  --in picture show a guide to reload book
-  ---reload book => if book filename is same as picked file => replace
+  -reload book => if book filename is same as picked file => replace
   -in book viewer show directions to reload a book
 
 -save book in zoom state
--activebook switch fix
-
 -make header title component => wrappaa ui kitten fontin siihen
-
-FIXES
--make library ad position absolute and bottom
--- so looks maybe a tiny bit better
 
 73. Consent
     -add concent asking from the docx
@@ -78,6 +68,10 @@ lisää adsien aloitukseen timeri - 7 pv?
 --wrap icons to ui kitten
 
 --file browseriin pdf fileihin -- avaa sovelluksessa
+
+FIXES
+-make library ad position absolute and bottom
+-- so looks maybe a tiny bit better
 
 --Single book view
 -Big picture
@@ -262,3 +256,7 @@ color: BookMarkColor
 --small tasks, improve zoom to not bug - scale variable?
 -make pdf view full screen - strech? / zoom in a bit? (make optional)
 -prevent sideways view -->
+
+- If filepath is invalid
+  --Disable activating the book
+  --in picture show a guide to reload book

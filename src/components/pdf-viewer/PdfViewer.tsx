@@ -1,5 +1,5 @@
 import { TouchableWithoutFeedback } from '@ui-kitten/components/devsupport';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   Dimensions,
   PanResponder,
@@ -7,22 +7,14 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import {
-  CachesDirectoryPath,
-  DocumentDirectoryPath,
-  exists,
-  ExternalDirectoryPath,
-  ExternalStorageDirectoryPath,
-  LibraryDirectoryPath,
-  MainBundlePath,
-  readdir,
-  readDir,
-} from 'react-native-fs';
+import { exists, LibraryDirectoryPath } from 'react-native-fs';
 import Pdf from 'react-native-pdf';
 import { useDispatch, useSelector } from 'react-redux';
+import { IBook } from '../../interfaces';
 import { RootState } from '../../state';
 import { setActiveBook, updateActiveBookPage } from '../../state/booksSlice';
 import { toggleFullScreen } from '../../state/pdfViewerSlice';
+import SimpleScreen from '../menu-screens/SimpleScreen';
 import { MiikaText } from '../reusable/MiikaText';
 
 function calcDistance(x1: number, y1: number, x2: number, y2: number) {
@@ -42,29 +34,35 @@ function calcCenter(x1: number, y1: number, x2: number, y2: number) {
   };
 }
 
+const initialZoom = {
+  zoom: 1,
+  minZoom: 0.5,
+  isZooming: false,
+  initialDistance: null,
+  initialX: null,
+  initialY: null,
+  initialZoom: 1,
+};
+
 const PdfViewer = () => {
   const dispatch = useDispatch();
   const { activeBook } = useSelector((state: RootState) => state.books);
   const pdfViewerIsFullScreen = useSelector(
     (state: RootState) => state.pdfViewer.isFullScreen,
   );
-
+  const [prevBook, setPrevBook] = useState<IBook | undefined>(activeBook);
+  const [zoomState, setZoomState] = useState<any>(initialZoom);
   const [swipeState, setSwipeState] = useState<any>({
     center: undefined,
     distance: undefined,
   });
 
-  // could save zoom in book
-
-  const [zoomState, setZoomState] = useState<any>({
-    zoom: 1,
-    minZoom: 0.5,
-    isZooming: false,
-    initialDistance: null,
-    initialX: null,
-    initialY: null,
-    initialZoom: 1,
-  });
+  useEffect(() => {
+    if (prevBook?.id !== activeBook?.id) {
+      setPrevBook(activeBook);
+      setZoomState(initialZoom);
+    }
+  }, [activeBook]);
 
   const onPageChanged = (page: number, numberOfPages: number) => {
     console.log(`Current page: ${page}`);
@@ -152,30 +150,6 @@ const PdfViewer = () => {
     }
   };
 
-  // (async function adsread() {
-  //   console.log(
-  //     await readdir(DocumentDirectoryPath).catch(e => console.log(e, 'EE')),
-  //     'DOCUMENT DIR STUFF',
-  //   );
-  //   console.log(
-  //     await readdir(DocumentDirectoryPath + '/PDFS').catch(e =>
-  //       console.log(e, 'EE'),
-  //     ),
-  //     'PDFS STUFF',
-  //   );
-  //   console.log('own copy', await exists(activeBook?.copyFileUri!));
-  //   console.log('own uri', await exists(activeBook?.uri!));
-  //   console.log('og filecopyuri', await exists(activeBook?.file.fileCopyUri!));
-  //   console.log('own copy uri', activeBook?.copyFileUri);
-  //   console.log('item uri', activeBook?.uri);
-  //   console.log('og filecopyuri', activeBook?.file.fileCopyUri);
-
-  //   console.log(
-  //     `file://${DocumentDirectoryPath}/${activeBook?.name}`,
-  //     'DYNAMIC URI',
-  //   );
-  // })();
-
   const panResponder = useMemo(
     () =>
       PanResponder.create({
@@ -225,16 +199,57 @@ const PdfViewer = () => {
     [zoomState, swipeState],
   );
 
-  console.log(
-    `file://${CachesDirectoryPath + activeBook?.uri}`,
-    'CURRENT ACTIVE URI',
-  );
+  const [fileFound, setFileFound] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  return (
-    <View style={styles.container}>
-      {pdfViewerIsFullScreen && <StatusBar hidden />}
-      {activeBook ? (
+  useEffect(() => {
+    (async () => {
+      if (activeBook && isLoading) {
+        setIsLoading(true);
+        const fileExists = await exists(
+          `${LibraryDirectoryPath}/${activeBook.file.name}`,
+        );
+        setFileFound(fileExists);
+        setIsLoading(false);
+      }
+    })();
+  }, [activeBook]);
+
+  useEffect(() => {
+    (async () => {
+      if (activeBook) {
+        const fileExists = await exists(
+          `${LibraryDirectoryPath}/${activeBook.file.name}`,
+        );
+        console.log(fileExists, 'FILE EXISTS?');
+      }
+    })();
+  }, [activeBook]);
+
+  const renderMainContent = () => {
+    if (!activeBook)
+      return (
+        <SimpleScreen header="No book selected">
+          <MiikaText text="You can select and add books in library" />
+        </SimpleScreen>
+      );
+    else if (activeBook && isLoading)
+      return (
+        <View>
+          <MiikaText text="Loading..." />
+        </View>
+      );
+    else if (activeBook && !fileFound)
+      return (
+        <SimpleScreen header="File not found">
+          <MiikaText text="You should delete this book in the library, then reselect it." />
+          <MiikaText text="If this does not work, the file can't be read with this app." />
+        </SimpleScreen>
+      );
+    else
+      return (
         <View {...panResponder.panHandlers}>
+          {pdfViewerIsFullScreen && <StatusBar hidden />}
           <TouchableWithoutFeedback onPress={onPdfPress}>
             <Pdf
               singlePage={true}
@@ -258,14 +273,10 @@ const PdfViewer = () => {
             />
           </TouchableWithoutFeedback>
         </View>
-      ) : (
-        <View>
-          <MiikaText text="No book selected" />
-          <MiikaText text="You can select and add books in library" />
-        </View>
-      )}
-    </View>
-  );
+      );
+  };
+
+  return <View style={styles.container}>{renderMainContent()}</View>;
 };
 
 export default PdfViewer;
@@ -274,14 +285,6 @@ export default PdfViewer;
 // zoomstate bug notes:
 // checkaa miten mounttaa
 // miten säilyy kirjojen välillä
-
-// mitä pinch prosessissa tapahtuu => console.logit
-
-// VAIHTOEHDOT
-
-// tsekkaa pathit läpi - filecopy uri - normi uri
-
-// savee file erikseen librarylla ja readaa tallennettu copy
 
 const styles = StyleSheet.create({
   container: {
@@ -296,16 +299,3 @@ const styles = StyleSheet.create({
     height: Dimensions.get('window').height,
   },
 });
-
-// TODOS:
-
-// - ongelma, paska sanoo että sen niminen file on jo
-
-// ratkaisut:
-
-// - tallenna copy cacheen, ei libraryyn, lue cachea
-// - clearaa muisti, jollain fs komennolla
-// --riskit ?
-
-// solutions - try to copy normal uri ? maybe cant copy a copy?
-// no idea man
