@@ -6,10 +6,12 @@ import {
   TestIds,
 } from 'react-native-google-mobile-ads';
 
-export function AdmobBannerAd() {
+export function AdmobBannerAd({ adUnitId }: { adUnitId: string }) {
+  const unitId = __DEV__ ? TestIds.BANNER : adUnitId;
+
   return (
     <View style={s.adContainer}>
-      <BannerAd size={BannerAdSize.BANNER} unitId={TestIds.BANNER} />
+      <BannerAd size={BannerAdSize.BANNER} unitId={unitId} />
     </View>
   );
 }

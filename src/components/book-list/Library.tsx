@@ -32,7 +32,7 @@ export default function Library() {
           <BookListItem book={book} key={book.id} />
         ))}
       </ScrollView>
-      <AdmobBannerAd />
+      <AdmobBannerAd adUnitId="ca-app-pub-8279790179515379/2242175832" />
     </SafeAreaView>
   );
 }
