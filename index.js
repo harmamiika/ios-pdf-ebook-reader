@@ -39,6 +39,7 @@ import Settings from './src/components/menu-screens/Settings';
 import AppInfo from './src/components/menu-screens/AppInfo';
 import UserGuide from './src/components/menu-screens/UserGuide';
 import LibraryRightHeader from './src/components/book-list/LibraryRightHeader';
+import { MiikaText } from './src/components/reusable/MiikaText';
 
 LogBox.ignoreLogs([
   'ViewPropTypes will be removed',
@@ -61,7 +62,7 @@ const Application = () => {
     <NavigationContainer>
       <Navigator>
         <Screen
-          name="PdfViewer"
+          name="Reading view"
           component={PdfViewer}
           options={({ navigation }) => ({
             headerShown: !pdfViewerIsFullScreen,
@@ -69,29 +70,39 @@ const Application = () => {
             headerRight: props => (
               <ReaderRightHeader navigation={navigation} {...props} />
             ),
-            title:
-              activeBookTitle?.length < 29
-                ? `${activeBookTitle}`
-                : activeBookTitle
-                ? `${activeBookTitle?.substring(0, 26)}...`
-                : 'Book',
+            headerTitle: props => (
+              <MiikaText
+                {...props}
+                category="h5"
+                text={
+                  activeBookTitle?.length < 29
+                    ? `${activeBookTitle}`
+                    : activeBookTitle
+                    ? `${activeBookTitle?.substring(0, 26)}...`
+                    : 'Welcome'
+                }
+              />
+            ),
           })}
-          // headerRight: LibraryIcon,
-          // add key // see if something changes with reset
         />
         <Screen
           name="Library"
           component={Library}
           options={({ navigation }) => ({
             headerRight: () => <LibraryRightHeader navigation={navigation} />,
+            headerTitle: props => (
+              <MiikaText {...props} category="h5" text={'Library'} />
+            ),
           })}
         />
         <Screen
           name="Menu"
           component={Menu}
-          // options={{
-          //   headerLeft: LibraryIcon,
-          // }}
+          options={{
+            headerTitle: props => (
+              <MiikaText {...props} category="h5" text={'Menu'} />
+            ),
+          }}
         />
         <Screen name="Settings" component={Settings} />
         <Screen name="AppInfo" component={AppInfo} />
