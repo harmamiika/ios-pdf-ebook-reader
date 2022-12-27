@@ -2,7 +2,9 @@ import React from 'react';
 import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../state';
+import SimpleScreen from '../menu-screens/SimpleScreen';
 import { AdmobBannerAd } from '../reusable/ads/BannerAd';
+import { MiikaText } from '../reusable/MiikaText';
 import BookListItem, { screenHeight, screenWidth } from './BookListItem';
 
 export default function Library() {
@@ -15,6 +17,13 @@ export default function Library() {
   }
 
   // console.log(bookList, 'book List');
+
+  if (!bookList.length)
+    return (
+      <SimpleScreen header="Library is empty">
+        <MiikaText text="Add a book by pressing the plus icon." />
+      </SimpleScreen>
+    );
 
   return (
     <SafeAreaView style={styles.container}>

@@ -248,35 +248,37 @@ const PdfViewer = () => {
       );
     else
       return (
-        <View {...panResponder.panHandlers}>
-          {pdfViewerIsFullScreen && <StatusBar hidden />}
-          <TouchableWithoutFeedback onPress={onPdfPress}>
-            <Pdf
-              singlePage={true}
-              enableAnnotationRendering={true}
-              enablePaging={true}
-              source={{
-                // uri: `${LibraryDirectoryPath}/${activeBook.file.name}`,
-                uri: activeBook.copyFileUri,
-              }}
-              style={styles.pdf}
-              ref={(pdf: any) => {
+        <View style={styles.container}>
+          <View {...panResponder.panHandlers}>
+            {pdfViewerIsFullScreen && <StatusBar hidden />}
+            <TouchableWithoutFeedback onPress={onPdfPress}>
+              <Pdf
+                singlePage={true}
+                enableAnnotationRendering={true}
+                enablePaging={true}
+                source={{
+                  // uri: `${LibraryDirectoryPath}/${activeBook.file.name}`,
+                  uri: activeBook.copyFileUri,
+                }}
+                style={styles.pdf}
+                ref={(pdf: any) => {
+                  // @ts-ignore
+                  this.pdf = pdf;
+                }}
+                onPageChanged={onPageChanged}
                 // @ts-ignore
-                this.pdf = pdf;
-              }}
-              onPageChanged={onPageChanged}
-              // @ts-ignore
-              onLoadComplete={() => this.pdf.setPage(activeBook.currentPage)}
-              minScale={1}
-              maxScale={3}
-              scale={zoomState.zoom}
-            />
-          </TouchableWithoutFeedback>
+                onLoadComplete={() => this.pdf.setPage(activeBook.currentPage)}
+                minScale={1}
+                maxScale={3}
+                scale={zoomState.zoom}
+              />
+            </TouchableWithoutFeedback>
+          </View>
         </View>
       );
   };
 
-  return <View style={styles.container}>{renderMainContent()}</View>;
+  return <>{renderMainContent()}</>;
 };
 
 export default PdfViewer;

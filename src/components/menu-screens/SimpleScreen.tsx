@@ -14,7 +14,7 @@ export default function ({
 }: React.PropsWithChildren<SimpleScreenProps>) {
   return (
     <View style={styles.container}>
-      <MiikaText category="h3" text={header} />
+      <MiikaText category="h3" text={header} marginBottom={5} />
       {children}
     </View>
   );
