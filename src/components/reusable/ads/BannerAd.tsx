@@ -11,7 +11,16 @@ export function AdmobBannerAd({ adUnitId }: { adUnitId: string }) {
 
   return (
     <View style={s.adContainer}>
-      <BannerAd size={BannerAdSize.BANNER} unitId={unitId} />
+      <BannerAd
+        size={BannerAdSize.BANNER}
+        unitId={unitId}
+        onAdLoaded={e => {
+          console.log('Ad loaded: ', e);
+        }}
+        onAdFailedToLoad={e => {
+          console.log('Ad failed to load: ', e);
+        }}
+      />
     </View>
   );
 }

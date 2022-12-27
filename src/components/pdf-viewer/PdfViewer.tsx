@@ -202,17 +202,6 @@ const PdfViewer = () => {
     })();
   }, [activeBook]);
 
-  useEffect(() => {
-    (async () => {
-      if (activeBook) {
-        const fileExists = await exists(
-          `${LibraryDirectoryPath}/${activeBook.file.name}`,
-        );
-        console.log(fileExists, 'FILE EXISTS?');
-      }
-    })();
-  }, [activeBook]);
-
   const renderMainContent = () => {
     if (!activeBook)
       return (
