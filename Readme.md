@@ -2,7 +2,6 @@ new-hope is the most up to date branch, you can use it
 -npm run ios
 
 <!-- <h2>Roadmap</h2>
-  -reload book => if book filename is same as picked file => replace
 -save book in zoom state
 
 73. Consent
@@ -70,6 +69,7 @@ FIXES
 -make library ad position absolute and bottom
 -- so looks maybe a tiny bit better
 
+-reload book => if book filename is same as picked file => replace
 --Single book view
 -Big picture
 -show original filename

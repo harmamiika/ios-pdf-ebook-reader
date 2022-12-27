@@ -1,13 +1,13 @@
+import { IconProps, useTheme } from '@ui-kitten/components';
 import React from 'react';
-import { Button, IconProps } from '@ui-kitten/components';
-import { CustomIonIcon } from './CustomIonIcon';
-import { StyleSheet, TouchableHighlight, TouchableOpacity } from 'react-native';
-import { FontAwesome5Icon } from './FontAwesome5Icon';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import {
   headerIconsize,
   screenHeight,
   screenWidth,
 } from '../../utils/cssHelpers';
+import { CustomIonIcon } from './CustomIonIcon';
+import { FontAwesome5Icon } from './FontAwesome5Icon';
 import { FontAwesomeIcon } from './FontAwesomerIcon';
 
 interface IconButtonProps {
@@ -26,10 +26,13 @@ export function IconButton({
   onPress,
   iconName,
   iconType,
-  iconColor,
+  // iconColor,
   iconSize,
   ...opacityProps
 }: IconProps & IconButtonProps) {
+  const theme = useTheme();
+  const iconColor = theme['text-basic-color'];
+
   const renderIcon = () => {
     if (iconType === IconType.IonIcon)
       return (
@@ -44,6 +47,7 @@ export function IconButton({
         <FontAwesome5Icon
           name={iconName}
           size={iconSize ? iconSize : headerIconsize}
+          color={iconColor}
         />
       );
     else if (iconType === IconType.FAIcon)
@@ -51,6 +55,7 @@ export function IconButton({
         <FontAwesomeIcon
           name={iconName}
           size={iconSize ? iconSize : headerIconsize}
+          color={iconColor}
         />
       );
   };
