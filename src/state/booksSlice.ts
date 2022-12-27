@@ -43,7 +43,6 @@ const createPdfCopy = async (file: IFile) => {
 
 const savePdf = async (file: IFile) => {
   // console.log(RNFS.getAllExternalFilesDirs(), 'ALL PATHS');
-
   const { name, fileCopyUri } = file;
   console.log(name, 'name');
   const newPath = `${LibraryDirectoryPath}/${name}`;

@@ -49,6 +49,9 @@ const { Navigator, Screen } = createNativeStackNavigator();
 
 const Application = () => {
   const activeBookTitle = useSelector(state => state.books.activeBook?.name);
+  const pdfViewerIsFullScreen = useSelector(
+    state => state.pdfViewer.isFullScreen,
+  );
 
   useEffect(() => {
     InitializeAds();
@@ -61,6 +64,7 @@ const Application = () => {
           name="PdfViewer"
           component={PdfViewer}
           options={({ navigation }) => ({
+            headerShown: !pdfViewerIsFullScreen,
             headerLeft: () => <LibraryIcon navigation={navigation} />,
             headerRight: props => (
               <ReaderRightHeader navigation={navigation} {...props} />

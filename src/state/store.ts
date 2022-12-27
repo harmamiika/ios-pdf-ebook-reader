@@ -12,9 +12,11 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+import pdfReducer from './pdfViewerSlice';
 
 const rootReducer = combineReducers({
   books: booksReducer,
+  pdfViewer: pdfReducer,
 });
 
 const persistConfig = {

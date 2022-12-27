@@ -1,6 +1,12 @@
 import { TouchableWithoutFeedback } from '@ui-kitten/components/devsupport';
 import React, { useMemo, useState } from 'react';
-import { Dimensions, PanResponder, StyleSheet, View } from 'react-native';
+import {
+  Dimensions,
+  PanResponder,
+  StatusBar,
+  StyleSheet,
+  View,
+} from 'react-native';
 import {
   CachesDirectoryPath,
   DocumentDirectoryPath,
@@ -38,6 +44,9 @@ function calcCenter(x1: number, y1: number, x2: number, y2: number) {
 const PdfViewer = () => {
   const dispatch = useDispatch();
   const { activeBook } = useSelector((state: RootState) => state.books);
+  const pdfViewerIsFullScreen = useSelector(
+    (state: RootState) => state.pdfViewer.isFullScreen,
+  );
 
   const [swipeState, setSwipeState] = useState<any>({
     center: undefined,
@@ -218,6 +227,7 @@ const PdfViewer = () => {
 
   return (
     <View style={styles.container}>
+      {pdfViewerIsFullScreen && <StatusBar hidden />}
       {activeBook ? (
         <View {...panResponder.panHandlers}>
           <TouchableWithoutFeedback onPress={onPdfPress}>
