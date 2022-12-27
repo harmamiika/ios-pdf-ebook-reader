@@ -14,10 +14,6 @@ new-hope is the most up to date branch, you can use it
 
     NO CODE LOW CODE TASKS
 
-73. Make app icon MVP
-    --buy logo and ads from fiverr 20 -100€
-    --make sample lorem pdf book
-
 KUVISSA:
 1 PDF
 2 PDF lista
@@ -25,8 +21,6 @@ KUVISSA:
 
 Featuret - smooth pdf viewing - manage books - track books
 
-KEKSI NIMI
-77. Send app to review
 V1
 
 ---
@@ -258,3 +252,10 @@ color: BookMarkColor
   --in picture show a guide to reload book
   -in book viewer show directions to reload a book -->
 <!-- -make header title component => wrappaa ui kitten fontin siihen -->
+<!--
+73. Make app icon MVP
+    --buy logo and ads from fiverr 20 -100€
+    --make sample lorem pdf book -->
+
+<!-- KEKSI NIMI -->
+<!-- 77. Send app to review -->
