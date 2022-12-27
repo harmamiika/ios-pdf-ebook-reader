@@ -10,9 +10,6 @@ blob-struggle-branch is the most up to date branch, you can use it
   -in book viewer show directions to reload a book
 
 -save book in zoom state
--click on middle on pdf viewer => switch to full screen
--- full screen mode => google
-
 -activebook switch fix
 
 -make header title component => wrappaa ui kitten fontin siihen
@@ -20,8 +17,6 @@ blob-struggle-branch is the most up to date branch, you can use it
 FIXES
 -make library ad position absolute and bottom
 -- so looks maybe a tiny bit better
-
--react native pdf/image reference (filecopy uri) gets destroyed on update
 
 73. Consent
     -add concent asking from the docx
@@ -60,9 +55,7 @@ KUVISSA:
 Featuret - smooth pdf viewing - manage books - track books
 
 KEKSI NIMI
-
 77. Send app to review
-
 V1
 
 ---

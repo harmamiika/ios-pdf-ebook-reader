@@ -22,6 +22,7 @@ import Pdf from 'react-native-pdf';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../state';
 import { setActiveBook, updateActiveBookPage } from '../../state/booksSlice';
+import { toggleFullScreen } from '../../state/pdfViewerSlice';
 import { MiikaText } from '../reusable/MiikaText';
 
 function calcDistance(x1: number, y1: number, x2: number, y2: number) {
@@ -82,12 +83,16 @@ const PdfViewer = () => {
 
   const onPdfPress = (event: any) => {
     const positionX = event.nativeEvent.pageX;
-    if (positionX > 200) {
+    console.log(positionX, 'positionX');
+
+    if (positionX > 250) {
       // @ts-ignore
       this.pdf.setPage(activeBook?.currentPage + 1 || 1);
-    } else if (positionX < 200) {
+    } else if (positionX < 150) {
       // @ts-ignore
       this.pdf.setPage(activeBook?.currentPage - 1 || 1);
+    } else {
+      dispatch(toggleFullScreen());
     }
   };
 
