@@ -14,17 +14,17 @@ export const Menu = ({
   navigation,
 }: NativeStackScreenProps<any>): JSX.Element => {
   const menuItems: IMenuItem[] = [
-    {
-      text: 'User guide',
-      onPress: () => navigation.navigate('UserGuide'),
-    },
-    {
-      text: 'Settings',
-      onPress: () => navigation.navigate('Settings'),
-    },
+    // {
+    //   text: 'User guide',
+    //   onPress: () => navigation.navigate('UserGuide'),
+    // },
+    // {
+    //   text: 'Settings',
+    //   onPress: () => navigation.navigate('Settings'),
+    // },
     {
       text: 'App info',
-      onPress: () => navigation.navigate('AppInfo'),
+      onPress: () => navigation.navigate('App info'),
     },
     // {
     //   text: 'Library',
@@ -34,18 +34,18 @@ export const Menu = ({
     //   text: 'Read',
     //   onPress: () => {},
     // },
-    {
-      text: 'Feedback',
-      onPress: () => {},
-    },
-    {
-      text: 'Updgrade to premium',
-      onPress: () => {},
-    },
-    {
-      text: 'Refer a friend',
-      onPress: () => {},
-    },
+    // {
+    //   text: 'Feedback',
+    //   onPress: () => {},
+    // },
+    // {
+    //   text: 'Updgrade to premium',
+    //   onPress: () => {},
+    // },
+    // {
+    //   text: 'Refer a friend',
+    //   onPress: () => {},
+    // },
   ];
 
   return (

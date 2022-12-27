@@ -3,21 +3,8 @@ new-hope is the most up to date branch, you can use it
 
 <!-- <h2>Roadmap</h2>
 73. Consent
-    -add concent asking from the docx
+    -add consent asking from the docx
     -figure out how to detect location
-
-STUDY
--react-native cache directory how it works
--filecopyuri, uri - differences
-
-1. MVP - finish lists at least
-   ----At least App info
-   ----Settings
-   ----Library
-   ----(TBD PREMIUM, REFER A FRIND, GIVE FEEDBACK?)
-   ----FAQ / Help
-
---Consider foldering data model - make data model not completely shit
 
 72. Make app responsive to 4 devices
     -learn how to switch simulator device (yt)
@@ -77,6 +64,19 @@ FIXES
 -bookmarks
 -started reading
 -folders
+
+1. MVP - finish lists at least
+   ----At least App info
+   ----Settings
+   ----Library
+   ----(TBD PREMIUM, REFER A FRIND, GIVE FEEDBACK?)
+   ----FAQ / Help
+
+--Consider foldering data model - make data model not completely shit
+
+
+STUDY
+-filecopyuri, uri - differences
 
 -add bookmark note
 -change book name

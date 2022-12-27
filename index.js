@@ -74,11 +74,12 @@ const Application = () => {
               <MiikaText
                 {...props}
                 category="h5"
+                // todo: track device width and adjust text size accordingly
                 text={
-                  activeBookTitle?.length < 29
+                  activeBookTitle?.length < 19
                     ? `${activeBookTitle}`
                     : activeBookTitle
-                    ? `${activeBookTitle?.substring(0, 26)}...`
+                    ? `${activeBookTitle?.substring(0, 19)}...`
                     : 'Welcome'
                 }
               />
@@ -105,7 +106,15 @@ const Application = () => {
           }}
         />
         <Screen name="Settings" component={Settings} />
-        <Screen name="AppInfo" component={AppInfo} />
+        <Screen
+          name="App info"
+          component={AppInfo}
+          options={() => ({
+            headerTitle: props => (
+              <MiikaText {...props} category="h5" text={'App info'} />
+            ),
+          })}
+        />
         <Screen name="UserGuide" component={UserGuide} />
       </Navigator>
     </NavigationContainer>

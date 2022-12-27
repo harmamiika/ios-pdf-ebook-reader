@@ -27,11 +27,11 @@ export default function LibraryRightHeader({ navigation }: Props) {
       <FilePicker />
       {/* </View> */}
 
-      <IconButton
+      {/* <IconButton
         iconName="folder-open"
         iconType={IconType.FontAwesome5Icon}
         style={childStyle}
-      />
+      /> */}
 
       <IconButton
         iconName="bars"
