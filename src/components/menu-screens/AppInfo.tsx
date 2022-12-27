@@ -4,7 +4,7 @@ import SimpleScreen from './SimpleScreen';
 
 export default function AppInfo() {
   return (
-    <SimpleScreen header="PDF Book Reader">
+    <SimpleScreen header="PDF eBook Reader">
       <MiikaText text="Version 1.0, 2022" />
       {/* <MiikaText text="Created with <3 by Miika Härmä" /> */}
       {/* <MiikaText text="Web site: " />
