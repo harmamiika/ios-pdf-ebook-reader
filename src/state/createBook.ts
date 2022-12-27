@@ -1,8 +1,4 @@
-import {
-  CachesDirectoryPath,
-  DocumentDirectoryPath,
-  LibraryDirectoryPath,
-} from 'react-native-fs';
+import { LibraryDirectoryPath } from 'react-native-fs';
 import uuid from 'react-native-uuid';
 import { IBook, IFile, IThumbnail } from '../interfaces';
 import { removeFileExtension } from './booksSlice';

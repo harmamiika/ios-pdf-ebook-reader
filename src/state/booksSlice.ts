@@ -124,6 +124,14 @@ export const booksSlice = createSlice({
       };
       addUpdatedBookToState(state, updatedBook as IBook);
     },
+    updateBook(state, action: PayloadAction<IBook>) {
+      state.bookList = state.bookList.map(b =>
+        b.id === action.payload.id ? action.payload : b,
+      );
+      if (state.activeBook?.id === action.payload.id) {
+        state.activeBook = action.payload;
+      }
+    },
     deleteBookmark(state, action: PayloadAction<string>) {
       const updatedBookmarks = state.activeBook?.bookmarks.filter(
         bm => bm.id !== action.payload,
@@ -170,5 +178,6 @@ export const {
   updateActiveBookPage,
   addBookmark,
   deleteBookmark,
+  updateBook,
 } = booksSlice.actions;
 export default booksSlice.reducer;

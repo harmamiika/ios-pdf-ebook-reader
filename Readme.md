@@ -2,8 +2,6 @@ new-hope is the most up to date branch, you can use it
 -npm run ios
 
 <!-- <h2>Roadmap</h2>
--save book in zoom state
-
 73. Consent
     -add concent asking from the docx
     -figure out how to detect location
@@ -70,6 +68,7 @@ FIXES
 -- so looks maybe a tiny bit better
 
 -reload book => if book filename is same as picked file => replace
+-save zoom state to redux
 --Single book view
 -Big picture
 -show original filename
