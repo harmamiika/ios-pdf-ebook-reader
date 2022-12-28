@@ -58,16 +58,6 @@ const Application = () => {
     <NavigationContainer>
       <Navigator>
         <Screen
-          name="Library"
-          component={Library}
-          options={({ navigation }) => ({
-            headerRight: () => <LibraryRightHeader navigation={navigation} />,
-            headerTitle: props => (
-              <MiikaText {...props} category="h5" text={'Library'} />
-            ),
-          })}
-        />
-        <Screen
           name="Reading view"
           component={PdfViewer}
           options={({ navigation }) => ({
@@ -89,6 +79,16 @@ const Application = () => {
                     : 'Welcome'
                 }
               />
+            ),
+          })}
+        />
+        <Screen
+          name="Library"
+          component={Library}
+          options={({ navigation }) => ({
+            headerRight: () => <LibraryRightHeader navigation={navigation} />,
+            headerTitle: props => (
+              <MiikaText {...props} category="h5" text={'Library'} />
             ),
           })}
         />

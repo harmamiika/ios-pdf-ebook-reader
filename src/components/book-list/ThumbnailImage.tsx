@@ -32,21 +32,21 @@ export default function ThumbnailImage({ book }: ThumbnailImageProps) {
   const uriSlice = uri.slice(indexOf);
   const returnUri = '~' + uriSlice;
 
-  useEffect(() => {
-    // create new image if original image is missing
-    // this logic could be bad
-    (async () => {
-      if (book.thumbnail.originalUri) {
-        const originalFileExists = await exists(book.thumbnail.originalUri);
-        if (!originalFileExists) {
-          const newThumbnail = await createThumbnail(book.copyFileUri);
-          if (newThumbnail) {
-            dispatch(updateBook({ ...book, thumbnail: newThumbnail }));
-          }
-        }
-      }
-    })();
-  }, [book.thumbnail.uri]);
+  // useEffect(() => {
+  //   // create new image if original image is missing
+  //   // this logic could be bad
+  //   (async () => {
+  //     if (book.thumbnail.originalUri) {
+  //       const originalFileExists = await exists(book.thumbnail.originalUri);
+  //       if (!originalFileExists) {
+  //         const newThumbnail = await createThumbnail(book.copyFileUri);
+  //         if (newThumbnail) {
+  //           dispatch(updateBook({ ...book, thumbnail: newThumbnail }));
+  //         }
+  //       }
+  //     }
+  //   })();
+  // }, [book.thumbnail.uri]);
 
   return (
     <View style={styles.container}>

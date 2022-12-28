@@ -1,6 +1,19 @@
 new-hope is the most up to date branch, you can use it
 -npm run ios
 
+todos:
+=>create gdpr notices and use them in app
+
+-get lorem pdfs
+=>take app pics
+=>generate app pic ads with dall-e / figma
+
+-create site mvp
+-add reference to site in app details
+-use different icon?
+
+send app to review
+
 <!-- <h2>Roadmap</h2>
 73. Consent
     -add consent asking from the docx
