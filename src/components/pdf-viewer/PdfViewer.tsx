@@ -233,8 +233,8 @@ const PdfViewer = () => {
                 enableAnnotationRendering={true}
                 enablePaging={true}
                 source={{
-                  // uri: `${LibraryDirectoryPath}/${activeBook.file.name}`,
-                  uri: activeBook.copyFileUri,
+                  uri: `${LibraryDirectoryPath}/${activeBook.file.name}`,
+                  // uri: activeBook.copyFileUri,
                 }}
                 style={styles.pdf}
                 ref={(pdf: any) => {
