@@ -8,7 +8,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ApplicationProvider } from '@ui-kitten/components';
 import React, { useEffect } from 'react';
 import { Appearance, AppRegistry } from 'react-native';
-import mobileAds from 'react-native-google-mobile-ads';
 import { Provider, useSelector } from 'react-redux';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -19,16 +18,8 @@ import { ReaderRightHeader } from './src/components/header/ReaderRightHeader';
 import { Menu } from './src/components/menu/Menu';
 import PdfViewer from './src/components/pdf-viewer/PdfViewer';
 import { store } from './src/state/store';
-
-async function InitializeAds() {
-  const adapterStatuses = await mobileAds().initialize();
-  console.log(adapterStatuses, 'adapter statuses');
-
-  // .then(adapterStatuses => {
-  //   console.log(adapterStatuses, 'adapter statuses');
-  //   // Initialization complete!
-  // });
-}
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { InitializeAds } from './src/state/adConsentsSlice';
 
 import { LogBox } from 'react-native';
 import LibraryRightHeader from './src/components/book-list/LibraryRightHeader';
