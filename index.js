@@ -19,7 +19,7 @@ import { Menu } from './src/components/menu/Menu';
 import PdfViewer from './src/components/pdf-viewer/PdfViewer';
 import { store } from './src/state/store';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { InitializeAds } from './src/state/adConsentsSlice';
+import { InitializeAds } from './src/utils/adConsents';
 
 import { LogBox } from 'react-native';
 import LibraryRightHeader from './src/components/book-list/LibraryRightHeader';
