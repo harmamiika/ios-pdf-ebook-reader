@@ -4,12 +4,18 @@ import SimpleScreen from './SimpleScreen';
 
 export default function AppInfo() {
   return (
-    <SimpleScreen header="Book reader">
-      {/* <MiikaText text="Version 1.0, 2022" /> */}
-      <MiikaText text="Read PDF-ebooks and track your progress." />
-      {/* <MiikaText text="Web site: " />
-      <MiikaText text="In app store" />
-      <MiikaText text="email" /> */}
+    <SimpleScreen header="MyPDFBooks">
+      <MiikaText
+        marginTop={10}
+        marginBottom={10}
+        text="Read PDF-books and track your progress."
+      />
+      <MiikaText
+        marginBottom={10}
+        text="Send feedback or report a bug: mypdfebooks.contact@gmail.com"
+      />
+      <MiikaText marginBottom={10} text="https://mypdfbooks.vercel.app/" />
+      <MiikaText marginBottom={10} text="Version 1.0 - © Miika Härmä 2022" />
     </SimpleScreen>
   );
 }
