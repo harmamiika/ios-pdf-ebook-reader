@@ -1,5 +1,17 @@
 -npm run ios
 
+-Make double tap open the book in view
+-Add option to finish book
+
+-Add rate app - button to menu
+
+-Remove garbage from site
+-Add some pics to site
+
+V3:
+-Try to rank site in google
+-Add premium version to get rid of ads
+
 <!-- <h2>Roadmap</h2>
 73. Consent
     -add consent asking from the docx

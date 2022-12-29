@@ -164,8 +164,6 @@ export const booksSlice = createSlice({
         'thumbnail',
       );
       state.bookList = bookList;
-      // if first book, make automatically active
-      if (bookList.length === 1) setActiveBook(bookList[0]);
     });
     builder.addCase(deleteBook.fulfilled, (state, action) => {
       const newBookList = state.bookList.filter(

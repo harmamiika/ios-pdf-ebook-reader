@@ -1,22 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../state';
+import { setActiveBook } from '../../state/booksSlice';
 import SimpleScreen from '../menu-screens/SimpleScreen';
 import { AdmobBannerAd } from '../reusable/ads/BannerAd';
 import { MiikaText } from '../reusable/MiikaText';
 import BookListItem, { screenHeight, screenWidth } from './BookListItem';
 
 export default function Library() {
-  const { bookList } = useSelector((state: RootState) => state.books);
+  const dispatch = useDispatch();
+  const bookList = useSelector((state: RootState) => state.books.bookList);
+  const activeBook = useSelector((state: RootState) => state.books.activeBook);
 
-  for (let book of bookList) {
-    console.log(book.uri, 'book.uri');
-    // console.log(book.file.fileCopyUri, 'file copy uri');
-    // console.log(book.file.uri, 'file uri');
-  }
-
-  // console.log(bookList, 'book List');
+  // not the prettiest solution, but it works
+  useEffect(() => {
+    if (bookList.length === 1 && !activeBook) {
+      dispatch(setActiveBook(bookList[0]));
+    }
+  }, [bookList]);
 
   if (!bookList.length)
     return (
