@@ -1,7 +1,6 @@
 -npm run ios
 
 -Add option to finish book
-
 -Add rate app - button to menu
 
 -Remove garbage from site

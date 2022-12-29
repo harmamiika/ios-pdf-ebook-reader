@@ -26,7 +26,7 @@ export default function LibraryLeftHeader({ navigation }: Props) {
         iconName="ios-book-sharp"
         onPress={() => navigation.navigate('Reading view')}
         iconType={IconType.IonIcon}
-        style={{ ...childStyle, marginRight: 0 }}
+        style={{ ...childStyle, marginLeft: 5 }}
       />
     </View>
   );
