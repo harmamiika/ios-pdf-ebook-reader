@@ -8,7 +8,11 @@ import { AdmobBannerAd } from '../reusable/ads/BannerAd';
 import { MiikaText } from '../reusable/MiikaText';
 import BookListItem, { screenHeight, screenWidth } from './BookListItem';
 
-export default function Library() {
+interface LibraryProps {
+  navigation: any;
+}
+
+export default function Library({ navigation }: LibraryProps) {
   const dispatch = useDispatch();
   const bookList = useSelector((state: RootState) => state.books.bookList);
   const activeBook = useSelector((state: RootState) => state.books.activeBook);
@@ -31,7 +35,7 @@ export default function Library() {
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
         {bookList.map(book => (
-          <BookListItem book={book} key={book.id} />
+          <BookListItem book={book} key={book.id} navigation={navigation} />
         ))}
       </ScrollView>
       <AdmobBannerAd adUnitId="ca-app-pub-8279790179515379/2242175832" />

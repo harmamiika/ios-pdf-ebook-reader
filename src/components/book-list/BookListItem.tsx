@@ -1,5 +1,5 @@
 import { Divider, useTheme } from '@ui-kitten/components';
-import React from 'react';
+import React, { useState } from 'react';
 import { Dimensions, StyleSheet, TouchableHighlight, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { IBook } from '../../interfaces';
@@ -11,15 +11,24 @@ import CardContent from './CardContent';
 import OverflowMenuButton from './OverFlowMenuButton';
 interface BookListItemProps {
   book: IBook;
+  navigation: any;
 }
 
-export default function BookListItem({ book }: BookListItemProps) {
+export default function BookListItem({ book, navigation }: BookListItemProps) {
   const dispatch = useDispatch();
   const theme = useTheme();
   const iconColor = theme['text-basic-color'];
   const { activeBook } = useSelector((state: RootState) => state.books);
+  const [lastTapTime, setLastTapTime] = useState(0);
 
   const onItemPress = (event: any) => {
+    const currentTime = Date.now();
+    const timeSinceLastTap = currentTime - lastTapTime;
+    if (timeSinceLastTap < 500) {
+      // Handle double tap
+      navigation.navigate('Reading view');
+    }
+    setLastTapTime(currentTime);
     // console.log(event, 'event');
     dispatch(setActiveBook(book));
   };
