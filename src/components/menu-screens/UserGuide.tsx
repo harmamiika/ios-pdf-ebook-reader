@@ -1,4 +1,5 @@
 import React from 'react';
+import { View } from 'react-native';
 import { MiikaText } from '../reusable/MiikaText';
 import Paragraph from './Paragraph';
 import SimpleScreen from './SimpleScreen';
@@ -17,6 +18,7 @@ export default function UserGuide() {
           text="You must have the book in your phones storage already, the app does
           not download books."
         />
+        <BulletPoint text="Books have to be in PDF format, for example EPUB files are currently not supported." />
       </Paragraph>
 
       <Paragraph title="Finding books in your phones storage">
@@ -26,6 +28,10 @@ export default function UserGuide() {
           text="You can go back to the root of your phones storage by pressing the back button in the top left corner
       and find the book by navigating forward from there."
         />
+        <BulletPoint
+          text="When you browse storage through this app, only PDF-files are visible. 
+        If you are sure you are in a correct location, but can't see the file, it is possible the format of the file is currently unsupported."
+        />
       </Paragraph>
 
       <Paragraph title="The reading view is not working">
@@ -34,6 +40,7 @@ export default function UserGuide() {
         <BulletPoint text="It is possible that the PDFs filename contains unsupported special characters, you can try renaming the file to fix this." />
         <BulletPoint text="It is also possible that the PDF is corrupted, in which case you should try downloading the file again." />
         <BulletPoint text="You can also report any bug at: mypdfbooks.contact@gmail.com." />
+        <View style={{ height: 100 }} />
       </Paragraph>
     </SimpleScreen>
   );
