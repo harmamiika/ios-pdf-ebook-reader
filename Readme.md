@@ -1,6 +1,5 @@
 -npm run ios
 
--Make double tap open the book in view
 -Add option to finish book
 
 -Add rate app - button to menu

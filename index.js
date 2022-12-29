@@ -106,7 +106,15 @@ const Application = () => {
             ),
           })}
         />
-        <Screen name="UserGuide" component={UserGuide} />
+        <Screen
+          name="UserGuide"
+          component={UserGuide}
+          options={() => ({
+            headerTitle: props => (
+              <MiikaText {...props} category="h5" text={'User guide'} />
+            ),
+          })}
+        />
       </Navigator>
     </NavigationContainer>
   );

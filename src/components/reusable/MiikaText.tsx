@@ -1,5 +1,6 @@
 import { Text } from '@ui-kitten/components';
 import React from 'react';
+import { TextProps } from 'react-native';
 
 interface MiikaTextProps {
   text: string;
@@ -10,7 +11,7 @@ interface MiikaTextProps {
   width?: number | string;
 }
 
-export const MiikaText: React.FC<MiikaTextProps> = ({
+export const MiikaText: React.FC<MiikaTextProps & TextProps> = ({
   text,
   marginBottom = 0,
   marginTop = 0,
@@ -22,7 +23,6 @@ export const MiikaText: React.FC<MiikaTextProps> = ({
   // NOT RESPONSIVE
   return (
     <Text
-      numberOfLines={2}
       category={category}
       style={{
         marginBottom,
