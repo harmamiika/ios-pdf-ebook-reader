@@ -15,7 +15,7 @@ export default function AppInfo() {
         text="Send feedback or report a bug: mypdfebooks.contact@gmail.com"
       />
       <MiikaText marginBottom={10} text="https://mypdfbooks.vercel.app/" />
-      <MiikaText marginBottom={10} text="Version 1.0 - © Miika Härmä 2022" />
+      <MiikaText marginBottom={10} text="Version 1.0 - © 2022 Miika Härmä" />
     </SimpleScreen>
   );
 }

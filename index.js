@@ -22,6 +22,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { InitializeAds } from './src/utils/adConsents';
 
 import { LogBox } from 'react-native';
+import LibraryLeftHeader from './src/components/book-list/LibraryLeftHeader';
 import LibraryRightHeader from './src/components/book-list/LibraryRightHeader';
 import AppInfo from './src/components/menu-screens/AppInfo';
 import Settings from './src/components/menu-screens/Settings';
@@ -37,6 +38,7 @@ const { Navigator, Screen } = createNativeStackNavigator();
 
 const Application = () => {
   const activeBookTitle = useSelector(state => state.books.activeBook?.name);
+  const activeBookId = useSelector(state => state.books.activeBook?.id);
   const pdfViewerIsFullScreen = useSelector(
     state => state.pdfViewer.isFullScreen,
   );
@@ -49,8 +51,20 @@ const Application = () => {
     <NavigationContainer>
       <Navigator>
         <Screen
+          name="Library"
+          component={Library}
+          options={({ navigation }) => ({
+            headerLeft: () => <LibraryLeftHeader navigation={navigation} />,
+            headerRight: () => <LibraryRightHeader navigation={navigation} />,
+            headerTitle: props => (
+              <MiikaText {...props} category="h5" text={'Library'} />
+            ),
+          })}
+        />
+        <Screen
           name="Reading view"
           component={PdfViewer}
+          navigationKey={activeBookId || 'default'}
           options={({ navigation }) => ({
             headerShown: !pdfViewerIsFullScreen,
             headerLeft: () => <LibraryIcon navigation={navigation} />,
@@ -70,16 +84,6 @@ const Application = () => {
                     : 'Welcome'
                 }
               />
-            ),
-          })}
-        />
-        <Screen
-          name="Library"
-          component={Library}
-          options={({ navigation }) => ({
-            headerRight: () => <LibraryRightHeader navigation={navigation} />,
-            headerTitle: props => (
-              <MiikaText {...props} category="h5" text={'Library'} />
             ),
           })}
         />

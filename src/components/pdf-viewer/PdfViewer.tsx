@@ -219,7 +219,11 @@ const PdfViewer = () => {
       return (
         <SimpleScreen header="File not found">
           <MiikaText text="You should delete this book in the library, then reselect it." />
-          <MiikaText text="If this does not work, the file can't be read with this app." />
+          <MiikaText
+            text="If this does not work, this file can't be read with this app. 
+          A possible, but not certain cause could be weird characters in the file name.
+          You can try to renaming the file and then reselecting it."
+          />
         </SimpleScreen>
       );
     else

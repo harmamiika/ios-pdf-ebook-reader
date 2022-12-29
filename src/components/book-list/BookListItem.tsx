@@ -1,4 +1,4 @@
-import { Divider } from '@ui-kitten/components';
+import { Divider, useTheme } from '@ui-kitten/components';
 import React from 'react';
 import { Dimensions, StyleSheet, TouchableHighlight, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,6 +15,8 @@ interface BookListItemProps {
 
 export default function BookListItem({ book }: BookListItemProps) {
   const dispatch = useDispatch();
+  const theme = useTheme();
+  const iconColor = theme['text-basic-color'];
   const { activeBook } = useSelector((state: RootState) => state.books);
 
   const onItemPress = (event: any) => {
@@ -38,7 +40,7 @@ export default function BookListItem({ book }: BookListItemProps) {
             {book.id === activeBook?.id && (
               <CustomIonIcon
                 name="ios-book-sharp"
-                style={{ paddingRight: 15, paddingTop: 3 }}
+                style={{ paddingRight: 15, paddingTop: 3, color: iconColor }}
               />
             )}
             <OverflowMenuButton book={book} />
