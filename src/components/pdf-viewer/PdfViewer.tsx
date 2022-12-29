@@ -235,6 +235,7 @@ const PdfViewer = () => {
                 source={{
                   uri: `${LibraryDirectoryPath}/${activeBook.file.name}`,
                   // uri: activeBook.copyFileUri,
+                  // uri: activeBook.file.uri,
                 }}
                 style={styles.pdf}
                 ref={(pdf: any) => {

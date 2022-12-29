@@ -1,7 +1,12 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
 import { DocumentPickerResponse } from 'react-native-document-picker';
-import { copyFile, LibraryDirectoryPath, unlink } from 'react-native-fs';
+import {
+  copyFile,
+  exists,
+  LibraryDirectoryPath,
+  unlink,
+} from 'react-native-fs';
 import uuid from 'react-native-uuid';
 import { createThumbnail, removeThumbnail } from '../utils/thumbnails';
 import { IBook, IBookmark, ICategory, IFile } from './../interfaces';
@@ -13,9 +18,12 @@ const savePdf = async (file: IFile) => {
   console.log(name, 'name');
   const newPath = `${LibraryDirectoryPath}/${name}`;
 
+  // const exist = await exists(fileCopyUri.split('%20').join(' '));
+  // console.log(exist, 'FILE COPY URI EXISTS');
+  const fixedFilePath = fileCopyUri.split('%20').join(' ');
   console.log(newPath, 'newPath');
   try {
-    await copyFile(fileCopyUri, newPath);
+    await copyFile(fixedFilePath, newPath);
     return newPath;
   } catch (e) {
     console.log(e, 'err');
