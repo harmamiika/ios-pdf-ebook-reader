@@ -22,22 +22,23 @@ export default function LibraryRightHeader({ navigation }: Props) {
         flexDirection: 'row',
         alignItems: 'center',
         paddingHorizontal: gap / -2,
+        // paddingHorizontal: gap,
       }}>
       {/* <View style={childStyle}> */}
       <FilePicker />
       {/* </View> */}
 
-      <IconButton
+      {/* <IconButton
         iconName="folder-open"
         iconType={IconType.FontAwesome5Icon}
         style={childStyle}
-      />
+      /> */}
 
       <IconButton
         iconName="bars"
         onPress={() => navigation.navigate('Menu')}
         iconType={IconType.FontAwesome5Icon}
-        style={{ ...childStyle, marginRight: -5 }}
+        style={{ ...childStyle, marginRight: 0 }}
       />
     </View>
   );

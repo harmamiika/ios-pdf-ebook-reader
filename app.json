@@ -2,6 +2,8 @@
   "name": "mybookpdf",
   "displayName": "mybookpdf",
   "react-native-google-mobile-ads": {
-    "ios_app_id": "ca-app-pub-8279790179515379~9722847087"
+    "ios_app_id": "ca-app-pub-8279790179515379~9722847087",
+    "delay_app_measurement_init": true,
+    "user_tracking_usage_description": "This identifier will be used to deliver personalized ads to you."
   }
 }

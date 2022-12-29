@@ -7,7 +7,7 @@ import { MiikaText } from '../reusable/MiikaText';
 const Header = (props: any) => {
   return (
     <View {...props}>
-      <Text category="h6">Confirm delete</Text>
+      <Text category="h6">Confirm remove</Text>
     </View>
   );
 };
@@ -31,7 +31,7 @@ const Footer = ({
     <View {...props}>
       <View style={s.footer}>
         <Button status="danger" onPress={onDelete}>
-          <Text>Yes</Text>
+          <Text>Confirm</Text>
         </Button>
         <Button status="basic" onPress={() => setIsVisible(false)}>
           <Text>Cancel</Text>
@@ -67,8 +67,8 @@ export default function DeleteModal({
           />
         )}>
         <View>
-          <MiikaText text={`Remove ${book?.name} from list?`} />
-          <MiikaText text="(This does not remove the file from your phone)" />
+          <MiikaText text={`Remove ${book?.name} from library?`} />
+          <MiikaText text="This does not remove the file from your phone and you can add the book back later." />
         </View>
       </Card>
     </Modal>

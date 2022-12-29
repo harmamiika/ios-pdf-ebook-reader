@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Image, StyleSheet, View } from 'react-native';
+import { exists } from 'react-native-fs';
+import { useDispatch } from 'react-redux';
 import { IBook } from '../../interfaces';
+import { updateBook } from '../../state/booksSlice';
+import { createThumbnail } from '../../utils/thumbnails';
 import { MiikaText } from '../reusable/MiikaText';
 
 interface ThumbnailImageProps {
   book: IBook;
 }
 
-// todo: backup image
-
 // /tmp/com.app.librarian-Inbox/Ticket-Wien-Budapest-3022097197.pdf
-
 export default function ThumbnailImage({ book }: ThumbnailImageProps) {
+  const dispatch = useDispatch();
   // console.log(book.thumbnail, 'humb');
 
   if (!book.thumbnail.uri) {
@@ -29,6 +31,22 @@ export default function ThumbnailImage({ book }: ThumbnailImageProps) {
   const indexOf = uri.indexOf(searchString);
   const uriSlice = uri.slice(indexOf);
   const returnUri = '~' + uriSlice;
+
+  // useEffect(() => {
+  //   // create new image if original image is missing
+  //   // this logic could be bad
+  //   (async () => {
+  //     if (book.thumbnail.originalUri) {
+  //       const originalFileExists = await exists(book.thumbnail.originalUri);
+  //       if (!originalFileExists) {
+  //         const newThumbnail = await createThumbnail(book.copyFileUri);
+  //         if (newThumbnail) {
+  //           dispatch(updateBook({ ...book, thumbnail: newThumbnail }));
+  //         }
+  //       }
+  //     }
+  //   })();
+  // }, [book.thumbnail.uri]);
 
   return (
     <View style={styles.container}>

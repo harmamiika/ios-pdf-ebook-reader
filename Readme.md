@@ -1,29 +1,19 @@
-new-hope is the most up to date branch, you can use it
 -npm run ios
 
+-Add option to finish book
+-Add rate app - button to menu
+
+-Remove garbage from site
+-Add some pics to site
+
+V3:
+-Try to rank site in google
+-Add premium version to get rid of ads
+
 <!-- <h2>Roadmap</h2>
-  -reload book => if book filename is same as picked file => replace
-  -add delete to delete fiel reference
-
--save book in zoom state
--make header title component => wrappaa ui kitten fontin siihen
-
 73. Consent
-    -add concent asking from the docx
+    -add consent asking from the docx
     -figure out how to detect location
-
-STUDY
--react-native cache directory how it works
--filecopyuri, uri - differences
-
-1. MVP - finish lists at least
-   ----At least App info
-   ----Settings
-   ----Library
-   ----(TBD PREMIUM, REFER A FRIND, GIVE FEEDBACK?)
-   ----FAQ / Help
-
---Consider foldering data model - make data model not completely shit
 
 72. Make app responsive to 4 devices
     -learn how to switch simulator device (yt)
@@ -33,10 +23,6 @@ STUDY
 
     NO CODE LOW CODE TASKS
 
-73. Make app icon MVP
-    --buy logo and ads from fiverr 20 -100€
-    --make sample lorem pdf book
-
 KUVISSA:
 1 PDF
 2 PDF lista
@@ -44,8 +30,6 @@ KUVISSA:
 
 Featuret - smooth pdf viewing - manage books - track books
 
-KEKSI NIMI
-77. Send app to review
 V1
 
 ---
@@ -73,6 +57,8 @@ FIXES
 -make library ad position absolute and bottom
 -- so looks maybe a tiny bit better
 
+-reload book => if book filename is same as picked file => replace
+-save zoom state to redux
 --Single book view
 -Big picture
 -show original filename
@@ -81,6 +67,19 @@ FIXES
 -bookmarks
 -started reading
 -folders
+
+1. MVP - finish lists at least
+   ----At least App info
+   ----Settings
+   ----Library
+   ----(TBD PREMIUM, REFER A FRIND, GIVE FEEDBACK?)
+   ----FAQ / Help
+
+--Consider foldering data model - make data model not completely shit
+
+
+STUDY
+-filecopyuri, uri - differences
 
 -add bookmark note
 -change book name
@@ -261,3 +260,14 @@ color: BookMarkColor
   --Disable activating the book
   --in picture show a guide to reload book
   -in book viewer show directions to reload a book -->
+<!-- -make header title component => wrappaa ui kitten fontin siihen -->
+<!--
+73. Make app icon MVP
+    --buy logo and ads from fiverr 20 -100€
+    --make sample lorem pdf book -->
+
+<!-- KEKSI NIMI -->
+<!-- =>create gdpr notices and use them in app -->
+
+<!-- 77. Send app to review -->
+<!-- -create site mvp -->

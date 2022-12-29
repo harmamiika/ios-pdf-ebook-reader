@@ -1,22 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../state';
+import { setActiveBook } from '../../state/booksSlice';
 import SimpleScreen from '../menu-screens/SimpleScreen';
 import { AdmobBannerAd } from '../reusable/ads/BannerAd';
 import { MiikaText } from '../reusable/MiikaText';
 import BookListItem, { screenHeight, screenWidth } from './BookListItem';
 
-export default function Library() {
-  const { bookList } = useSelector((state: RootState) => state.books);
+interface LibraryProps {
+  navigation: any;
+}
 
-  for (let book of bookList) {
-    console.log(book.uri, 'book.uri');
-    // console.log(book.file.fileCopyUri, 'file copy uri');
-    // console.log(book.file.uri, 'file uri');
-  }
+export default function Library({ navigation }: LibraryProps) {
+  const dispatch = useDispatch();
+  const bookList = useSelector((state: RootState) => state.books.bookList);
+  const activeBook = useSelector((state: RootState) => state.books.activeBook);
 
-  // console.log(bookList, 'book List');
+  // not the prettiest solution, but it works
+  useEffect(() => {
+    if (bookList.length === 1 && !activeBook) {
+      dispatch(setActiveBook(bookList[0]));
+    }
+  }, [bookList]);
 
   if (!bookList.length)
     return (
@@ -29,10 +35,10 @@ export default function Library() {
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
         {bookList.map(book => (
-          <BookListItem book={book} key={book.id} />
+          <BookListItem book={book} key={book.id} navigation={navigation} />
         ))}
       </ScrollView>
-      <AdmobBannerAd />
+      <AdmobBannerAd adUnitId="ca-app-pub-8279790179515379/2242175832" />
     </SafeAreaView>
   );
 }

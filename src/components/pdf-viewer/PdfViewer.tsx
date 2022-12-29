@@ -65,8 +65,6 @@ const PdfViewer = () => {
   }, [activeBook]);
 
   const onPageChanged = (page: number, numberOfPages: number) => {
-    console.log(`Current page: ${page}`);
-    console.log(`number of pages ${numberOfPages}`);
     dispatch(updateActiveBookPage(page));
     if (activeBook && !activeBook.totalPages) {
       dispatch(
@@ -81,8 +79,6 @@ const PdfViewer = () => {
 
   const onPdfPress = (event: any) => {
     const positionX = event.nativeEvent.pageX;
-    console.log(positionX, 'positionX');
-
     if (positionX > 250) {
       // @ts-ignore
       this.pdf.setPage(activeBook?.currentPage + 1 || 1);
@@ -99,8 +95,6 @@ const PdfViewer = () => {
     let center = calcCenter(x1, y1, x2, y2);
 
     if (!zoomState.isZooming) {
-      console.log(zoomState, 'zoomState');
-
       const newZoomState = {
         ...zoomState,
         isZooming: true,
@@ -113,16 +107,11 @@ const PdfViewer = () => {
       setZoomState(newZoomState);
     } else {
       let touchZoom = distance / zoomState.initialDistance;
-      console.log(
-        zoomState.initialDistance,
-        'initial distance in activated zoom',
-      );
       let zoom =
         touchZoom * zoomState.initialZoom > zoomState.minZoom
           ? touchZoom * zoomState.initialZoom
           : zoomState.minZoom;
 
-      console.log(zoom, 'zooom');
       setZoomState({
         ...zoomState,
         zoom: zoom,
@@ -188,8 +177,6 @@ const PdfViewer = () => {
             center: undefined,
             distance: undefined,
           });
-          console.log('release');
-          // save zoom in book state
         },
         // hmmmm
         onPanResponderTerminationRequest: (evt, gestureState) => true,
@@ -215,17 +202,6 @@ const PdfViewer = () => {
     })();
   }, [activeBook]);
 
-  useEffect(() => {
-    (async () => {
-      if (activeBook) {
-        const fileExists = await exists(
-          `${LibraryDirectoryPath}/${activeBook.file.name}`,
-        );
-        console.log(fileExists, 'FILE EXISTS?');
-      }
-    })();
-  }, [activeBook]);
-
   const renderMainContent = () => {
     if (!activeBook)
       return (
@@ -243,7 +219,11 @@ const PdfViewer = () => {
       return (
         <SimpleScreen header="File not found">
           <MiikaText text="You should delete this book in the library, then reselect it." />
-          <MiikaText text="If this does not work, the file can't be read with this app." />
+          <MiikaText
+            text="If this does not work, this file can't be read with this app. 
+          A possible, but not certain cause could be weird characters in the file name.
+          You can try to renaming the file and then reselecting it."
+          />
         </SimpleScreen>
       );
     else
@@ -257,8 +237,9 @@ const PdfViewer = () => {
                 enableAnnotationRendering={true}
                 enablePaging={true}
                 source={{
-                  // uri: `${LibraryDirectoryPath}/${activeBook.file.name}`,
-                  uri: activeBook.copyFileUri,
+                  uri: `${LibraryDirectoryPath}/${activeBook.file.name}`,
+                  // uri: activeBook.copyFileUri,
+                  // uri: activeBook.file.uri,
                 }}
                 style={styles.pdf}
                 ref={(pdf: any) => {
