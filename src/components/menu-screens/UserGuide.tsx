@@ -34,14 +34,14 @@ export default function UserGuide() {
         />
       </Paragraph>
 
-      <Paragraph title="The reading view is not working">
+      {/* <Paragraph title="The reading view is not working">
         <BulletPoint text="If the reading view is not working, it is possible you have added a PDF that is not supported by the app." />
         <BulletPoint text="To fix this, you should remove the book from your library." />
         <BulletPoint text="It is possible that the PDFs filename contains unsupported special characters, you can try renaming the file to fix this." />
         <BulletPoint text="It is also possible that the PDF is corrupted, in which case you should try downloading the file again." />
         <BulletPoint text="You can also report any bug at: mypdfbooks.contact@gmail.com." />
         <View style={{ height: 100 }} />
-      </Paragraph>
+      </Paragraph> */}
     </SimpleScreen>
   );
 }
