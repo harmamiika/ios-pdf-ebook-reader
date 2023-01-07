@@ -19,12 +19,12 @@ export const Menu = ({
     //   onPress: () => navigation.navigate('Settings'),
     // },
     {
-      text: 'App info',
-      onPress: () => navigation.navigate('App info'),
-    },
-    {
       text: 'User guide',
       onPress: () => navigation.navigate('UserGuide'),
+    },
+    {
+      text: 'App info',
+      onPress: () => navigation.navigate('App info'),
     },
     // {
     //   text: 'Library',
