@@ -16,6 +16,7 @@ export default function AppInfo() {
       />
       <MiikaText marginBottom={10} text="https://mypdfbooks.vercel.app/" />
       <MiikaText marginBottom={10} text="Version 1.0 - © 2022 Miika Härmä" />
+      <MiikaText marginBottom={10} text="Made in Finland" />
     </SimpleScreen>
   );
 }
