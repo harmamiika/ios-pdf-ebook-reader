@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { IBook } from '../../interfaces';
 import { RootState } from '../../state';
 import { setActiveBook } from '../../state/booksSlice';
 import SimpleScreen from '../menu-screens/SimpleScreen';
@@ -34,7 +35,7 @@ export default function Library({ navigation }: LibraryProps) {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView}>
-        {bookList.map(book => (
+        {bookList.map((book: IBook) => (
           <BookListItem book={book} key={book.id} navigation={navigation} />
         ))}
       </ScrollView>

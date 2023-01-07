@@ -1,6 +1,12 @@
 import { Divider, useTheme } from '@ui-kitten/components';
 import React, { useState } from 'react';
-import { Dimensions, StyleSheet, TouchableHighlight, View } from 'react-native';
+import {
+  Dimensions,
+  StyleSheet,
+  TouchableHighlight,
+  View,
+  ViewStyle,
+} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { IBook } from '../../interfaces';
 import { RootState } from '../../state';
@@ -35,7 +41,7 @@ export default function BookListItem({ book, navigation }: BookListItemProps) {
 
   return (
     <TouchableHighlight onPress={onItemPress}>
-      <View style={styles.itemContainer}>
+      <View style={createItemContainerStyle(theme)}>
         <View style={styles.itemHeading}>
           {/* HEADER */}
           <View style={styles.headerWrapper}>
@@ -67,17 +73,17 @@ export const { width: screenWidth, height: screenHeight } =
 
 export const sideMargin = screenWidth / 15;
 
+const createItemContainerStyle = (theme: any, index?: number): ViewStyle => ({
+  width: screenWidth,
+  height: (1.1 * screenHeight * 1.5) / 5 || 0,
+  backgroundColor: 'white',
+  borderTopColor: theme['text-basic-color'],
+  borderTopWidth: 0.75,
+  display: 'flex',
+  flexDirection: 'column',
+});
+
 const styles = StyleSheet.create({
-  itemContainer: {
-    width: screenWidth,
-    height: (1.1 * screenHeight * 1.5) / 5 || 0,
-    // backgroundColor: 'blue',
-    backgroundColor: 'white',
-    borderTopColor: 'gray',
-    borderTopWidth: 1,
-    display: 'flex',
-    flexDirection: 'column',
-  },
   itemHeading: {
     width: '100%',
     height: (1.7 * screenHeight) / 20 || 0,
