@@ -8,6 +8,7 @@ import SimpleScreen from '../menu-screens/SimpleScreen';
 import { AdmobBannerAd } from '../reusable/ads/BannerAd';
 import { MiikaText } from '../reusable/MiikaText';
 import BookListItem, { screenHeight, screenWidth } from './BookListItem';
+import { StatusBar } from 'react-native';
 
 interface LibraryProps {
   navigation: any;
@@ -34,6 +35,7 @@ export default function Library({ navigation }: LibraryProps) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="dark-content" />
       <ScrollView style={styles.scrollView}>
         {bookList.map((book: IBook) => (
           <BookListItem book={book} key={book.id} navigation={navigation} />

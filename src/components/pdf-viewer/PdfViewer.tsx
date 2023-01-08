@@ -231,7 +231,7 @@ const PdfViewer = () => {
       return (
         <View style={styles.container}>
           <View {...panResponder.panHandlers}>
-            {pdfViewerIsFullScreen && <StatusBar hidden />}
+            <StatusBar hidden={pdfViewerIsFullScreen} barStyle="dark-content" />
             <KeepAwake />
             <TouchableWithoutFeedback onPress={onPdfPress}>
               <Pdf
