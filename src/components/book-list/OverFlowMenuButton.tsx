@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { IBook } from '../../interfaces';
-import { deleteBook } from '../../state/booksSlice';
+import { deleteBook, updateBook } from '../../state/booksSlice';
 import { FontAwesome5Icon } from '../reusable/FontAwesome5Icon';
 import DeleteModal from './DeleteModal';
 
@@ -61,10 +61,33 @@ export default function OverflowMenuButton({ book }: OverflowMenuButtonProps) {
           accessoryLeft={() => <FontAwesome5Icon name="check" size={16} />}
           title="Mark as read"
         /> */}
+
+        <MenuItem
+          title="Mark as read"
+          accessoryLeft={() => (
+            <FontAwesome5Icon name="check" size={16} color={iconColor} />
+          )}
+          onPress={() =>
+            dispatch(updateBook({ ...book, finishDate: new Date().toString() }))
+          }
+        />
+        <MenuItem
+          title="Reset start date"
+          accessoryLeft={() => (
+            <FontAwesome5Icon name="undo" size={16} color={iconColor} />
+          )}
+          onPress={() =>
+            dispatch(updateBook({ ...book, startDate: new Date().toString() }))
+          }
+        />
         <MenuItem
           title="Remove"
           accessoryLeft={() => (
-            <FontAwesome5Icon name="trash-alt" size={16} color={iconColor} />
+            // cancel icon
+            // different than thrash ico
+            <View style={{ paddingRight: 5 }}>
+              <FontAwesome5Icon name="times" size={16} color={iconColor} />
+            </View>
           )}
           onPress={() =>
             // dispatch(showDeleteModal({ isVisible: true, book }))
@@ -74,6 +97,7 @@ export default function OverflowMenuButton({ book }: OverflowMenuButtonProps) {
       </OverflowMenu>
       <DeleteModal
         // ?? ts only error?
+        // @ts-ignore
         deleteBook={book => dispatch(deleteBook(book))}
         isVisible={deleteModalIsVisible}
         setIsVisible={setDeleteModalIsVisible}

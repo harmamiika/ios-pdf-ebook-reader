@@ -14,10 +14,12 @@ export interface IBook {
 
   startDate: string;
   finishDate: string | undefined;
-  lastPdfMountTime: string | undefined;
 
   categories: ICategory[];
   bookmarks: IBookmark[];
+
+  // unused but can exist in memory
+  lastPdfMountTime: string | undefined;
 }
 // TODO: Author?
 
