@@ -1,3 +1,4 @@
+import KeepAwake from '@sayem314/react-native-keep-awake';
 import { TouchableWithoutFeedback } from '@ui-kitten/components/devsupport';
 import React, { useEffect, useMemo, useState } from 'react';
 import {
@@ -231,6 +232,7 @@ const PdfViewer = () => {
         <View style={styles.container}>
           <View {...panResponder.panHandlers}>
             {pdfViewerIsFullScreen && <StatusBar hidden />}
+            <KeepAwake />
             <TouchableWithoutFeedback onPress={onPdfPress}>
               <Pdf
                 singlePage={true}
