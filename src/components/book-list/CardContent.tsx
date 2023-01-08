@@ -1,9 +1,11 @@
+import { useTheme } from '@ui-kitten/components';
 import { format } from 'date-fns';
 import React, { useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { IBook } from '../../interfaces';
 import { screenHeight, sideMargin } from '../../utils/cssHelpers';
 import { CustomIonIcon } from '../reusable/CustomIonIcon';
+import { FontAwesome5Icon } from '../reusable/FontAwesome5Icon';
 import { MiikaText } from '../reusable/MiikaText';
 import StartedReading from './StartedReading';
 import ThumbnailImage from './ThumbnailImage';
@@ -21,7 +23,9 @@ interface CardContentProps {
 // => done !!
 
 export default function CardContent({ book }: CardContentProps) {
-  // console.log(book, 'book');
+  const theme = useTheme();
+  const iconColor = theme['text-basic-color'];
+
   const bookmarksString = useMemo(
     () => book.bookmarks.map(m => m.page.toString()).join(', '),
     [book],
@@ -36,10 +40,10 @@ export default function CardContent({ book }: CardContentProps) {
             flexDirection: 'row',
             alignItems: 'center',
           }}>
-          <CustomIonIcon
-            name="book-sharp"
+          <FontAwesome5Icon
+            name="book"
             size={16}
-            style={{ paddingRight: 20, marginTop: 10 }}
+            style={{ paddingRight: 20, marginTop: 10, color: iconColor }}
           />
 
           <View>
@@ -64,7 +68,7 @@ export default function CardContent({ book }: CardContentProps) {
           <CustomIonIcon
             name="bookmarks-sharp"
             size={16}
-            style={{ paddingRight: 20 }}
+            style={{ paddingRight: 20, color: iconColor }}
           />
           <View>
             <MiikaText
