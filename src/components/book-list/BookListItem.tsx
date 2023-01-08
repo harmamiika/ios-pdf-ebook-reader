@@ -77,8 +77,10 @@ const createItemContainerStyle = (theme: any, index?: number): ViewStyle => ({
   width: screenWidth,
   height: (1.1 * screenHeight * 1.5) / 5 || 0,
   backgroundColor: 'white',
-  borderTopColor: theme['text-basic-color'],
-  borderTopWidth: 0.75,
+  // aka 	color-basic-600
+  // borderTopColor: theme['color-basic-transparent-default-border'],
+  borderTopColor: theme['color-basic-400'],
+  borderTopWidth: 2,
   display: 'flex',
   flexDirection: 'column',
 });
