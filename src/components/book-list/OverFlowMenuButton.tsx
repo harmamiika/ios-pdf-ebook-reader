@@ -81,11 +81,16 @@ export default function OverflowMenuButton({ book }: OverflowMenuButtonProps) {
         <MenuItem
           title="Reset start date"
           accessoryLeft={() => (
-            <FontAwesome5Icon name="undo" size={16} color={iconColor} />
+            <FontAwesome5Icon
+              name="undo"
+              size={16}
+              color={!book.finishDate ? iconColor : disabledTextColor}
+            />
           )}
           onPress={() =>
             dispatch(updateBook({ ...book, startDate: new Date().toString() }))
           }
+          disabled={!!book.finishDate}
         />
         <MenuItem
           title="Remove"
