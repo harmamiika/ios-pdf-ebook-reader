@@ -20,6 +20,7 @@ export default function OverflowMenuButton({ book }: OverflowMenuButtonProps) {
   const dispatch = useDispatch();
   const theme = useTheme();
   const iconColor = theme['text-basic-color'];
+  const disabledTextColor = theme['text-disabled-color'];
   const [menuIsVisible, setMenuIsVisible] = useState<boolean>(false);
 
   const onItemSelect = (index: any) => {
@@ -65,12 +66,18 @@ export default function OverflowMenuButton({ book }: OverflowMenuButtonProps) {
         <MenuItem
           title="Mark as read"
           accessoryLeft={() => (
-            <FontAwesome5Icon name="check" size={16} color={iconColor} />
+            <FontAwesome5Icon
+              name="check"
+              size={16}
+              color={!book.finishDate ? iconColor : disabledTextColor}
+            />
           )}
           onPress={() =>
             dispatch(updateBook({ ...book, finishDate: new Date().toString() }))
           }
+          disabled={!!book.finishDate}
         />
+
         <MenuItem
           title="Reset start date"
           accessoryLeft={() => (

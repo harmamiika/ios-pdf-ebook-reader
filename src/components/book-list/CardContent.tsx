@@ -3,7 +3,9 @@ import React, { useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { IBook } from '../../interfaces';
 import { screenHeight, sideMargin } from '../../utils/cssHelpers';
+import { CustomIonIcon } from '../reusable/CustomIonIcon';
 import { MiikaText } from '../reusable/MiikaText';
+import StartedReading from './StartedReading';
 import ThumbnailImage from './ThumbnailImage';
 
 interface CardContentProps {
@@ -28,30 +30,63 @@ export default function CardContent({ book }: CardContentProps) {
   return (
     <View style={styles.itemBottomSide}>
       <View style={styles.descriptionContainer}>
-        <MiikaText
-          text={`Page ${book?.currentPage}${
-            book.totalPages ? ` / ${book.totalPages}` : ''
-          }`}
-          marginTop={15}
-        />
-
-        <View>
-          <MiikaText
-            text={
-              book.bookmarks.length > 0
-                ? `Bookmarked pages: ${bookmarksString}`
-                : 'No bookmarks'
-            }
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}>
+          <CustomIonIcon
+            name="book-sharp"
+            size={16}
+            style={{ paddingRight: 20, marginTop: 15 }}
           />
+
+          <View>
+            <MiikaText text={`Page: `} marginTop={15} />
+
+            <MiikaText
+              text={`${book?.currentPage}${
+                book.totalPages ? ` / ${book.totalPages}` : ''
+              }`}
+              // marginTop={15}
+              category={'p2'}
+            />
+          </View>
         </View>
 
-        <View>
-          <MiikaText text={`Started reading: `} />
-          <MiikaText
-            text={`${format(new Date(book.startDate), 'EEEE d. MMMM, y')}`}
-            marginBottom={15}
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}>
+          <CustomIonIcon
+            name="bookmarks-sharp"
+            size={16}
+            style={{ paddingRight: 20 }}
           />
+          <View>
+            <MiikaText
+              text={
+                book.bookmarks.length > 0
+                  ? `Bookmarked pages: `
+                  : 'No bookmarks'
+              }
+            />
+
+            {book.bookmarks.length > 0 && (
+              <MiikaText
+                text={`${bookmarksString}`}
+                category="p2"
+                style={{ flexWrap: 'wrap', paddingRight: 50 }}
+                numberOfLines={2}
+              />
+            )}
+          </View>
         </View>
+
+        <StartedReading book={book} />
       </View>
 
       <View style={styles.imageWrapper}>
