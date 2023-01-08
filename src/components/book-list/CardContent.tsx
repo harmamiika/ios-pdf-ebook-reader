@@ -39,11 +39,11 @@ export default function CardContent({ book }: CardContentProps) {
           <CustomIonIcon
             name="book-sharp"
             size={16}
-            style={{ paddingRight: 20, marginTop: 15 }}
+            style={{ paddingRight: 20, marginTop: 10 }}
           />
 
           <View>
-            <MiikaText text={`Page: `} marginTop={15} />
+            <MiikaText text={`Page: `} marginTop={10} />
 
             <MiikaText
               text={`${book?.currentPage}${

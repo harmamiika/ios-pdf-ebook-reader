@@ -61,13 +61,22 @@ export default function StartedReading({ book }: StartedReadingProps) {
             color={iconColor}
           />
 
-          <View>
-            <MiikaText text={`Started reading: `} />
-            <MiikaText
-              text={`${format(new Date(book.startDate), 'd.M.y')}`}
-              marginBottom={15}
-              category={'p2'}
-            />
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+            }}>
+            <View>
+              <MiikaText text={`Started reading: `} />
+            </View>
+            <View>
+              <MiikaText
+                text={`${format(new Date(book.startDate), 'd.M.y')}`}
+                marginBottom={10}
+                category={'p2'}
+              />
+            </View>
           </View>
         </View>
       );
