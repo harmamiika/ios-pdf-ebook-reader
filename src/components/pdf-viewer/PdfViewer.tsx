@@ -80,10 +80,16 @@ const PdfViewer = () => {
 
   const onPdfPress = (event: any) => {
     const positionX = event.nativeEvent.pageX;
-    if (positionX > 250) {
+    console.log('positionX POS POS', positionX);
+    const screenWidth = Dimensions.get('screen').width;
+    console.log(`The maximum value of pageX is: ${screenWidth}`);
+
+    const switchPageArea = screenWidth / 2.5;
+
+    if (positionX > screenWidth - switchPageArea) {
       // @ts-ignore
       this.pdf.setPage(activeBook?.currentPage + 1 || 1);
-    } else if (positionX < 150) {
+    } else if (positionX < switchPageArea) {
       // @ts-ignore
       this.pdf.setPage(activeBook?.currentPage - 1 || 1);
     } else {
