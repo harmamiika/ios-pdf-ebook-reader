@@ -202,6 +202,11 @@ const PdfViewer = () => {
 
   useEffect(() => {
     (async () => {
+      // const ex = await exists(
+      //   decodeURIComponent(activeBook?.copyFileUri || ''),
+      // );
+      // console.log(ex, 'ex filecopyuri');
+
       if (activeBook && isLoading) {
         setIsLoading(true);
         const fileExists = await exists(

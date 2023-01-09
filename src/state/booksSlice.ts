@@ -18,15 +18,23 @@ const savePdf = async (file: IFile) => {
   console.log(name, 'name');
   const newPath = `${LibraryDirectoryPath}/${name}`;
 
-  // const exist = await exists(fileCopyUri.split('%20').join(' '));
-  // console.log(exist, 'FILE COPY URI EXISTS');
-  const fixedFilePath = fileCopyUri.split('%20').join(' ');
+  const exist = await exists(
+    decodeURIComponent(fileCopyUri.split('%20').join(' ')),
+  );
+  console.log(exist, 'FILE COPY URI EXISTS');
+  // const fixedFilePath = decodeURIComponent(fileCopyUri.split('%20').join(' '));
   console.log(newPath, 'newPath');
+  const fixedFilePath = decodeURIComponent(fileCopyUri);
+
   try {
     await copyFile(fixedFilePath, newPath);
+
+    // somehow file copy uri might still keep existing
+    unlink(fixedFilePath).then(() => console.log('ulinked ?'));
+
     return newPath;
   } catch (e) {
-    console.log(e, 'err');
+    console.log(e, 'err örr');
     return undefined;
   }
 };

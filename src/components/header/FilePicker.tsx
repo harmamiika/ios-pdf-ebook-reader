@@ -68,7 +68,7 @@ export const FilePicker = () => {
       iconSize={27}
       style={{
         ...childStyle,
-        marginRight: gap * 0.75,
+        marginRight: gap * 1.5,
       }}
     />
   );
