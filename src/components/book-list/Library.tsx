@@ -9,6 +9,7 @@ import { AdmobBannerAd } from '../reusable/ads/BannerAd';
 import { MiikaText } from '../reusable/MiikaText';
 import BookListItem, { screenHeight, screenWidth } from './BookListItem';
 import { StatusBar } from 'react-native';
+import { useTheme } from '@ui-kitten/components';
 
 interface LibraryProps {
   navigation: any;
@@ -18,6 +19,9 @@ export default function Library({ navigation }: LibraryProps) {
   const dispatch = useDispatch();
   const bookList = useSelector((state: RootState) => state.books.bookList);
   const activeBook = useSelector((state: RootState) => state.books.activeBook);
+
+  const theme = useTheme();
+  const color = theme['text-basic-color'];
 
   // not the prettiest solution, but it works
   useEffect(() => {
@@ -34,7 +38,12 @@ export default function Library({ navigation }: LibraryProps) {
     );
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        borderTopColor: color,
+        borderTopWidth: 1,
+      }}>
       <StatusBar barStyle="dark-content" />
       <ScrollView style={styles.scrollView}>
         {bookList.map((book: IBook) => (
@@ -47,12 +56,6 @@ export default function Library({ navigation }: LibraryProps) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // backgroundColor: 'blue',
-    // display: 'flex',
-    // alignContent: 'flex-end',
-  },
   scrollView: {
     width: screenWidth,
     height: screenHeight,
