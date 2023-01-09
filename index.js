@@ -28,6 +28,7 @@ import AppInfo from './src/components/menu-screens/AppInfo';
 import Settings from './src/components/menu-screens/Settings';
 import UserGuide from './src/components/menu-screens/UserGuide';
 import { MiikaText } from './src/components/reusable/MiikaText';
+import { isTablet } from './src/utils/cssHelpers';
 
 LogBox.ignoreLogs([
   'ViewPropTypes will be removed',
@@ -46,6 +47,8 @@ const Application = () => {
   useEffect(() => {
     InitializeAds();
   }, []);
+
+  const titleMaxLength = isTablet ? 50 : 20;
 
   return (
     <NavigationContainer>
@@ -77,10 +80,10 @@ const Application = () => {
                 category="h5"
                 // todo: track device width and adjust text size accordingly
                 text={
-                  activeBookTitle?.length < 19
+                  activeBookTitle?.length < titleMaxLength
                     ? `${activeBookTitle}`
                     : activeBookTitle
-                    ? `${activeBookTitle?.substring(0, 19)}...`
+                    ? `${activeBookTitle?.substring(0, titleMaxLength)}...`
                     : 'Welcome'
                 }
               />

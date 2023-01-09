@@ -10,3 +10,5 @@ export const topMargin = screenHeight / 50;
 export const headerIconsize = 28;
 
 export const headerIconSidePadding = 15;
+
+export const isTablet = Dimensions.get('screen').width > 500;
