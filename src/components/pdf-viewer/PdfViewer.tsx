@@ -239,7 +239,7 @@ const PdfViewer = () => {
           <View {...panResponder.panHandlers}>
             <StatusBar hidden={pdfViewerIsFullScreen} barStyle="dark-content" />
             <KeepAwake />
-            {activeBook?.currentPage && (
+            {activeBook?.currentPage && !pdfViewerIsFullScreen && (
               <PageJumper
                 activeBook={activeBook}
                 updateActiveBookPage={(page: number) => {

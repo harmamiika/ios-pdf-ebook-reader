@@ -1,7 +1,9 @@
 import { Slider } from '@miblanchard/react-native-slider';
+import { useTheme } from '@ui-kitten/components';
 import React from 'react';
 import { View } from 'react-native';
 import { IBook } from '../../interfaces';
+import { CustomIonIcon } from '../reusable/CustomIonIcon';
 import { MiikaText } from '../reusable/MiikaText';
 
 interface PageJumperProps {
@@ -13,6 +15,9 @@ export default function PageJumper({
   activeBook,
   updateActiveBookPage,
 }: PageJumperProps) {
+  const theme = useTheme();
+  const color = theme['text-basic-color'];
+
   const text = activeBook.totalPages
     ? `${activeBook.currentPage.toString()} / ${activeBook.totalPages.toString()}`
     : activeBook.currentPage.toString();
@@ -32,20 +37,19 @@ export default function PageJumper({
   const trackmarks = activeBook?.bookmarks.map(bm => Number(bm.page));
   console.log(trackmarks, 'markds');
 
-  const renderTrackMarkComponent = (props: any) => {
-    console.log(props, 'props');
-    return <View style={{ backgroundColor: 'blue', width: 2, height: 10 }} />;
+  const renderTrackMarkComponent = (trackMarkNumber: number) => {
+    console.log(trackMarkNumber, 'props');
+    return <CustomIonIcon name="bookmark" size={15} style={{ color: color }} />;
   };
+
+  // todos: asetetele paremmin tabille?
+  // muotoile teksti ? tuleeko badgen sisälle?
+  // add full screen button? - increase clutter + make things super obvious
 
   return (
     <View
       style={{
-        // position: 'absolute',
-        // marginLeft: 'auto',
-        // marginRight: 'auto',
-        // left: 0,
-        // right: 0,
-        backgroundColor: 'red',
+        // backgroundColor: 'red',
         position: 'absolute',
         alignSelf: 'center',
         bottom: '10%',
@@ -55,6 +59,7 @@ export default function PageJumper({
 
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'center',
       }}>
       <MiikaText text={text} />
       {activeBook.totalPages && (
@@ -68,6 +73,10 @@ export default function PageJumper({
             trackClickable={false}
             onValueChange={onSliderChange}
             renderTrackMarkComponent={renderTrackMarkComponent}
+            minimumTrackTintColor={color}
+            maximumTrackTintColor={color}
+            thumbTintColor={color}
+            containerStyle={{ height: 25 }}
           />
         </View>
       )}
