@@ -26,10 +26,13 @@ export default function CardContent({ book }: CardContentProps) {
   const theme = useTheme();
   const iconColor = theme['text-basic-color'];
 
-  const bookmarksString = useMemo(
-    () => book.bookmarks.map(m => m.page.toString()).join(', '),
-    [book],
-  );
+  const bookmarksString = useMemo(() => {
+    const bms = [...book.bookmarks];
+    return bms
+      .sort((a, b) => a.page - b.page)
+      .map(m => m.page.toString())
+      .join(', ');
+  }, [book]);
 
   return (
     <View style={styles.itemBottomSide}>
