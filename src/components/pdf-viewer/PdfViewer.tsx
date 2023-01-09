@@ -13,10 +13,14 @@ import Pdf from 'react-native-pdf';
 import { useDispatch, useSelector } from 'react-redux';
 import { IBook } from '../../interfaces';
 import { RootState } from '../../state';
-import { setActiveBook, updateActiveBookPage } from '../../state/booksSlice';
+import booksSlice, {
+  setActiveBook,
+  updateActiveBookPage,
+} from '../../state/booksSlice';
 import { toggleFullScreen } from '../../state/pdfViewerSlice';
 import SimpleScreen from '../menu-screens/SimpleScreen';
 import { MiikaText } from '../reusable/MiikaText';
+import PageJumper from './PageJumper';
 
 function calcDistance(x1: number, y1: number, x2: number, y2: number) {
   let dx = Math.abs(x1 - x2);
@@ -80,9 +84,9 @@ const PdfViewer = () => {
 
   const onPdfPress = (event: any) => {
     const positionX = event.nativeEvent.pageX;
-    console.log('positionX POS POS', positionX);
+    // console.log('positionX POS POS', positionX);
     const screenWidth = Dimensions.get('screen').width;
-    console.log(`The maximum value of pageX is: ${screenWidth}`);
+    // console.log(`The maximum value of pageX is: ${screenWidth}`);
 
     const switchPageArea = screenWidth / 2.5;
 
@@ -235,6 +239,15 @@ const PdfViewer = () => {
           <View {...panResponder.panHandlers}>
             <StatusBar hidden={pdfViewerIsFullScreen} barStyle="dark-content" />
             <KeepAwake />
+            {activeBook?.currentPage && (
+              <PageJumper
+                activeBook={activeBook}
+                updateActiveBookPage={(page: number) => {
+                  // @ts-ignore
+                  this.pdf.setPage(page);
+                }}
+              />
+            )}
             <TouchableWithoutFeedback onPress={onPdfPress}>
               <Pdf
                 singlePage={true}
@@ -279,6 +292,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     // backgroundColor: 'red',
+    position: 'relative',
   },
   pdf: {
     flex: 1,
