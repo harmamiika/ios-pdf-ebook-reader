@@ -1,7 +1,7 @@
 import { Slider } from '@miblanchard/react-native-slider';
 import { useTheme } from '@ui-kitten/components';
 import React from 'react';
-import { View } from 'react-native';
+import { Dimensions, View } from 'react-native';
 import { IBook } from '../../interfaces';
 import { CustomIonIcon } from '../reusable/CustomIonIcon';
 import { MiikaText } from '../reusable/MiikaText';
@@ -17,7 +17,6 @@ export default function PageJumper({
 }: PageJumperProps) {
   const theme = useTheme();
   const color = theme['text-basic-color'];
-
   const text = activeBook.totalPages
     ? `${activeBook.currentPage.toString()} / ${activeBook.totalPages.toString()}`
     : activeBook.currentPage.toString();
@@ -42,9 +41,9 @@ export default function PageJumper({
     return <CustomIonIcon name="bookmark" size={15} style={{ color: color }} />;
   };
 
-  // todos: asetetele paremmin tabille?
-  // muotoile teksti ? tuleeko badgen sisälle?
-  // add full screen button? - increase clutter + make things super obvious
+  // better way to do this?
+  const isTablet = Dimensions.get('screen').width > 500;
+  console.log(Dimensions.get('screen').width, 'HIGH');
 
   return (
     <View
@@ -53,30 +52,37 @@ export default function PageJumper({
         position: 'absolute',
         alignSelf: 'center',
         bottom: '10%',
-        width: 300,
-        height: 50,
+        width: Dimensions.get('screen').width * 0.8,
+        height: isTablet ? 70 : 60,
         zIndex: 9999,
-
+        // backgroundColor: lightGray,
+        backgroundColor: 'white',
+        borderColor: color,
+        borderWidth: isTablet ? 1 : 1,
+        borderRadius: 10,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-      <MiikaText text={text} />
+      <MiikaText text={text} category={'p1'} />
       {activeBook.totalPages && (
-        <View style={{ width: '100%' }}>
+        <View
+          style={{
+            width: '95%',
+          }}>
           <Slider
             minimumValue={1}
             step={1}
             maximumValue={activeBook.totalPages}
             value={activeBook.currentPage}
             trackMarks={trackmarks}
-            trackClickable={false}
+            // trackClickable={false}
             onValueChange={onSliderChange}
             renderTrackMarkComponent={renderTrackMarkComponent}
             minimumTrackTintColor={color}
             maximumTrackTintColor={color}
             thumbTintColor={color}
-            containerStyle={{ height: 25 }}
+            containerStyle={{ height: 20 }}
           />
         </View>
       )}
