@@ -12,3 +12,7 @@ export function createAppUri(originalUri: string, searchString: string) {
   const uriSlice = originalUri.slice(indexOf);
   return '~' + uriSlice;
 }
+
+// export function getAppUri(uri: string) {
+//   return;
+// }

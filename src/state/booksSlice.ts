@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
 import { DocumentPickerResponse } from 'react-native-document-picker';
-import {
+import RNFS, {
   copyFile,
   exists,
   LibraryDirectoryPath,
@@ -12,18 +12,19 @@ import { createThumbnail, removeThumbnail } from '../utils/thumbnails';
 import { IBook, IBookmark, ICategory, IFile } from './../interfaces';
 import { createBook } from './createBook';
 
+// CURRENT PATH WHERE USED FILE EXISTS
+
 const savePdf = async (file: IFile) => {
   // todo: add check if there is space on device
   const { name, fileCopyUri } = file;
   console.log(name, 'name');
   const newPath = `${LibraryDirectoryPath}/${name}`;
 
-  const exist = await exists(
-    decodeURIComponent(fileCopyUri.split('%20').join(' ')),
-  );
-  console.log(exist, 'FILE COPY URI EXISTS');
+  // const exist = await exists(
+  //   decodeURIComponent(newPath),
+  // );
+  // console.log(exist, 'FILE COPY URI EXISTS');
   // const fixedFilePath = decodeURIComponent(fileCopyUri.split('%20').join(' '));
-  console.log(newPath, 'newPath');
   const fixedFilePath = decodeURIComponent(fileCopyUri);
 
   try {
@@ -40,9 +41,25 @@ const savePdf = async (file: IFile) => {
 };
 
 const deletePdfCopy = async (book: IBook) => {
-  const { copyFileUri } = book;
+  const { copyFileUri, file } = book;
   try {
-    await unlink(copyFileUri);
+    // const meme = await unlink(copyFileUri);
+    // console.log(meme, 'unlink undecoded copyFileUri');
+
+    // remove
+
+    // const exist = await exists(
+    //   decodeURIComponent(fileCopyUri.split('%20').join(' ')),
+    // );
+    // const meme2 = await unlink(decodeURIComponent(copyFileUri));
+    // console.log(meme2, 'unlink decoded copyFileUri');
+
+    const meme3 = await unlink(`${LibraryDirectoryPath}/${file.name}`);
+    console.log(meme3, 'unlinked undecoded library');
+
+    RNFS.readdir(LibraryDirectoryPath).then(res =>
+      console.log(res, 'library dir contetns after pdf delete'),
+    );
   } catch (e) {
     console.log(e, 'err');
   }
