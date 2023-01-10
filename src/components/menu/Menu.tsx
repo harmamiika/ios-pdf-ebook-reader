@@ -55,7 +55,7 @@ export const Menu = ({
           <MiikaMenuItem text={item.text} onPress={item.onPress} key={index} />
         ))}
       </View>
-      <AdmobBannerAd adUnitId="ca-app-pub-8279790179515379/2242175832" />
+      <AdmobBannerAd adUnitId="ca-app-pub-8279790179515379/6306346256" />
     </SafeAreaView>
   );
 };
