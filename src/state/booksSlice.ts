@@ -1,12 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
 import { DocumentPickerResponse } from 'react-native-document-picker';
-import RNFS, {
-  copyFile,
-  exists,
-  LibraryDirectoryPath,
-  unlink,
-} from 'react-native-fs';
+import { copyFile, LibraryDirectoryPath, unlink } from 'react-native-fs';
 import uuid from 'react-native-uuid';
 import { createThumbnail, removeThumbnail } from '../utils/thumbnails';
 import { IBook, IBookmark, ICategory, IFile } from './../interfaces';
@@ -41,27 +36,14 @@ const savePdf = async (file: IFile) => {
 };
 
 const deletePdfCopy = async (book: IBook) => {
-  const { copyFileUri, file } = book;
+  const { file } = book;
   try {
-    // const meme = await unlink(copyFileUri);
-    // console.log(meme, 'unlink undecoded copyFileUri');
-
-    // remove
-
-    // const exist = await exists(
-    //   decodeURIComponent(fileCopyUri.split('%20').join(' ')),
+    await unlink(`${LibraryDirectoryPath}/${file.name}`);
+    // RNFS.readdir(LibraryDirectoryPath).then(res =>
+    //   console.log(res, 'library dir contetns after pdf delete'),
     // );
-    // const meme2 = await unlink(decodeURIComponent(copyFileUri));
-    // console.log(meme2, 'unlink decoded copyFileUri');
-
-    const meme3 = await unlink(`${LibraryDirectoryPath}/${file.name}`);
-    console.log(meme3, 'unlinked undecoded library');
-
-    RNFS.readdir(LibraryDirectoryPath).then(res =>
-      console.log(res, 'library dir contetns after pdf delete'),
-    );
   } catch (e) {
-    console.log(e, 'err');
+    console.log(e, 'err in delete pdf ccopy');
   }
 };
 

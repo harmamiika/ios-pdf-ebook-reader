@@ -1,5 +1,4 @@
-import { logUrlExists } from './testingHelpers';
-import { unlink, LibraryDirectoryPath } from 'react-native-fs';
+import { LibraryDirectoryPath, unlink } from 'react-native-fs';
 import PdfThumbnail from 'react-native-pdf-thumbnail';
 import { createAppUri, thumbnailUriSearchString } from './uri';
 
@@ -26,7 +25,9 @@ export const removeThumbnail = async (path: string) => {
 
   try {
     const url = LibraryDirectoryPath + '/Caches/' + fileName;
-    await logUrlExists(decodeURIComponent(url));
+    // const url2 = createAppUri(path, thumbnailUriSearchString);
+    // console.log(url2, 'url2');
+    // await logUrlExists(decodeURIComponent(url));
     await unlink(decodeURIComponent(url));
     console.log('REMOVED SUCCESSFLULLY THUMBNAIL');
   } catch (e) {

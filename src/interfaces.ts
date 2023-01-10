@@ -6,7 +6,6 @@ export interface IBook {
   // MINIMIZE THIS
   uri: string;
 
-  copyFileUri: string;
   copyFile: {};
 
   totalPages: number | undefined;
@@ -20,6 +19,9 @@ export interface IBook {
 
   // unused but can exist in memory
   lastPdfMountTime: string | undefined;
+
+  // Oli v1ssä, kuitenkin turha koska library path muuttuu
+  // copyFileUri: string;
 }
 // TODO: Author?
 
