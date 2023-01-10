@@ -78,7 +78,9 @@ export default function PageJumper({
             trackMarks={trackmarks}
             // trackClickable={false}
             onValueChange={onSliderChange}
-            renderTrackMarkComponent={renderTrackMarkComponent}
+            renderTrackMarkComponent={
+              trackmarks.length > 0 ? renderTrackMarkComponent : undefined
+            }
             minimumTrackTintColor={color}
             maximumTrackTintColor={color}
             thumbTintColor={color}
