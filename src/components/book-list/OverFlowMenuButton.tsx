@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 import { IBook } from '../../interfaces';
 import { deleteBook, updateBook } from '../../state/booksSlice';
 import { FontAwesome5Icon } from '../reusable/FontAwesome5Icon';
-import DeleteModal from './DeleteModal';
+import LibraryModal from './LibraryModal';
 
 interface OverflowMenuButtonProps {
   book: IBook;
@@ -107,10 +107,10 @@ export default function OverflowMenuButton({ book }: OverflowMenuButtonProps) {
           }
         />
       </OverflowMenu>
-      <DeleteModal
+      <LibraryModal
         // ?? ts only error?
         // @ts-ignore
-        deleteBook={book => dispatch(deleteBook(book))}
+        onConfirm={book => dispatch(deleteBook(book))}
         isVisible={deleteModalIsVisible}
         setIsVisible={setDeleteModalIsVisible}
         book={book}
