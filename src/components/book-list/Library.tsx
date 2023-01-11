@@ -1,5 +1,6 @@
+import { useTheme } from '@ui-kitten/components';
 import React, { useEffect } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
+import { SafeAreaView, ScrollView, StatusBar, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { IBook } from '../../interfaces';
 import { RootState } from '../../state';
@@ -8,8 +9,6 @@ import SimpleScreen from '../menu-screens/SimpleScreen';
 import { AdmobBannerAd } from '../reusable/ads/BannerAd';
 import { MiikaText } from '../reusable/MiikaText';
 import BookListItem, { screenHeight, screenWidth } from './BookListItem';
-import { StatusBar } from 'react-native';
-import { useTheme } from '@ui-kitten/components';
 
 interface LibraryProps {
   navigation: any;

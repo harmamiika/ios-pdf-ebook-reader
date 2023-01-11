@@ -1,33 +1,22 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { WritableDraft } from 'immer/dist/internal';
 import { DocumentPickerResponse } from 'react-native-document-picker';
-import { copyFile, LibraryDirectoryPath, unlink } from 'react-native-fs';
+import { LibraryDirectoryPath, moveFile, unlink } from 'react-native-fs';
 import uuid from 'react-native-uuid';
+import { clearCacheDir } from '../utils/clearCacheDir';
 import { createThumbnail, removeThumbnail } from '../utils/thumbnails';
 import { IBook, IBookmark, ICategory, IFile } from './../interfaces';
 import { createBook } from './createBook';
 
-// CURRENT PATH WHERE USED FILE EXISTS
-
 const savePdf = async (file: IFile) => {
   // todo: add check if there is space on device
   const { name, fileCopyUri } = file;
-  console.log(name, 'name');
   const newPath = `${LibraryDirectoryPath}/${name}`;
-
-  // const exist = await exists(
-  //   decodeURIComponent(newPath),
-  // );
-  // console.log(exist, 'FILE COPY URI EXISTS');
-  // const fixedFilePath = decodeURIComponent(fileCopyUri.split('%20').join(' '));
   const fixedFilePath = decodeURIComponent(fileCopyUri);
 
   try {
-    await copyFile(fixedFilePath, newPath);
-
-    // somehow file copy uri might still keep existing
-    unlink(fixedFilePath).then(() => console.log('ulinked ?'));
-
+    await moveFile(fixedFilePath, newPath);
+    await clearCacheDir();
     return newPath;
   } catch (e) {
     console.log(e, 'err örr');
@@ -39,9 +28,6 @@ const deletePdfCopy = async (book: IBook) => {
   const { file } = book;
   try {
     await unlink(`${LibraryDirectoryPath}/${file.name}`);
-    // RNFS.readdir(LibraryDirectoryPath).then(res =>
-    //   console.log(res, 'library dir contetns after pdf delete'),
-    // );
   } catch (e) {
     console.log(e, 'err in delete pdf ccopy');
   }

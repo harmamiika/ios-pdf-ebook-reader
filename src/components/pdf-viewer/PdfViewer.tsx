@@ -13,10 +13,7 @@ import Pdf from 'react-native-pdf';
 import { useDispatch, useSelector } from 'react-redux';
 import { IBook } from '../../interfaces';
 import { RootState } from '../../state';
-import booksSlice, {
-  setActiveBook,
-  updateActiveBookPage,
-} from '../../state/booksSlice';
+import { setActiveBook, updateActiveBookPage } from '../../state/booksSlice';
 import { toggleFullScreen } from '../../state/pdfViewerSlice';
 import SimpleScreen from '../menu-screens/SimpleScreen';
 import { MiikaText } from '../reusable/MiikaText';
@@ -206,7 +203,6 @@ const PdfViewer = () => {
       //   decodeURIComponent(activeBook?.copyFileUri || ''),
       // );
       // console.log(ex, 'ex filecopyuri');
-
       if (activeBook && isLoading) {
         setIsLoading(true);
         const fileExists = await exists(
@@ -260,8 +256,6 @@ const PdfViewer = () => {
                 enablePaging={true}
                 source={{
                   uri: `${LibraryDirectoryPath}/${activeBook.file.name}`,
-                  // uri: activeBook.copyFileUri,
-                  // uri: activeBook.file.uri,
                 }}
                 style={styles.pdf}
                 ref={(pdf: any) => {

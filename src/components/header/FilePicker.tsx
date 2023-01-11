@@ -3,8 +3,6 @@ import DocumentPicker from 'react-native-document-picker';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../state';
 import { addNewBook } from '../../state/booksSlice';
-
-import { FontAwesome5Icon } from '../reusable/FontAwesome5Icon';
 import { IconButton, IconType } from '../reusable/IconButton';
 
 export const FilePicker = () => {
@@ -19,14 +17,6 @@ export const FilePicker = () => {
         copyTo: 'cachesDirectory',
         // mode: 'import'
       });
-      //Printing the log realted to the file
-      console.log('res : ' + JSON.stringify(res));
-      console.log('URI : ' + res[0].uri);
-      console.log('Type : ' + res[0].type);
-      console.log('File Name : ' + res[0].name);
-      console.log('File Size : ' + res[0].size);
-      //Setting the state to show single file attributes
-      console.log(res, 'res2');
 
       // FIXAA TÄMÄ
       if (bookList.find(b => b.file.name === res[0].name)) {
