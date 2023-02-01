@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IBook } from '../../interfaces';
 import { RootState } from '../../state';
 import { setActiveBook } from '../../state/booksSlice';
+import TestButtons from '../../utils/TestButtons';
 import SimpleScreen from '../menu-screens/SimpleScreen';
 import { AdmobBannerAd } from '../reusable/ads/BannerAd';
 import { MiikaText } from '../reusable/MiikaText';
@@ -44,6 +45,7 @@ export default function Library({ navigation }: LibraryProps) {
         borderTopWidth: 1,
       }}>
       <StatusBar barStyle="dark-content" />
+      <TestButtons />
       <ScrollView style={styles.scrollView}>
         {bookList.map((book: IBook) => (
           <BookListItem book={book} key={book.id} navigation={navigation} />

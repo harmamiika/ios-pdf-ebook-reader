@@ -18,6 +18,12 @@ import { toggleFullScreen } from '../../state/pdfViewerSlice';
 import SimpleScreen from '../menu-screens/SimpleScreen';
 import { MiikaText } from '../reusable/MiikaText';
 import PageJumper from './PageJumper';
+import { useFileSystem } from '@epubjs-react-native/file-system';
+
+import { Reader, ReaderProvider } from '@epubjs-react-native/core';
+import WebView from 'react-native-webview';
+import { EPubReader } from './EPubReader';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 function calcDistance(x1: number, y1: number, x2: number, y2: number) {
   let dx = Math.abs(x1 - x2);
@@ -88,8 +94,16 @@ const PdfViewer = () => {
     const switchPageArea = screenWidth / 2.5;
 
     if (positionX > screenWidth - switchPageArea) {
-      // @ts-ignore
-      this.pdf.setPage(activeBook?.currentPage + 1 || 1);
+      console.log('yo whats up');
+      if (activeBook?.file.type === 'application/pdf') {
+        // @ts-ignore
+        this.pdf.setPage(activeBook?.currentPage + 1 || 1);
+      } else {
+        console.log('TIGGER');
+        updateActiveBookPage(
+          activeBook?.currentPage ? activeBook.currentPage + 1 : 1,
+        );
+      }
     } else if (positionX < switchPageArea) {
       // @ts-ignore
       this.pdf.setPage(activeBook?.currentPage - 1 || 1);
@@ -137,12 +151,16 @@ const PdfViewer = () => {
       const distanceX = swipeState.center.x - x;
       const distanceY = swipeState.center.y - y;
       // reset swipe is not necessary?
-      if (distanceX > 50 || distanceY > 50) {
-        // @ts-ignore
-        this.pdf.setPage(activeBook?.currentPage + 1 || 1);
-      } else if (distanceX < -50 || distanceY < -50) {
-        // @ts-ignore
-        this.pdf.setPage(activeBook.currentPage - 1);
+      if (activeBook?.file.type === 'application/pdf') {
+        if (distanceX > 50 || distanceY > 50) {
+          // @ts-ignore
+          this.pdf.setPage(activeBook?.currentPage + 1 || 1);
+        } else if (distanceX < -50 || distanceY < -50) {
+          // @ts-ignore
+          this.pdf.setPage(activeBook.currentPage - 1);
+        }
+      } else {
+        console.log('yo');
       }
     }
   };
@@ -214,6 +232,16 @@ const PdfViewer = () => {
     })();
   }, [activeBook]);
 
+  (async function fileExists(path: string) {
+    try {
+      const ex = await exists(path);
+      console.log(ex, 'active book library path exists');
+      console.log(path, 'path');
+    } catch (e) {
+      console.log(e, 'e');
+    }
+  })(`${LibraryDirectoryPath}/${activeBook?.file.name}`);
+
   const renderMainContent = () => {
     if (!activeBook)
       return (
@@ -240,35 +268,66 @@ const PdfViewer = () => {
           <View {...panResponder.panHandlers}>
             <StatusBar hidden={pdfViewerIsFullScreen} barStyle="dark-content" />
             <KeepAwake />
-            {activeBook?.currentPage && !pdfViewerIsFullScreen && (
-              <PageJumper
-                activeBook={activeBook}
-                updateActiveBookPage={(page: number) => {
-                  // @ts-ignore
-                  this.pdf.setPage(page);
-                }}
-              />
-            )}
+            {activeBook?.currentPage &&
+              !pdfViewerIsFullScreen &&
+              activeBook.file.type === 'application/pdf' && (
+                <PageJumper
+                  activeBook={activeBook}
+                  updateActiveBookPage={(page: number) => {
+                    // @ts-ignore
+                    this.pdf.setPage(page);
+                  }}
+                />
+              )}
             <TouchableWithoutFeedback onPress={onPdfPress}>
-              <Pdf
-                singlePage={true}
-                enableAnnotationRendering={true}
-                enablePaging={true}
-                source={{
-                  uri: `${LibraryDirectoryPath}/${activeBook.file.name}`,
-                }}
-                style={styles.pdf}
-                ref={(pdf: any) => {
-                  // @ts-ignore
-                  this.pdf = pdf;
-                }}
-                onPageChanged={onPageChanged}
-                // @ts-ignore
-                onLoadComplete={() => this.pdf.setPage(activeBook.currentPage)}
-                minScale={1}
-                maxScale={3}
-                scale={zoomState.zoom}
-              />
+              {activeBook.file.type === 'application/pdf' && (
+                <Pdf
+                  singlePage={true}
+                  enableAnnotationRendering={true}
+                  enablePaging={true}
+                  source={{
+                    uri: `${LibraryDirectoryPath}/${activeBook.file.name}`,
+                  }}
+                  style={styles.pdf}
+                  ref={(pdf: any) => {
+                    // @ts-ignore
+                    this.pdf = pdf;
+                  }}
+                  onPageChanged={onPageChanged}
+                  onLoadComplete={() =>
+                    // @ts-ignore
+
+                    this.pdf.setPage(activeBook.currentPage)
+                  }
+                  minScale={1}
+                  maxScale={3}
+                  scale={zoomState.zoom}
+                />
+              )}
+              {activeBook.file.type === 'application/epub+zip' && (
+                // <ReaderProvider>
+                //   <Reader
+                //     src={`${LibraryDirectoryPath}/${activeBook.file.name}`}
+                //     fileSystem={useFileSystem}
+                //     width={Dimensions.get('window').width}
+                //     height={Dimensions.get('window').height}
+                //     enableSwipe={true}
+                //     key={2}
+                //   />
+                // </ReaderProvider>
+                // <SafeAreaView>
+                <ReaderProvider>
+                  <EPubReader activeBook={activeBook} />
+                </ReaderProvider>
+                // </SafeAreaView>
+                // <WebView
+                //   source={{
+                //     uri: `${LibraryDirectoryPath}/${activeBook.file.name}`,
+                //   }}
+                //   allowFileAccess={true}
+                //   style={{ marginTop: 20 }}
+                // />
+              )}
             </TouchableWithoutFeedback>
           </View>
         </View>

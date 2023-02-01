@@ -1,4 +1,5 @@
 import React from 'react';
+import { Alert } from 'react-native';
 import DocumentPicker from 'react-native-document-picker';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../state';
@@ -12,22 +13,30 @@ export const FilePicker = () => {
   const getFile = async () => {
     try {
       const res = await DocumentPicker.pick({
-        type: [DocumentPicker.types.pdf],
+        // type: [DocumentPicker.types.pdf, 'application/pdf', 'com.adobe.epub-container'],
+        type: [
+          // DocumentPicker.types.pdf,
+          DocumentPicker.types.allFiles,
+          // 'application/pdf',
+          // 'com.adobe.epub-container',
+        ],
         // DocumentPicker.types.allFiles
         copyTo: 'cachesDirectory',
         // mode: 'import'
       });
 
-      // FIXAA TÄMÄ
-      if (bookList.find(b => b.file.name === res[0].name)) {
+      if (
+        res[0].type !== 'application/pdf' &&
+        res[0].type !== 'application/epub+zip'
+      ) {
+        Alert.alert('Only pdf and epub files are supported');
+      } else if (bookList.find(b => b.file.name === res[0].name)) {
         console.log('duplicate file');
         console.log(res[0], 'ress');
-        // @ts-ignore
-        alert('Book with this filename already exists');
+        Alert.alert('Book with this filename already exists');
       } else {
+        // success case
         console.log(res[0], 'resssRESS');
-        // HUOM
-
         // @ts-ignore
         dispatch(addNewBook(res[0]));
       }
@@ -37,8 +46,7 @@ export const FilePicker = () => {
         //If user canceled the document selection
       } else {
         //For Unknown Errorgit
-        // @ts-ignore
-        alert('Unknown Error: ' + JSON.stringify(err));
+        Alert.alert('Unknown Error: ' + JSON.stringify(err));
         throw err;
       }
     }

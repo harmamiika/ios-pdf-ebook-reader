@@ -18,7 +18,7 @@ export default function ThumbnailImage({ book }: ThumbnailImageProps) {
 
   // console.log(book.thumbnail, 'humb');
 
-  if (!book.thumbnail.uri) {
+  if (!book.thumbnail.uri && book.file.type === 'application/pdf') {
     return (
       <View>
         <MiikaText text="no thumbnail" />
@@ -30,8 +30,8 @@ export default function ThumbnailImage({ book }: ThumbnailImageProps) {
 
   const uri = book.thumbnail.uri;
   const searchString = '/Library/Caches/';
-  const indexOf = uri.indexOf(searchString);
-  const uriSlice = uri.slice(indexOf);
+  const indexOf = uri?.indexOf(searchString);
+  const uriSlice = uri?.slice(indexOf);
   const returnUri = '~' + uriSlice;
 
   // useEffect(() => {
@@ -52,13 +52,19 @@ export default function ThumbnailImage({ book }: ThumbnailImageProps) {
 
   return (
     <View style={styles.container}>
-      <Image
-        source={{
-          // uri: returnUri,
-          uri: book.thumbnail.uri,
-        }}
-        style={styles.image}
-      />
+      {book.file.type === 'application/pdf' ? (
+        <Image
+          source={{
+            // uri: returnUri,
+            uri: book.thumbnail.uri,
+          }}
+          style={styles.image}
+        />
+      ) : (
+        <View>
+          <MiikaText text="YO" />
+        </View>
+      )}
     </View>
   );
 }

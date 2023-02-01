@@ -75,7 +75,8 @@ export const addNewBook = createAsyncThunk(
   'books/addBook',
   async (file: DocumentPickerResponse) => {
     let thumbnail;
-    if (file.fileCopyUri) {
+
+    if (file.type === 'application&pdf' && file.fileCopyUri) {
       thumbnail = await createThumbnail(file.fileCopyUri);
     }
     // await createPdfCopy(file as IFile);
