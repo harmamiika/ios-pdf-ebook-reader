@@ -10,8 +10,13 @@ import { useDispatch } from 'react-redux';
 import { setActiveBook } from '../../state/booksSlice';
 import { WebView } from 'react-native-webview';
 import RNFS from 'react-native-fs';
-// import { Book } from "epubjs-react-native";
 
+// import htmlContent from '../../assets/epub.html';
+// const htmlContent = require('../../assets/epub.html');
+
+// const html = require('./assets/epub.html');
+
+// import { Book } from "epubjs-react-native";
 interface ReaderProps {
   activeBook: IBook;
   server: any;
@@ -38,7 +43,6 @@ const MyEpubViewer = ({ activeBook }: { activeBook: IBook }) => {
     );
   }
 
-  console.log('yo');
   return null;
 };
 
@@ -67,7 +71,7 @@ export function EPubReader({ activeBook, server }: ReaderProps) {
   React.useEffect(() => {
     // tsekkaa onko kauempana kuin max page
     //   goToLocation(activeBook?.currentPage.toString() || '9');
-    goToLocation('1');
+    goToLocation('');
     // set max page to current location if higher thgan max poage
     console.log('executed');
     // if (activeBook.currentPage !== 1) {
@@ -207,12 +211,15 @@ export function EPubReader({ activeBook, server }: ReaderProps) {
         //   onResized={size => console.log(size, 'resized')}
         //   height={500}
         //   enableSwipe={true}
-        key={2} */}
-      {/* /> */}
+        key={2}
+      /> */}
       {/* <Epub
         src={`${LibraryDirectoryPath}/${activeBook.file.name}`}
         flow={'paginated'}
       /> */}
+
+      {/* <MyEpubViewer activeBook={activeBook} /> */}
+
       {server?.url ? (
         <>
           <WebView
@@ -226,7 +233,7 @@ export function EPubReader({ activeBook, server }: ReaderProps) {
             scalesPageToFit={true}
             allowsInlineMediaPlayback={true}
             domStorageEnabled={true}
-            // useWebKit={true}
+            useWebKit={true}
             injectedJavaScript={runFirst}
             style={{ flex: 1, marginBottom: 20 }}
             // style={[{ backgroundColor: 'red' }]}
@@ -239,7 +246,7 @@ export function EPubReader({ activeBook, server }: ReaderProps) {
 
             // get path to epub file inside assets folder for ios
 
-            source={{ uri: server.url }}
+            source={{ html: server.url }}
             // source={{ html: '<h1>Hello world</h1>' }}
             // style={{ marginTop: 20, height: 500, width: 400 }}
           />

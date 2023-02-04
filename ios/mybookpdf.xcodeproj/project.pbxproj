@@ -15,6 +15,7 @@
 		7699B88040F8A987B510C191 /* libPods-mybookpdf-mybookpdfTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-mybookpdf-mybookpdfTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		A216C6BF2840044B00735164 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = A216C6BE2840044B00735164 /* Fonts */; };
+		A296671F298E4D1D00D32AFA /* epub.html in Resources */ = {isa = PBXBuildFile; fileRef = A296671E298E4D1D00D32AFA /* epub.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = mybookpdf/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-mybookpdf-mybookpdfTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mybookpdf-mybookpdfTests.release.xcconfig"; path = "Target Support Files/Pods-mybookpdf-mybookpdfTests/Pods-mybookpdf-mybookpdfTests.release.xcconfig"; sourceTree = "<group>"; };
 		A216C6BE2840044B00735164 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = "../node_modules/react-native-vector-icons/Fonts"; sourceTree = "<group>"; };
+		A296671E298E4D1D00D32AFA /* epub.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = epub.html; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -119,6 +121,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				A296671D298E4D1D00D32AFA /* assets */,
 				13B07FAE1A68108700A75B9A /* mybookpdf */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* mybookpdfTests */,
@@ -138,6 +141,15 @@
 				00E356EE1AD99517003FC87E /* mybookpdfTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A296671D298E4D1D00D32AFA /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				A296671E298E4D1D00D32AFA /* epub.html */,
+			);
+			name = assets;
+			path = ../assets;
 			sourceTree = "<group>";
 		};
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
@@ -246,6 +258,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A296671F298E4D1D00D32AFA /* epub.html in Resources */,
 				A216C6BF2840044B00735164 /* Fonts in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,

@@ -129,6 +129,7 @@ const Root = () => {
   const colorScheme = Appearance.getColorScheme();
   console.log(colorScheme, 'color shcmee');
   const persistor = persistStore(store);
+
   return (
     <ApplicationProvider {...eva} theme={eva.light}>
       <Provider store={store}>

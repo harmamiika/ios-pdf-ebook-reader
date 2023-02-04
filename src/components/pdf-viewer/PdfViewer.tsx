@@ -24,6 +24,7 @@ import { Reader, ReaderProvider } from '@epubjs-react-native/core';
 import WebView from 'react-native-webview';
 import { EPubReader } from './EPubReader';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useServer } from './useServer';
 
 function calcDistance(x1: number, y1: number, x2: number, y2: number) {
   let dx = Math.abs(x1 - x2);
@@ -64,6 +65,9 @@ const PdfViewer = () => {
     center: undefined,
     distance: undefined,
   });
+
+  const server = useServer(activeBook);
+  console.log(server, 'server');
 
   useEffect(() => {
     if (prevBook?.id !== activeBook?.id) {
@@ -317,7 +321,7 @@ const PdfViewer = () => {
                 // </ReaderProvider>
                 // <SafeAreaView>
                 <ReaderProvider>
-                  <EPubReader activeBook={activeBook} />
+                  <EPubReader activeBook={activeBook} server={server} />
                 </ReaderProvider>
                 // </SafeAreaView>
                 // <WebView
