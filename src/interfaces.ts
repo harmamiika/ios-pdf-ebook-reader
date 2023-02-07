@@ -6,6 +6,8 @@ export interface IBook {
   // MINIMIZE THIS
   uri: string;
 
+  epubPages?: any[];
+
   copyFile: {};
 
   totalPages: number | undefined;
@@ -24,6 +26,18 @@ export interface IBook {
   // copyFileUri: string;
 }
 // TODO: Author?
+
+export interface IEPubPageInfo {
+  page: number;
+  cfi: string | undefined;
+  percentage: number | undefined;
+  currentLocation: {
+    atEnd?: boolean;
+    end?: any;
+    start?: any;
+    // & more
+  };
+}
 
 export interface ICategory {
   id: string;

@@ -25,6 +25,7 @@ import WebView from 'react-native-webview';
 import { EPubReader } from './EPubReader';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useServer } from './useServer';
+import EPubWebView from './EPubWebView';
 
 function calcDistance(x1: number, y1: number, x2: number, y2: number) {
   let dx = Math.abs(x1 - x2);
@@ -66,9 +67,6 @@ const PdfViewer = () => {
     distance: undefined,
   });
 
-  const server = useServer(activeBook);
-  console.log(server, 'server');
-
   useEffect(() => {
     if (prevBook?.id !== activeBook?.id) {
       setPrevBook(activeBook);
@@ -98,21 +96,26 @@ const PdfViewer = () => {
     const switchPageArea = screenWidth / 2.5;
 
     if (positionX > screenWidth - switchPageArea) {
-      console.log('yo whats up');
       if (activeBook?.file.type === 'application/pdf') {
         // @ts-ignore
         this.pdf.setPage(activeBook?.currentPage + 1 || 1);
       } else {
-        console.log('TIGGER');
-        updateActiveBookPage(
-          activeBook?.currentPage ? activeBook.currentPage + 1 : 1,
-        );
+        console.log('todo');
+        // updateActiveBookPage(
+        //   activeBook?.currentPage ? activeBook.currentPage + 1 : 1,
+        // );
       }
     } else if (positionX < switchPageArea) {
-      // @ts-ignore
-      this.pdf.setPage(activeBook?.currentPage - 1 || 1);
+      if (activeBook?.file.type === 'application/pdf') {
+        // @ts-ignore
+        this.pdf.setPage(activeBook?.currentPage - 1 || 1);
+      } else {
+        console.log('todo');
+      }
     } else {
-      dispatch(toggleFullScreen());
+      if (activeBook?.file.type === 'application/pdf') {
+        dispatch(toggleFullScreen());
+      }
     }
   };
 
@@ -269,22 +272,22 @@ const PdfViewer = () => {
     else
       return (
         <View style={styles.container}>
-          <View {...panResponder.panHandlers}>
-            <StatusBar hidden={pdfViewerIsFullScreen} barStyle="dark-content" />
-            <KeepAwake />
-            {activeBook?.currentPage &&
-              !pdfViewerIsFullScreen &&
-              activeBook.file.type === 'application/pdf' && (
-                <PageJumper
-                  activeBook={activeBook}
-                  updateActiveBookPage={(page: number) => {
-                    // @ts-ignore
-                    this.pdf.setPage(page);
-                  }}
-                />
-              )}
-            <TouchableWithoutFeedback onPress={onPdfPress}>
-              {activeBook.file.type === 'application/pdf' && (
+          <StatusBar hidden={pdfViewerIsFullScreen} barStyle="dark-content" />
+          <KeepAwake />
+          {activeBook?.currentPage &&
+            !pdfViewerIsFullScreen &&
+            activeBook.file.type === 'application/pdf' && (
+              <PageJumper
+                activeBook={activeBook}
+                updateActiveBookPage={(page: number) => {
+                  // @ts-ignore
+                  this.pdf.setPage(page);
+                }}
+              />
+            )}
+          <TouchableWithoutFeedback onPress={onPdfPress}>
+            {activeBook.file.type === 'application/pdf' && (
+              <View {...panResponder.panHandlers}>
                 <Pdf
                   singlePage={true}
                   enableAnnotationRendering={true}
@@ -307,33 +310,35 @@ const PdfViewer = () => {
                   maxScale={3}
                   scale={zoomState.zoom}
                 />
-              )}
-              {activeBook.file.type === 'application/epub+zip' && (
-                // <ReaderProvider>
-                //   <Reader
-                //     src={`${LibraryDirectoryPath}/${activeBook.file.name}`}
-                //     fileSystem={useFileSystem}
-                //     width={Dimensions.get('window').width}
-                //     height={Dimensions.get('window').height}
-                //     enableSwipe={true}
-                //     key={2}
-                //   />
-                // </ReaderProvider>
-                // <SafeAreaView>
-                <ReaderProvider>
-                  <EPubReader activeBook={activeBook} server={server} />
-                </ReaderProvider>
-                // </SafeAreaView>
-                // <WebView
-                //   source={{
-                //     uri: `${LibraryDirectoryPath}/${activeBook.file.name}`,
-                //   }}
-                //   allowFileAccess={true}
-                //   style={{ marginTop: 20 }}
-                // />
-              )}
-            </TouchableWithoutFeedback>
-          </View>
+              </View>
+            )}
+
+            {activeBook.file.type === 'application/epub+zip' && (
+              // <ReaderProvider>
+              //   <Reader
+              //     src={`${LibraryDirectoryPath}/${activeBook.file.name}`}
+              //     fileSystem={useFileSystem}
+              //     width={Dimensions.get('window').width}
+              //     height={Dimensions.get('window').height}
+              //     enableSwipe={true}
+              //     key={2}
+              //   />
+              // </ReaderProvider>
+              // <SafeAreaView>
+              // <EPubWebView activeBook={activeBook} />
+              <ReaderProvider>
+                <EPubReader activeBook={activeBook} />
+              </ReaderProvider>
+              // </SafeAreaView>
+              // <WebView
+              //   source={{
+              //     uri: `${LibraryDirectoryPath}/${activeBook.file.name}`,
+              //   }}
+              //   allowFileAccess={true}
+              //   style={{ marginTop: 20 }}
+              // />
+            )}
+          </TouchableWithoutFeedback>
         </View>
       );
   };
@@ -353,8 +358,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
+    // position: 'relative',
     // backgroundColor: 'red',
-    position: 'relative',
   },
   pdf: {
     flex: 1,
