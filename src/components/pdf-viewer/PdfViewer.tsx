@@ -274,17 +274,19 @@ const PdfViewer = () => {
         <View style={styles.container}>
           <StatusBar hidden={pdfViewerIsFullScreen} barStyle="dark-content" />
           <KeepAwake />
-          {activeBook?.currentPage &&
-            !pdfViewerIsFullScreen &&
-            activeBook.file.type === 'application/pdf' && (
-              <PageJumper
-                activeBook={activeBook}
-                updateActiveBookPage={(page: number) => {
+          {activeBook?.currentPage && !pdfViewerIsFullScreen && (
+            <PageJumper
+              activeBook={activeBook}
+              updateActiveBookPage={(page: number) => {
+                if (activeBook.file.type === 'application/pdf') {
                   // @ts-ignore
                   this.pdf.setPage(page);
-                }}
-              />
-            )}
+                } else if (activeBook.file.type === 'application/epub+zip') {
+                  dispatch(updateActiveBookPage(page));
+                }
+              }}
+            />
+          )}
           <TouchableWithoutFeedback onPress={onPdfPress}>
             {activeBook.file.type === 'application/pdf' && (
               <View {...panResponder.panHandlers}>

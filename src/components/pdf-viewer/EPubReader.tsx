@@ -114,6 +114,8 @@ export function EPubReader({ activeBook }: ReaderProps) {
   console.log(activeBook.currentPage, 'current page');
   console.log(activeBook.epubPages?.length, 'epub pages length');
 
+  // improve zoom ? better still not to disable probably
+
   return (
     <View
       style={{
@@ -132,10 +134,8 @@ export function EPubReader({ activeBook }: ReaderProps) {
           width={Dimensions.get('window').width}
           // pinchToZoom={true}
           height={Dimensions.get('window').height - 100}
-          //   onResized={size => console.log(size, 'resized')}
-          enableSwipe
-          // onSwipeRight={goForward}
-          //   height={500}
+          onResized={size => console.log(size, 'resized')}
+          // enableSwipe
           initialLocation={
             activeBook.epubPages?.[activeBook.currentPage - 1].cfi
           }
