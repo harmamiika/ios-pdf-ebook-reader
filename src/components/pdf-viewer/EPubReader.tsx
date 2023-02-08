@@ -7,7 +7,11 @@ import { IBook, IEPubPageInfo } from '../../interfaces';
 import { Button } from '@ui-kitten/components';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
-import { setActiveBook, updateBook } from '../../state/booksSlice';
+import {
+  setActiveBook,
+  updateActiveBookPage,
+  updateBook,
+} from '../../state/booksSlice';
 import { WebView } from 'react-native-webview';
 import RNFS from 'react-native-fs';
 import { useServer } from './useServer';
@@ -41,10 +45,6 @@ export function EPubReader({ activeBook }: ReaderProps) {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    // tsekkaa onko kauempana kuin max page
-    //   goToLocation(activeBook?.currentPage.toString() || '9');
-
-    // if location is different than current page, set current page to location
     const activeBookCfi =
       activeBook?.epubPages?.[activeBook.currentPage - 1].cfi;
     console.log(activeBookCfi, 'current cfi');
@@ -58,22 +58,8 @@ export function EPubReader({ activeBook }: ReaderProps) {
     // changeFontSize(20);
   }, [activeBook.currentPage]);
 
-  // if activebook has no max pages, goT
-
-  //   React.useEffect(() => {
-  //     if (!activeBook.totalPages) {
-  //       let curr = 0;
-  //       const previous = 0;
-  //       while (true) {
-  //         goNext();
-  //       }
-  //     }
-  //   }, [activeBook]);
-
   const location = React.useRef<number>();
-
   const pages = React.useRef<IEPubPageInfo[]>([]);
-
   console.log(pages, 'pages');
 
   const onLocationChange = () => {
@@ -116,8 +102,16 @@ export function EPubReader({ activeBook }: ReaderProps) {
     }
   };
 
+  const onSwipe = (direction: string) => {
+    if (direction === 'left') {
+      dispatch(updateActiveBookPage(activeBook.currentPage + 1));
+    } else {
+      dispatch(updateActiveBookPage(activeBook.currentPage - 1));
+    }
+  };
+
   console.log(activeBook.totalPages, 'total pages');
-  console.log(activeBook.epubPages, 'epub pages');
+  console.log(activeBook.currentPage, 'current page');
   console.log(activeBook.epubPages?.length, 'epub pages length');
 
   return (
@@ -142,7 +136,11 @@ export function EPubReader({ activeBook }: ReaderProps) {
           enableSwipe
           // onSwipeRight={goForward}
           //   height={500}
-          //   enableSwipe={true}
+          initialLocation={
+            activeBook.epubPages?.[activeBook.currentPage - 1].cfi
+          }
+          onSwipeLeft={() => onSwipe('left')}
+          onSwipeRight={() => onSwipe('right')}
           onLocationChange={onLocationChange}
           key={2}
           onFinish={() => console.log('finished')}
