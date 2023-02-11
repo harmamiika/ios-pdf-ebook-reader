@@ -45,17 +45,17 @@ export function EPubReader({ activeBook }: ReaderProps) {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    const activeBookCfi =
-      activeBook?.epubPages?.[activeBook.currentPage - 1].cfi;
-    console.log(activeBookCfi, 'current cfi');
-    if (activeBookCfi !== currentLocation?.start.cfi) {
-      console.log('different cfi');
-      goToLocation(activeBookCfi);
-    }
-    // set max page to current location if higher thgan max poage
-    console.log('executed');
-    // if (activeBook.currentPage !== 1) {
-    // changeFontSize(20);
+    // const activeBookCfi =
+    //   activeBook?.epubPages?.[(activeBook?.currentPage || 1) - 1].cfi;
+    // console.log(activeBookCfi, 'current cfi');
+    // if (activeBookCfi !== currentLocation?.start?.cfi) {
+    //   console.log('different cfi');
+    //   goToLocation(activeBookCfi);
+    // }
+    // // set max page to current location if higher thgan max poage
+    // console.log('executed');
+    // // if (activeBook.currentPage !== 1) {
+    // // changeFontSize(20);
   }, [activeBook.currentPage]);
 
   const location = React.useRef<number>();
@@ -63,43 +63,8 @@ export function EPubReader({ activeBook }: ReaderProps) {
   console.log(pages, 'pages');
 
   const onLocationChange = () => {
-    console.log('onLocationChange!!!!!!!!!!!!!!!!!');
-    console.log(activeBook.totalPages, 'total pages');
-    if (!activeBook.totalPages) {
-      // go forward infinitely and log add pageCount to the pages obj
-      if (!currentLocation) {
-        console.log('SOS no current location');
-        return;
-      }
-      pages.current.push({
-        page: pages.current.length + 1,
-        cfi: currentLocation?.start.cfi,
-        percentage: currentLocation?.start.percentage,
-        currentLocation: currentLocation,
-      });
-      // trigger cal function
-      console.log(activeBook.currentPage, 'current page');
-      console.log(currentLocation?.start.percentage, 'percentage');
-
-      // console.log(currentLocation?.end.location, 'end location')
-      console.log(activeBook.totalPages, 'total pages');
-      // if at start of book, go next one time
-      console.log(currentLocation?.atStart, 'at start');
-      // calculateTotalPages();
-
-      if (currentLocation?.atEnd === true) {
-        // save pages to active book
-        dispatch(
-          updateBook({
-            ...activeBook,
-            totalPages: pages.current.length,
-            epubPages: pages.current,
-          }),
-        );
-      } else {
-        goNext();
-      }
-    }
+    // console.log('onLocationChange!!!!!!!!!!!!!!!!!');
+    // console.log(activeBook.totalPages, 'total pages');
   };
 
   const onSwipe = (direction: string) => {
@@ -136,9 +101,9 @@ export function EPubReader({ activeBook }: ReaderProps) {
           height={Dimensions.get('window').height - 100}
           onResized={size => console.log(size, 'resized')}
           // enableSwipe
-          initialLocation={
-            activeBook.epubPages?.[activeBook.currentPage - 1].cfi
-          }
+          // initialLocation={
+          //   activeBook.epubPages?.[(activeBook?.currentPage || 1) - 1].cfi || ''
+          // }
           onSwipeLeft={() => onSwipe('left')}
           onSwipeRight={() => onSwipe('right')}
           onLocationChange={onLocationChange}

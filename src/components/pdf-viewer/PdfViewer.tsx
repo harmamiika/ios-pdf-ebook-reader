@@ -21,11 +21,11 @@ import PageJumper from './PageJumper';
 import { useFileSystem } from '@epubjs-react-native/file-system';
 
 import { Reader, ReaderProvider } from '@epubjs-react-native/core';
-import WebView from 'react-native-webview';
-import { EPubReader } from './EPubReader';
+// import WebView from 'react-native-webview';
+// import { EPubReader } from './EPubReader';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useServer } from './useServer';
-import EPubWebView from './EPubWebView';
+// import EPubWebView from './EPubWebView';
 
 function calcDistance(x1: number, y1: number, x2: number, y2: number) {
   let dx = Math.abs(x1 - x2);
@@ -76,7 +76,7 @@ const PdfViewer = () => {
 
   const onPageChanged = (page: number, numberOfPages: number) => {
     dispatch(updateActiveBookPage(page));
-    if (activeBook && !activeBook.totalPages) {
+    if (activeBook && !activeBook?.totalPages) {
       dispatch(
         setActiveBook({
           ...activeBook,
@@ -329,7 +329,7 @@ const PdfViewer = () => {
               // <SafeAreaView>
               // <EPubWebView activeBook={activeBook} />
               <ReaderProvider>
-                <EPubReader activeBook={activeBook} />
+                {/* <EPubReader activeBook={activeBook} /> */}
               </ReaderProvider>
               // </SafeAreaView>
               // <WebView
