@@ -25,6 +25,7 @@ import { Reader, ReaderProvider } from '@epubjs-react-native/core';
 // import { EPubReader } from './EPubReader';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useServer } from './useServer';
+import { EPubReader } from './EPubReader';
 // import EPubWebView from './EPubWebView';
 
 function calcDistance(x1: number, y1: number, x2: number, y2: number) {
@@ -111,11 +112,12 @@ const PdfViewer = () => {
         this.pdf.setPage(activeBook?.currentPage - 1 || 1);
       } else {
         console.log('todo');
-      }
-    } else {
-      if (activeBook?.file.type === 'application/pdf') {
         dispatch(toggleFullScreen());
       }
+    } else {
+      // if (activeBook?.file.type === 'application/pdf') {
+      dispatch(toggleFullScreen());
+      // }
     }
   };
 
@@ -329,7 +331,7 @@ const PdfViewer = () => {
               // <SafeAreaView>
               // <EPubWebView activeBook={activeBook} />
               <ReaderProvider>
-                {/* <EPubReader activeBook={activeBook} /> */}
+                <EPubReader activeBook={activeBook} />
               </ReaderProvider>
               // </SafeAreaView>
               // <WebView
