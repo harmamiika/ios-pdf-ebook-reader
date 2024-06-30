@@ -2,7 +2,7 @@ import { Button, Card, Modal, Text } from '@ui-kitten/components';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { IBook } from '../../interfaces';
-import { MiikaText } from '../reusable/MiikaText';
+import { StyledText } from '../reusable/StyledText';
 
 const Header = (props: any) => {
   return (
@@ -67,8 +67,8 @@ export default function LibraryModal({
           />
         )}>
         <View>
-          <MiikaText text={`Remove ${book?.name} from library?`} />
-          <MiikaText text="This does not remove the file from your phone and you can add the book back later." />
+          <StyledText text={`Remove ${book?.name} from library?`} />
+          <StyledText text="This does not remove the file from your phone and you can add the book back later." />
         </View>
       </Card>
     </Modal>

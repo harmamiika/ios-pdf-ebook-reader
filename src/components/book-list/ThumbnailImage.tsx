@@ -6,7 +6,7 @@ import { IBook } from '../../interfaces';
 import { updateBook } from '../../state/booksSlice';
 import { isTablet } from '../../utils/cssHelpers';
 import { createThumbnail } from '../../utils/thumbnails';
-import { MiikaText } from '../reusable/MiikaText';
+import { StyledText } from '../reusable/StyledText';
 
 interface ThumbnailImageProps {
   book: IBook;
@@ -21,7 +21,7 @@ export default function ThumbnailImage({ book }: ThumbnailImageProps) {
   if (!book.thumbnail.uri) {
     return (
       <View>
-        <MiikaText text="no thumbnail" />
+        <StyledText text="no thumbnail" />
       </View>
     );
   }

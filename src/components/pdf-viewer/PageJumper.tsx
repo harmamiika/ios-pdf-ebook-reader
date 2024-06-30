@@ -4,7 +4,7 @@ import React from 'react';
 import { Dimensions, View } from 'react-native';
 import { IBook } from '../../interfaces';
 import { CustomIonIcon } from '../reusable/CustomIonIcon';
-import { MiikaText } from '../reusable/MiikaText';
+import { StyledText } from '../reusable/StyledText';
 
 interface PageJumperProps {
   activeBook: IBook;
@@ -64,7 +64,7 @@ export default function PageJumper({
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-      <MiikaText text={text} category={'p1'} />
+      <StyledText text={text} category={'p1'} />
       {activeBook.totalPages && (
         <View
           style={{

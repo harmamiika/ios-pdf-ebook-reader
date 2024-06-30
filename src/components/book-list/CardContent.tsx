@@ -6,7 +6,7 @@ import { IBook } from '../../interfaces';
 import { screenHeight, sideMargin } from '../../utils/cssHelpers';
 import { CustomIonIcon } from '../reusable/CustomIonIcon';
 import { FontAwesome5Icon } from '../reusable/FontAwesome5Icon';
-import { MiikaText } from '../reusable/MiikaText';
+import { StyledText } from '../reusable/StyledText';
 import StartedReading from './StartedReading';
 import ThumbnailImage from './ThumbnailImage';
 
@@ -50,9 +50,9 @@ export default function CardContent({ book }: CardContentProps) {
           />
 
           <View>
-            <MiikaText text={`Page: `} marginTop={10} />
+            <StyledText text={`Page: `} marginTop={10} />
 
-            <MiikaText
+            <StyledText
               text={`${book?.currentPage}${
                 book.totalPages ? ` / ${book.totalPages}` : ''
               }`}
@@ -74,7 +74,7 @@ export default function CardContent({ book }: CardContentProps) {
             style={{ paddingRight: 20, color: iconColor }}
           />
           <View>
-            <MiikaText
+            <StyledText
               text={
                 book.bookmarks.length > 0
                   ? `Bookmarked pages: `
@@ -83,7 +83,7 @@ export default function CardContent({ book }: CardContentProps) {
             />
 
             {book.bookmarks.length > 0 && (
-              <MiikaText
+              <StyledText
                 text={`${bookmarksString}`}
                 category="p2"
                 style={{ flexWrap: 'wrap', paddingRight: 50 }}

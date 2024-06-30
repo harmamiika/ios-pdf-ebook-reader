@@ -5,7 +5,7 @@ import { View } from 'react-native';
 import { IBook } from '../../interfaces';
 import { CustomIonIcon } from '../reusable/CustomIonIcon';
 import { FontAwesome5Icon } from '../reusable/FontAwesome5Icon';
-import { MiikaText } from '../reusable/MiikaText';
+import { StyledText } from '../reusable/StyledText';
 
 interface StartedReadingProps {
   book: IBook;
@@ -16,7 +16,8 @@ export default function StartedReading({ book }: StartedReadingProps) {
   const iconColor = theme['text-basic-color'];
 
   const renderStartedReading = () => {
-    if (!book.startDate) return <MiikaText text={`Not yet started reading.`} />;
+    if (!book.startDate)
+      return <StyledText text={`Not yet started reading.`} />;
     else if (book.startDate && book.finishDate)
       return (
         <View
@@ -33,9 +34,9 @@ export default function StartedReading({ book }: StartedReadingProps) {
           />
 
           <View>
-            <MiikaText text={`Read: `} />
+            <StyledText text={`Read: `} />
 
-            <MiikaText
+            <StyledText
               text={`${format(new Date(book.startDate), 'd.M.y')} - ${format(
                 new Date(book.finishDate),
                 'd.M.y',
@@ -68,10 +69,10 @@ export default function StartedReading({ book }: StartedReadingProps) {
               justifyContent: 'center',
             }}>
             <View>
-              <MiikaText text={`Started reading: `} />
+              <StyledText text={`Started reading: `} />
             </View>
             <View>
-              <MiikaText
+              <StyledText
                 text={`${format(new Date(book.startDate), 'd.M.y')}`}
                 marginBottom={10}
                 category={'p2'}

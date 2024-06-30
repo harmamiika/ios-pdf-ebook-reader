@@ -1,11 +1,11 @@
 import React from 'react';
 import { View } from 'react-native';
-import { MiikaText } from '../reusable/MiikaText';
+import { StyledText } from '../reusable/StyledText';
 import Paragraph from './Paragraph';
 import SimpleScreen from './SimpleScreen';
 
 const BulletPoint = ({ text }: { text: string }) => (
-  <MiikaText marginBottom={5} text={`• ${text}`} />
+  <StyledText marginBottom={5} text={`• ${text}`} />
 );
 
 export default function UserGuide() {

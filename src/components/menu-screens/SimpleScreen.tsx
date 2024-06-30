@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { topMargin } from '../../utils/cssHelpers';
 import { sideMargin } from '../book-list/BookListItem';
-import { MiikaText } from '../reusable/MiikaText';
+import { StyledText } from '../reusable/StyledText';
 
 interface SimpleScreenProps {
   header: string;
@@ -17,14 +17,14 @@ export default function SimpleScreen({
   if (isScrollable)
     return (
       <ScrollView style={styles.container}>
-        <MiikaText category="h3" text={header} marginBottom={5} />
+        <StyledText category="h3" text={header} marginBottom={5} />
         {children}
       </ScrollView>
     );
   else
     return (
       <View style={styles.container}>
-        <MiikaText category="h3" text={header} marginBottom={5} />
+        <StyledText category="h3" text={header} marginBottom={5} />
         {children}
       </View>
     );

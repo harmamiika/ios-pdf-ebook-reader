@@ -16,7 +16,7 @@ import { RootState } from '../../state';
 import { setActiveBook, updateActiveBookPage } from '../../state/booksSlice';
 import { toggleFullScreen } from '../../state/pdfViewerSlice';
 import SimpleScreen from '../menu-screens/SimpleScreen';
-import { MiikaText } from '../reusable/MiikaText';
+import { StyledText } from '../reusable/StyledText';
 import PageJumper from './PageJumper';
 
 function calcDistance(x1: number, y1: number, x2: number, y2: number) {
@@ -218,20 +218,20 @@ const PdfViewer = () => {
     if (!activeBook)
       return (
         <SimpleScreen header="No book selected">
-          <MiikaText text="You can select and add books in library" />
+          <StyledText text="You can select and add books in library" />
         </SimpleScreen>
       );
     else if (activeBook && isLoading)
       return (
         <View>
-          <MiikaText text="Loading..." />
+          <StyledText text="Loading..." />
         </View>
       );
     else if (activeBook && !fileFound)
       return (
         <SimpleScreen header="File not found">
-          <MiikaText text="You should try deleting the book in the library, renaming the file, and then reselecting it. It is possible non-english characters can sometimes cause issues." />
-          <MiikaText text="If this does not work, this file can't be read with this app." />
+          <StyledText text="You should try deleting the book in the library, renaming the file, and then reselecting it. It is possible non-english characters can sometimes cause issues." />
+          <StyledText text="If this does not work, this file can't be read with this app." />
         </SimpleScreen>
       );
     else
