@@ -2,7 +2,7 @@ import { Divider } from '@ui-kitten/components';
 import React from 'react';
 import { StyleSheet, TouchableHighlight, View } from 'react-native';
 import { screenHeight, sideMargin } from '../../utils/cssHelpers';
-import { MiikaText } from '../reusable/MiikaText';
+import { StyledText } from '../reusable/StyledText';
 
 interface Props {
   text: string;
@@ -14,7 +14,7 @@ export default function MiikaMenuItem({ text, onPress }: Props) {
   return (
     <TouchableHighlight onPress={onPress}>
       <View style={styles.container}>
-        <MiikaText text={text} category="h6" marginLeft={sideMargin} />
+        <StyledText text={text} category="h6" marginLeft={sideMargin} />
       </View>
     </TouchableHighlight>
   );

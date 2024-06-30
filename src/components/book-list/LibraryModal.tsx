@@ -2,7 +2,7 @@ import { Button, Card, Modal, Text } from '@ui-kitten/components';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { IBook } from '../../interfaces';
-import { MiikaText } from '../reusable/MiikaText';
+import { StyledText } from '../reusable/StyledText';
 
 const Header = (props: any) => {
   return (
@@ -14,23 +14,23 @@ const Header = (props: any) => {
 
 const Footer = ({
   setIsVisible,
-  deleteBook,
+  onConfirm,
   book,
   ...props
 }: {
   setIsVisible: any;
   book: IBook | undefined;
-  deleteBook: (book: IBook) => void;
+  onConfirm: (book: IBook) => void;
 }) => {
-  const onDelete = () => {
-    book && deleteBook(book);
+  const onConfirmPress = () => {
+    book && onConfirm(book);
     setIsVisible(false);
   };
 
   return (
     <View {...props}>
       <View style={s.footer}>
-        <Button status="danger" onPress={onDelete}>
+        <Button status="danger" onPress={onConfirmPress}>
           <Text>Confirm</Text>
         </Button>
         <Button status="basic" onPress={() => setIsVisible(false)}>
@@ -41,19 +41,19 @@ const Footer = ({
   );
 };
 
-interface DeleteModalProps {
+interface LibraryModalProps {
   isVisible: boolean;
   book?: IBook;
-  deleteBook: (book: IBook) => void;
+  onConfirm: (book: IBook) => void;
   setIsVisible: (isVisible: boolean) => void;
 }
 
-export default function DeleteModal({
+export default function LibraryModal({
   isVisible,
   setIsVisible,
-  deleteBook,
+  onConfirm,
   book,
-}: DeleteModalProps) {
+}: LibraryModalProps) {
   return (
     <Modal visible={isVisible} onBackdropPress={() => setIsVisible(false)}>
       <Card
@@ -63,12 +63,12 @@ export default function DeleteModal({
             book={book}
             setIsVisible={setIsVisible}
             {...props}
-            deleteBook={deleteBook}
+            onConfirm={onConfirm}
           />
         )}>
         <View>
-          <MiikaText text={`Remove ${book?.name} from library?`} />
-          <MiikaText text="This does not remove the file from your phone and you can add the book back later." />
+          <StyledText text={`Remove ${book?.name} from library?`} />
+          <StyledText text="This does not remove the file from your phone and you can add the book back later." />
         </View>
       </Card>
     </Modal>

@@ -1,9 +1,13 @@
+import { useTheme } from '@ui-kitten/components';
 import { format } from 'date-fns';
 import React, { useMemo } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { IBook } from '../../interfaces';
 import { screenHeight, sideMargin } from '../../utils/cssHelpers';
-import { MiikaText } from '../reusable/MiikaText';
+import { CustomIonIcon } from '../reusable/CustomIonIcon';
+import { FontAwesome5Icon } from '../reusable/FontAwesome5Icon';
+import { StyledText } from '../reusable/StyledText';
+import StartedReading from './StartedReading';
 import ThumbnailImage from './ThumbnailImage';
 
 interface CardContentProps {
@@ -19,39 +23,77 @@ interface CardContentProps {
 // => done !!
 
 export default function CardContent({ book }: CardContentProps) {
-  // console.log(book, 'book');
-  const bookmarksString = useMemo(
-    () => book.bookmarks.map(m => m.page.toString()).join(', '),
-    [book],
-  );
+  const theme = useTheme();
+  const iconColor = theme['text-basic-color'];
+
+  const bookmarksString = useMemo(() => {
+    const bms = [...book.bookmarks];
+    return bms
+      .sort((a, b) => a.page - b.page)
+      .map(m => m.page.toString())
+      .join(', ');
+  }, [book]);
 
   return (
     <View style={styles.itemBottomSide}>
       <View style={styles.descriptionContainer}>
-        <MiikaText
-          text={`Page ${book?.currentPage}${
-            book.totalPages ? ` / ${book.totalPages}` : ''
-          }`}
-          marginTop={15}
-        />
-
-        <View>
-          <MiikaText
-            text={
-              book.bookmarks.length > 0
-                ? `Bookmarked pages: ${bookmarksString}`
-                : 'No bookmarks'
-            }
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}>
+          <FontAwesome5Icon
+            name="book"
+            size={16}
+            style={{ paddingRight: 20, marginTop: 10, color: iconColor }}
           />
+
+          <View>
+            <StyledText text={`Page: `} marginTop={10} />
+
+            <StyledText
+              text={`${book?.currentPage}${
+                book.totalPages ? ` / ${book.totalPages}` : ''
+              }`}
+              // marginTop={15}
+              category={'p2'}
+            />
+          </View>
         </View>
 
-        <View>
-          <MiikaText text={`Started reading: `} />
-          <MiikaText
-            text={`${format(new Date(book.startDate), 'EEEE d. MMMM, y')}`}
-            marginBottom={15}
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}>
+          <CustomIonIcon
+            name="bookmarks-sharp"
+            size={16}
+            style={{ paddingRight: 20, color: iconColor }}
           />
+          <View>
+            <StyledText
+              text={
+                book.bookmarks.length > 0
+                  ? `Bookmarked pages: `
+                  : 'No bookmarks'
+              }
+            />
+
+            {book.bookmarks.length > 0 && (
+              <StyledText
+                text={`${bookmarksString}`}
+                category="p2"
+                style={{ flexWrap: 'wrap', paddingRight: 50 }}
+                numberOfLines={2}
+              />
+            )}
+          </View>
         </View>
+
+        <StartedReading book={book} />
       </View>
 
       <View style={styles.imageWrapper}>

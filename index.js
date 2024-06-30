@@ -27,7 +27,8 @@ import LibraryRightHeader from './src/components/book-list/LibraryRightHeader';
 import AppInfo from './src/components/menu-screens/AppInfo';
 import Settings from './src/components/menu-screens/Settings';
 import UserGuide from './src/components/menu-screens/UserGuide';
-import { MiikaText } from './src/components/reusable/MiikaText';
+import { StyledText } from './src/components/reusable/StyledText';
+import { isTablet } from './src/utils/cssHelpers';
 
 LogBox.ignoreLogs([
   'ViewPropTypes will be removed',
@@ -47,6 +48,8 @@ const Application = () => {
     InitializeAds();
   }, []);
 
+  const titleMaxLength = isTablet ? 50 : 20;
+
   return (
     <NavigationContainer>
       <Navigator>
@@ -57,7 +60,7 @@ const Application = () => {
             headerLeft: () => <LibraryLeftHeader navigation={navigation} />,
             headerRight: () => <LibraryRightHeader navigation={navigation} />,
             headerTitle: props => (
-              <MiikaText {...props} category="h5" text={'Library'} />
+              <StyledText {...props} category="h5" text={'Library'} />
             ),
           })}
         />
@@ -72,15 +75,15 @@ const Application = () => {
               <ReaderRightHeader navigation={navigation} {...props} />
             ),
             headerTitle: props => (
-              <MiikaText
+              <StyledText
                 {...props}
                 category="h5"
                 // todo: track device width and adjust text size accordingly
                 text={
-                  activeBookTitle?.length < 19
+                  activeBookTitle?.length < titleMaxLength
                     ? `${activeBookTitle}`
                     : activeBookTitle
-                    ? `${activeBookTitle?.substring(0, 19)}...`
+                    ? `${activeBookTitle?.substring(0, titleMaxLength)}...`
                     : 'Welcome'
                 }
               />
@@ -92,7 +95,7 @@ const Application = () => {
           component={Menu}
           options={{
             headerTitle: props => (
-              <MiikaText {...props} category="h5" text={'Menu'} />
+              <StyledText {...props} category="h5" text={'Menu'} />
             ),
           }}
         />
@@ -102,7 +105,7 @@ const Application = () => {
           component={AppInfo}
           options={() => ({
             headerTitle: props => (
-              <MiikaText {...props} category="h5" text={'App info'} />
+              <StyledText {...props} category="h5" text={'App info'} />
             ),
           })}
         />
@@ -111,7 +114,7 @@ const Application = () => {
           component={UserGuide}
           options={() => ({
             headerTitle: props => (
-              <MiikaText {...props} category="h5" text={'User guide'} />
+              <StyledText {...props} category="h5" text={'User guide'} />
             ),
           })}
         />
@@ -127,13 +130,14 @@ const Root = () => {
   console.log(colorScheme, 'color shcmee');
   const persistor = persistStore(store);
   return (
-    <ApplicationProvider {...eva} theme={eva.light}>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <Application />
-        </PersistGate>
-      </Provider>
-    </ApplicationProvider>
+    <View></View>
+    // <ApplicationProvider {...eva} theme={eva.light}>
+    //   <Provider store={store}>
+    //     <PersistGate loading={null} persistor={persistor}>
+    //       <Application />
+    //     </PersistGate>
+    //   </Provider>
+    // </ApplicationProvider>
   );
 };
 

@@ -4,8 +4,9 @@ import { exists } from 'react-native-fs';
 import { useDispatch } from 'react-redux';
 import { IBook } from '../../interfaces';
 import { updateBook } from '../../state/booksSlice';
+import { isTablet } from '../../utils/cssHelpers';
 import { createThumbnail } from '../../utils/thumbnails';
-import { MiikaText } from '../reusable/MiikaText';
+import { StyledText } from '../reusable/StyledText';
 
 interface ThumbnailImageProps {
   book: IBook;
@@ -14,12 +15,13 @@ interface ThumbnailImageProps {
 // /tmp/com.app.librarian-Inbox/Ticket-Wien-Budapest-3022097197.pdf
 export default function ThumbnailImage({ book }: ThumbnailImageProps) {
   const dispatch = useDispatch();
+
   // console.log(book.thumbnail, 'humb');
 
   if (!book.thumbnail.uri) {
     return (
       <View>
-        <MiikaText text="no thumbnail" />
+        <StyledText text="no thumbnail" />
       </View>
     );
   }
@@ -69,7 +71,7 @@ const styles = StyleSheet.create({
   },
   container: {
     height: '90%',
-    width: 150,
+    width: isTablet ? 225 : 150,
     borderWidth: 0.5,
     border: 1,
     borderColor: 'rgb(245, 245, 245)',

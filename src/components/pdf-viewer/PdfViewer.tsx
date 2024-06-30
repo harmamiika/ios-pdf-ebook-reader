@@ -1,3 +1,4 @@
+import KeepAwake from '@sayem314/react-native-keep-awake';
 import { TouchableWithoutFeedback } from '@ui-kitten/components/devsupport';
 import React, { useEffect, useMemo, useState } from 'react';
 import {
@@ -15,7 +16,8 @@ import { RootState } from '../../state';
 import { setActiveBook, updateActiveBookPage } from '../../state/booksSlice';
 import { toggleFullScreen } from '../../state/pdfViewerSlice';
 import SimpleScreen from '../menu-screens/SimpleScreen';
-import { MiikaText } from '../reusable/MiikaText';
+import { StyledText } from '../reusable/StyledText';
+import PageJumper from './PageJumper';
 
 function calcDistance(x1: number, y1: number, x2: number, y2: number) {
   let dx = Math.abs(x1 - x2);
@@ -79,10 +81,16 @@ const PdfViewer = () => {
 
   const onPdfPress = (event: any) => {
     const positionX = event.nativeEvent.pageX;
-    if (positionX > 250) {
+    // console.log('positionX POS POS', positionX);
+    const screenWidth = Dimensions.get('screen').width;
+    // console.log(`The maximum value of pageX is: ${screenWidth}`);
+
+    const switchPageArea = screenWidth / 2.5;
+
+    if (positionX > screenWidth - switchPageArea) {
       // @ts-ignore
       this.pdf.setPage(activeBook?.currentPage + 1 || 1);
-    } else if (positionX < 150) {
+    } else if (positionX < switchPageArea) {
       // @ts-ignore
       this.pdf.setPage(activeBook?.currentPage - 1 || 1);
     } else {
@@ -191,6 +199,10 @@ const PdfViewer = () => {
 
   useEffect(() => {
     (async () => {
+      // const ex = await exists(
+      //   decodeURIComponent(activeBook?.copyFileUri || ''),
+      // );
+      // console.log(ex, 'ex filecopyuri');
       if (activeBook && isLoading) {
         setIsLoading(true);
         const fileExists = await exists(
@@ -206,31 +218,37 @@ const PdfViewer = () => {
     if (!activeBook)
       return (
         <SimpleScreen header="No book selected">
-          <MiikaText text="You can select and add books in library" />
+          <StyledText text="You can select and add books in library" />
         </SimpleScreen>
       );
     else if (activeBook && isLoading)
       return (
         <View>
-          <MiikaText text="Loading..." />
+          <StyledText text="Loading..." />
         </View>
       );
     else if (activeBook && !fileFound)
       return (
         <SimpleScreen header="File not found">
-          <MiikaText text="You should delete this book in the library, then reselect it." />
-          <MiikaText
-            text="If this does not work, this file can't be read with this app. 
-          A possible, but not certain cause could be weird characters in the file name.
-          You can try to renaming the file and then reselecting it."
-          />
+          <StyledText text="You should try deleting the book in the library, renaming the file, and then reselecting it. It is possible non-english characters can sometimes cause issues." />
+          <StyledText text="If this does not work, this file can't be read with this app." />
         </SimpleScreen>
       );
     else
       return (
         <View style={styles.container}>
           <View {...panResponder.panHandlers}>
-            {pdfViewerIsFullScreen && <StatusBar hidden />}
+            <StatusBar hidden={pdfViewerIsFullScreen} barStyle="dark-content" />
+            <KeepAwake />
+            {activeBook?.currentPage && !pdfViewerIsFullScreen && (
+              <PageJumper
+                activeBook={activeBook}
+                updateActiveBookPage={(page: number) => {
+                  // @ts-ignore
+                  this.pdf.setPage(page);
+                }}
+              />
+            )}
             <TouchableWithoutFeedback onPress={onPdfPress}>
               <Pdf
                 singlePage={true}
@@ -238,8 +256,6 @@ const PdfViewer = () => {
                 enablePaging={true}
                 source={{
                   uri: `${LibraryDirectoryPath}/${activeBook.file.name}`,
-                  // uri: activeBook.copyFileUri,
-                  // uri: activeBook.file.uri,
                 }}
                 style={styles.pdf}
                 ref={(pdf: any) => {
@@ -275,6 +291,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     // backgroundColor: 'red',
+    position: 'relative',
   },
   pdf: {
     flex: 1,

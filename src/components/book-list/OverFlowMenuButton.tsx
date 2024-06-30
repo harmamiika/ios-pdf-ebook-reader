@@ -8,9 +8,9 @@ import React, { useState } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { IBook } from '../../interfaces';
-import { deleteBook } from '../../state/booksSlice';
+import { deleteBook, updateBook } from '../../state/booksSlice';
 import { FontAwesome5Icon } from '../reusable/FontAwesome5Icon';
-import DeleteModal from './DeleteModal';
+import LibraryModal from './LibraryModal';
 
 interface OverflowMenuButtonProps {
   book: IBook;
@@ -20,6 +20,7 @@ export default function OverflowMenuButton({ book }: OverflowMenuButtonProps) {
   const dispatch = useDispatch();
   const theme = useTheme();
   const iconColor = theme['text-basic-color'];
+  const disabledTextColor = theme['text-disabled-color'];
   const [menuIsVisible, setMenuIsVisible] = useState<boolean>(false);
 
   const onItemSelect = (index: any) => {
@@ -61,10 +62,44 @@ export default function OverflowMenuButton({ book }: OverflowMenuButtonProps) {
           accessoryLeft={() => <FontAwesome5Icon name="check" size={16} />}
           title="Mark as read"
         /> */}
+
+        <MenuItem
+          title="Mark as read"
+          accessoryLeft={() => (
+            <FontAwesome5Icon
+              name="check"
+              size={16}
+              color={!book.finishDate ? iconColor : disabledTextColor}
+            />
+          )}
+          onPress={() =>
+            dispatch(updateBook({ ...book, finishDate: new Date().toString() }))
+          }
+          disabled={!!book.finishDate}
+        />
+
+        <MenuItem
+          title="Reset start date"
+          accessoryLeft={() => (
+            <FontAwesome5Icon
+              name="undo"
+              size={16}
+              color={!book.finishDate ? iconColor : disabledTextColor}
+            />
+          )}
+          onPress={() =>
+            dispatch(updateBook({ ...book, startDate: new Date().toString() }))
+          }
+          disabled={!!book.finishDate}
+        />
         <MenuItem
           title="Remove"
           accessoryLeft={() => (
-            <FontAwesome5Icon name="trash-alt" size={16} color={iconColor} />
+            // cancel icon
+            // different than thrash ico
+            <View style={{ paddingRight: 5 }}>
+              <FontAwesome5Icon name="times" size={16} color={iconColor} />
+            </View>
           )}
           onPress={() =>
             // dispatch(showDeleteModal({ isVisible: true, book }))
@@ -72,9 +107,10 @@ export default function OverflowMenuButton({ book }: OverflowMenuButtonProps) {
           }
         />
       </OverflowMenu>
-      <DeleteModal
+      <LibraryModal
         // ?? ts only error?
-        deleteBook={book => dispatch(deleteBook(book))}
+        // @ts-ignore
+        onConfirm={book => dispatch(deleteBook(book))}
         isVisible={deleteModalIsVisible}
         setIsVisible={setDeleteModalIsVisible}
         book={book}

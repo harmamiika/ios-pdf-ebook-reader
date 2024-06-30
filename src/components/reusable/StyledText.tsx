@@ -2,7 +2,7 @@ import { Text } from '@ui-kitten/components';
 import React from 'react';
 import { TextProps } from 'react-native';
 
-interface MiikaTextProps {
+interface StyledTextProps {
   text: string;
   marginTop?: number;
   marginBottom?: number;
@@ -11,7 +11,7 @@ interface MiikaTextProps {
   width?: number | string;
 }
 
-export const MiikaText: React.FC<MiikaTextProps & TextProps> = ({
+export const StyledText: React.FC<StyledTextProps & TextProps> = ({
   text,
   marginBottom = 0,
   marginTop = 0,

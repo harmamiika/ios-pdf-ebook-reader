@@ -1,12 +1,18 @@
 import { Divider, useTheme } from '@ui-kitten/components';
 import React, { useState } from 'react';
-import { Dimensions, StyleSheet, TouchableHighlight, View } from 'react-native';
+import {
+  Dimensions,
+  StyleSheet,
+  TouchableHighlight,
+  View,
+  ViewStyle,
+} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { IBook } from '../../interfaces';
 import { RootState } from '../../state';
 import { setActiveBook } from '../../state/booksSlice';
 import { CustomIonIcon } from '../reusable/CustomIonIcon';
-import { MiikaText } from '../reusable/MiikaText';
+import { StyledText } from '../reusable/StyledText';
 import CardContent from './CardContent';
 import OverflowMenuButton from './OverFlowMenuButton';
 interface BookListItemProps {
@@ -35,11 +41,11 @@ export default function BookListItem({ book, navigation }: BookListItemProps) {
 
   return (
     <TouchableHighlight onPress={onItemPress}>
-      <View style={styles.itemContainer}>
+      <View style={createItemContainerStyle(theme)}>
         <View style={styles.itemHeading}>
           {/* HEADER */}
           <View style={styles.headerWrapper}>
-            <MiikaText
+            <StyledText
               text={book.name}
               category="h6"
               width={screenWidth * 0.61}
@@ -67,17 +73,19 @@ export const { width: screenWidth, height: screenHeight } =
 
 export const sideMargin = screenWidth / 15;
 
+const createItemContainerStyle = (theme: any, index?: number): ViewStyle => ({
+  width: screenWidth,
+  height: (1.1 * screenHeight * 1.5) / 5 || 0,
+  backgroundColor: 'white',
+  // aka 	color-basic-600
+  // borderTopColor: theme['color-basic-transparent-default-border'],
+  borderTopColor: theme['color-basic-400'],
+  borderTopWidth: 2,
+  display: 'flex',
+  flexDirection: 'column',
+});
+
 const styles = StyleSheet.create({
-  itemContainer: {
-    width: screenWidth,
-    height: (1.1 * screenHeight * 1.5) / 5 || 0,
-    // backgroundColor: 'blue',
-    backgroundColor: 'white',
-    borderTopColor: 'gray',
-    borderTopWidth: 1,
-    display: 'flex',
-    flexDirection: 'column',
-  },
   itemHeading: {
     width: '100%',
     height: (1.7 * screenHeight) / 20 || 0,

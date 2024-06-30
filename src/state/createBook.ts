@@ -9,8 +9,6 @@ export const createBook = (file: IFile, thumbnail?: IThumbnail): IBook => ({
   name: removeFileExtension(file.name),
   // uri: `file://${DocumentDirectoryPath}/CC8E13F0-CD04-4D0F-9109-1EA51AEC56C8/${file.name}`,
   uri: `${LibraryDirectoryPath}/${file.name}`,
-
-  copyFileUri: `${LibraryDirectoryPath}/${file.name}`,
   copyFile: {},
 
   thumbnail: thumbnail || {
@@ -31,4 +29,7 @@ export const createBook = (file: IFile, thumbnail?: IThumbnail): IBook => ({
 
   bookmarks: [],
   categories: [],
+
+  // V1 legacy
+  // copyFileUri: `${LibraryDirectoryPath}/${file.name}`,
 });
