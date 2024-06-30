@@ -1,6 +1,8 @@
 MyPDFBooks, on PDF-tiedostonlukija iOS:lle, joka on tehty PDF-muotoisten kirjojen lukemisen helpottamiseksi. Applen Books-appi ei anna lukea paikallisia tiedostoja, vaan kirjat täytyy ostaa apin sisältä. En myöskään löytänyt paikallisten tiedostojen lukemiseen sopivaa appia sovelluskaupasta, josta syntyi idea appiin. Oikeastaan appi on IOS kopio Androidille saatavasta ReadEra-sovelluksesta.
 
-Appi on hyväksytty ja jakelussa App storessa: https://apps.apple.com/fi/app/mypdfbooks-pdf-reader/id1661658985?l=fi, mikä oli oikeastaan tämän projektin suurin tavoite. Päivittäisiä käyttäjiä on tällä hetkellä keskimäärin noin 10. Kehitys on tällä hetkellä paussilla.
+Appi on hyväksytty ja jakelussa App storessa: https://apps.apple.com/fi/app/mypdfbooks-pdf-reader/id1661658985?l=fi, mikä oli oikeastaan tämän projektin suurin tavoite. Listaus tosin poistuu ihan lähiaikoina, koska 20sentin kuukausittaiset mainostulot eivät ihan riitä kattamaan Applen 100e/vuosi - developer-lisenssiä, joten voi olla että joudun tekemään demon omalta laitteelta.
+
+Päivittäisiä käyttäjiä on tällä hetkellä keskimäärin noin 10. Kehitys on tällä hetkellä paussilla.
 
 Stack:
 Apin stackki on React Native + TypeScript, luotu Create React Native App (ei expo). Appilla ei ole omaa backendiä, vaan data tallentuu mobiililaitteen muistiin. Sovellus käyttää kuitenkin googlen apeja mainoksia ja analytiikkaa varten.
